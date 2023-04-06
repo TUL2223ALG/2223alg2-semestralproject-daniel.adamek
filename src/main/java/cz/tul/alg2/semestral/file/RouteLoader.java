@@ -8,11 +8,28 @@ import cz.tul.alg2.semestral.utilities.Pair;
 import cz.tul.alg2.semestral.utilities.TextNormalization;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class RouteLoader {
 
     private final HashMap<String, Station> allStations = new HashMap<>();
+    public ArrayList<String> loadFiles(String path) {
+        ArrayList<String> foundRoutes = new ArrayList<>();
+
+        File dir = new File(path);
+        if (!dir.exists()) {
+            System.out.println("Folder does not exist.");
+        } else {
+            File[] files = dir.listFiles((dir1, name) -> name.endsWith(".txt"));
+            for (File file : files)
+                if (file.isFile())
+                    foundRoutes.add(file.getPath());
+        }
+
+        return foundRoutes;
+    }
     public void loadRoute(String path, TypeOfTransportation typeOfTransportation) {
         try {
             // Load file from resources folder
