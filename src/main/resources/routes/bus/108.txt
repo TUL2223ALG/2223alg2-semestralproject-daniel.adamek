@@ -1,0 +1,65 @@
+Brodecká
+1
+U Prioru
+1
+Ruzyňský velkoobchod
+1
+Nádraží Ruzyně
+2
+Stochovská
+1
+Ruzyňská škola
+1
+Ruzyňská
+1
+Litovický potok
+1
+Libocká
+2
+Sídliště Petřiny
+2
+Petřiny
+1
+Větrník
+2
+Poliklinika Petřiny
+1
+Vojenská nemocnice
+2
+U Vojenské nemocnice
+1
+Talichova
+1
+Náměstí Před Bateriemi
+1
+Norbertov
+2
+Sibeliova
+3
+Vozovna Střešovice
+1
+Dělostřelecká
+3
+Thákurova
+2
+Národní technická knihovna
+2
+Studentský dům
+2
+Zelená
+2
+Rooseveltova
+1
+Českomalínská
+1
+Sibiřské náměstí
+1
+Radnice Praha 6
+3
+Dejvická
+1
+Sibiřské náměstí
+1
+Radnice Praha 6
+3
+Dejvická

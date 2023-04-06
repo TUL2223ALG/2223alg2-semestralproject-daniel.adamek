@@ -1,0 +1,45 @@
+Háje
+2
+Háje
+1
+Horčičkova
+3
+Jakobiho
+1
+Sídliště Petrovice
+1
+Betonárka
+1
+Na Blanici
+2
+Na Vrchách
+3
+Nádraží Uhříněves
+2
+Nové náměstí
+1
+Nové náměstí
+1
+Uhříněves
+2
+Venušina
+3
+Kolovraty
+1
+Tehovičky
+1
+Škola Kolovraty
+1
+Nad Dvorem
+2
+Nad Parkánem
+1
+K Říčanům
+1
+U Rozcestí
+2
+Pánkova
+1
+Hájová
+1
+Nedvězí

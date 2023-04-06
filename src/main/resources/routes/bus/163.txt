@@ -1,0 +1,45 @@
+Depo Hostivař
+1
+Malešická továrna
+1
+Na Homoli
+1
+Průmyslová
+2
+Ústřední
+2
+Obchodní centrum Štěrboholy
+3
+Štěrboholy
+1
+Škola Štěrboholy
+1
+Drobná
+1
+Novoštěrboholská
+2
+Rtyňská
+1
+Svatoňovická
+1
+Dolní Počernice
+3
+Nádraží Běchovice
+2
+Běchovice
+1
+Na Vaňhově
+2
+Blatov
+1
+Rápošovská
+1
+Újezd nad Lesy
+1
+Sudějovická
+1
+Zbyslavská
+1
+Rohožnická
+1
+Sídliště Rohožník

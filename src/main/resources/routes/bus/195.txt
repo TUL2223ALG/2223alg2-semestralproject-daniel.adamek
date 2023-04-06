@@ -1,0 +1,61 @@
+Sídliště Letňany
+1
+Ivančická
+1
+Avia Letňany
+1
+Staré Letňany
+1
+Rychnovská
+1
+Boletická
+1
+Výstaviště Letňany
+2
+Letňany
+2
+Letňanská
+1
+Nový Prosek
+1
+Prosek
+2
+Nad Jetelkou
+3
+Vysočanská
+3
+Nádraží Libeň
+1
+K Žižkovu
+2
+Balkán
+2
+Spojovací
+2
+Pod Táborem
+1
+Botanická zahrada Malešice
+2
+Malešické náměstí
+1
+Sídliště Malešice
+2
+Limuzská
+2
+Donatellova
+2
+Skalka
+1
+Na Padesátém
+1
+Nádraží Zahradní Město
+2
+Zahradní Město
+2
+Centrum Zahradní Město
+1
+Hlohová
+1
+Poliklinika Zahradní Město
+1
+Jesenická

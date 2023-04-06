@@ -1,0 +1,39 @@
+Českomoravská
+1
+Poliklinika Vysočany
+3
+Vysočanská
+2
+Ke Klíčovu
+1
+Pod Krocínkou
+1
+Klíčov
+1
+Klíčovská
+1
+Krocínka
+2
+Prosek
+1
+Starý Prosek
+0
+Prosek
+1
+U Kundratky
+1
+Nový Střížkov
+1
+Madlina
+1
+Teplická
+2
+Střížkov
+1
+Poliklinika Prosek
+1
+Zásadská
+1
+Českolipská
+1
+Novoborská

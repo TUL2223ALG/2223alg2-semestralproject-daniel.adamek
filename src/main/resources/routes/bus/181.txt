@@ -1,0 +1,53 @@
+Černý Most
+1
+Poliklinika Černý Most
+1
+Ronešova
+1
+Rajská zahrada
+1
+Hejtmanská
+2
+Vajgarská
+2
+Kyje
+1
+Jiráskova čtvrť
+1
+Pávovské náměstí
+2
+Za Horou
+1
+Českobrodská
+2
+Perlit
+2
+Spalovna Malešice
+3
+Radiová
+1
+Barvy a laky
+1
+Kablo
+1
+Sklářská
+1
+Nádraží Hostivař
+2
+Hostivařská
+1
+Na Groši
+2
+Hostivařské náměstí
+1
+Selská
+1
+Nad Košíkem
+1
+K Obecním hájovnám
+2
+Donovalská
+1
+Litochlebské náměstí
+2
+Opatov
