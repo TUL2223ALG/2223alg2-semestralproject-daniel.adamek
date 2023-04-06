@@ -21,7 +21,6 @@ public class RouteLoader {
 
             // Station loading
             String stationName;
-            Station station;
             Transport transport;
             Station prev, actual;
 
