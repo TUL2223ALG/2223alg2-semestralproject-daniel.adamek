@@ -7,17 +7,17 @@ import java.util.HashSet;
 public class Station {
     private final String name;
     // ZASTAVKA ; ZPŮSOB_DOPRAVY
-    private HashSet<Pair<Station, String>> neighbours = new HashSet<>();
+    private HashSet<Pair<Station, Transport>> neighbours = new HashSet<>();
 
     public Station(String stationName) {
         this.name = stationName;
     }
 
-    public HashSet<Pair<Station, String>> getNeighbours() {
+    public HashSet<Pair<Station, Transport>> getNeighbours() {
         return neighbours;
     }
 
-    public void addNeighbour(Pair<Station, String> neighbour) {
+    public void addNeighbour(Pair<Station, Transport> neighbour) {
         this.neighbours.add(neighbour);
     }
 }

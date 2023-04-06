@@ -5,11 +5,11 @@ import java.time.Duration;
 public class Transport {
     private TypeOfTransportation type;
 
-    private Duration transferTime;
+    private int transferTime;
 
-    Transport(TypeOfTransportation type, Duration time) {
+    Transport(TypeOfTransportation type, int duration) {
         this.type = type;
-        this.transferTime = time;
+        this.transferTime = duration;
     }
 
     public TypeOfTransportation getType() {
@@ -20,11 +20,11 @@ public class Transport {
         this.type = type;
     }
 
-    public Duration getTransferTime() {
+    public int getTransferTime() {
         return transferTime;
     }
 
-    public void setTransferTime(Duration transferTime) {
+    public void setTransferTime(int transferTime) {
         this.transferTime = transferTime;
     }
 }
