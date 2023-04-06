@@ -1,6 +1,6 @@
-package cz.tul.alg2.semestral;
+package cz.tul.alg2.semestral.transportation;
 
-import cz.tul.alg2.semestral.Utilities.Pair;
+import cz.tul.alg2.semestral.utilities.Pair;
 
 import java.util.HashSet;
 
