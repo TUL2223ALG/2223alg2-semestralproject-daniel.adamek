@@ -17,45 +17,56 @@ public class BFS {
         this.rl = rl;
         this.allStations = rl.getAllStations();
     }
-    public List<Station> findPath(String from, String to) {
-        Station fromStation = allStations.get(TextNormalization.stringNormalize(from));
-        Station toStation = allStations.get(TextNormalization.stringNormalize(to));
+    public List<Pair<Station, Integer>> bfs(String startName, String endName) {
+        Station start = allStations.get(TextNormalization.stringNormalize(startName));
+        Station end = allStations.get(TextNormalization.stringNormalize(endName));
 
+        Map<Station, Integer> distances = new HashMap<>();
+        Map<Station, Station> previous = new HashMap<>();
+        Map<Station, Transport> transport = new HashMap<>();
         Queue<Station> queue = new LinkedList<>();
-        Set<Station> visited = new HashSet<>();
-        HashMap<Station, Station> parents = new HashMap<>();
 
-        queue.add(fromStation);
-        visited.add(fromStation);
+        // nastavíme počáteční vzdálenost a přidáme startovní stanici do fronty
+        distances.put(start, 0);
+        queue.add(start);
 
         while (!queue.isEmpty()) {
-            Station current = queue.remove();
+            Station current = queue.poll();
+            for (Pair<Station, Transport> neighbor : current.getNeighbours()) {
+                Station neighborStation = neighbor.first;
+                Transport neighborTransport = neighbor.second;
 
-            if (current.equals(toStation)) {
-                // Reconstruct path from start to end
-                List<Station> path = new ArrayList<>();
-                Station station = toStation;
-                while (!station.equals(fromStation)) {
-                    path.add(station);
-                    station = parents.get(station);
-                }
-                path.add(fromStation);
-                Collections.reverse(path);
-                return path;
-            }
+                int transferTime = transport.getOrDefault(current, neighborTransport).getTransferTime();
+                int distance = distances.get(current) + transferTime;
 
-            for (Pair<Station, Transport> neighbour : current.getNeighbours()) {
-                Station neighbourStation = neighbour.first;
-                if (!visited.contains(neighbourStation)) {
-                    visited.add(neighbourStation);
-                    parents.put(neighbourStation, current);
-                    queue.add(neighbourStation);
+                // přidáme sousední stanici do fronty, pokud ještě nebyla zpracována
+                if (!distances.containsKey(neighborStation)) {
+                    distances.put(neighborStation, distance);
+                    transport.put(neighborStation, neighborTransport);
+                    previous.put(neighborStation, current);
+                    queue.add(neighborStation);
+                } else if (distance < distances.get(neighborStation) ||
+                        (distance == distances.get(neighborStation) &&
+                                neighborTransport.getTransferTime() < transport.get(neighborStation).getTransferTime())) {
+                    // aktualizujeme nejkratší cestu, pokud nová cesta je kratší nebo má nižší celkový čas přestupu
+                    distances.put(neighborStation, distance);
+                    transport.put(neighborStation, neighborTransport);
+                    previous.put(neighborStation, current);
                 }
             }
         }
 
-        // No path found
-        return null;
+        // rekonstrukce nejkratší cesty
+        List<Pair<Station, Integer>> path = new ArrayList<>();
+        Station current = end;
+        while (previous.containsKey(current)) {
+            Station previousStation = previous.get(current);
+            path.add(new Pair<>(current, distances.get(current) - distances.get(previousStation)));
+            current = previousStation;
+        }
+        path.add(new Pair<>(start, distances.get(start)));
 
+        Collections.reverse(path);
+        return path;
     }
 }
