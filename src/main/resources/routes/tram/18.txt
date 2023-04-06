@@ -1,0 +1,49 @@
+Nádraží Podbaba
+1
+Zelená
+1
+Lotyšská
+1
+Vítězné náměstí
+3
+Hradčanská
+2
+Chotkovy sady
+2
+Malostranská
+2
+Staroměstská
+2
+Karlovy lázně
+2
+Národní divadlo
+2
+Národní třída
+2
+Karlovo náměstí
+1
+Moráň
+2
+Botanická zahrada
+1
+Albertov
+2
+Ostrčilovo náměstí
+1
+Svatoplukova
+1
+Divadlo Na Fidlovačce
+2
+Náměstí Bratří Synků
+2
+Nuselská radnice
+1
+Palouček
+1
+Pražského povstání
+1
+Kotorská
+1
+Na Veselí
+2
+Vozovna Pankrác

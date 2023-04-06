@@ -1,0 +1,81 @@
+Sídliště Řepy
+1
+Blatiny
+1
+Slánská
+1
+Hlušičkova
+1
+Krematorium Motol
+2
+Motol
+1
+Vozovna Motol
+1
+Hotel Golf
+1
+Poštovka
+1
+Kotlářka
+1
+Kavalírka
+1
+Klamovka
+2
+U Zvonu
+1
+Bertramka
+3
+Anděl
+1
+Zborovská
+2
+Palackého náměstí
+2
+Karlovo náměstí
+1
+Štěpánská
+3
+I. P. Pavlova
+2
+Náměstí Míru
+2
+Šumavská
+1
+Vinohradská vodárna
+1
+Perunova
+1
+Orionka
+2
+Flora
+1
+Olšanské hřbitovy
+2
+Želivského
+1
+Želivského
+1
+Vinohradské hřbitovy
+1
+Krematorium Strašnice
+1
+Vinice
+1
+Solidarita
+1
+Zborov - Strašnické divadlo
+1
+Limuzská
+1
+Nové Strašnice
+2
+Depo Hostivař
+2
+Depo Hostivař
+1
+Malešická továrna
+1
+Na Homoli
+2
+Ústřední dílny DP

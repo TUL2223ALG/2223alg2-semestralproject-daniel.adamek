@@ -1,0 +1,33 @@
+Královka
+1
+Malovanka
+1
+Hládkov
+2
+Brusnice
+1
+Pražský hrad
+2
+Královský letohrádek
+3
+Malostranská
+2
+Malostranské náměstí
+1
+Hellichova
+2
+Újezd
+3
+Národní divadlo
+2
+Národní třída
+2
+Karlovo náměstí
+1
+Štěpánská
+3
+I. P. Pavlova
+2
+Bruselská
+2
+Zvonařka

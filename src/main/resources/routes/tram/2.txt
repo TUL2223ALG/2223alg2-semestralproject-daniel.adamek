@@ -1,0 +1,43 @@
+Sídliště Petřiny
+1
+Petřiny
+1
+Větrník
+1
+Vojenská nemocnice
+1
+Baterie
+1
+Ořechovka
+2
+Sibeliova
+1
+Vozovna Střešovice
+2
+Prašný most
+2
+Hradčanská
+2
+Chotkovy sady
+2
+Malostranská
+1
+Staroměstská
+2
+Karlovy lázně
+2
+Národní divadlo
+2
+Národní třída
+2
+Karlovo náměstí
+1
+Moráň
+1
+Palackého náměstí
+1
+Palackého náměstí
+1
+Výtoň
+3
+Podolská vodárna
