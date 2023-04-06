@@ -10,8 +10,9 @@ public class Station {
 
     private final String name;
     private final String prettyName;
+    private final HashSet<Route> routes = new HashSet<>();
     // ZASTAVKA ; ZPŮSOB_DOPRAVY
-    private HashSet<Pair<Station, Transport>> neighbours = new HashSet<>();
+    private final HashSet<Pair<Station, Transport>> neighbours = new HashSet<>();
 
     public Station(String stationName) {
         this.prettyName = stationName;
