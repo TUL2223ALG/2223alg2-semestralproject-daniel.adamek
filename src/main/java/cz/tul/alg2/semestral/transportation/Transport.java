@@ -7,7 +7,7 @@ public class Transport {
 
     private int transferTime;
 
-    Transport(TypeOfTransportation type, int duration) {
+    public Transport(TypeOfTransportation type, int duration) {
         this.type = type;
         this.transferTime = duration;
     }
