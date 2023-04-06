@@ -1,6 +1,7 @@
 package cz.tul.alg2.semestral.transportation;
 
 import cz.tul.alg2.semestral.utilities.Pair;
+import cz.tul.alg2.semestral.utilities.TextNormalization;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -8,11 +9,13 @@ import java.util.Objects;
 public class Station {
 
     private final String name;
+    private final String prettyName;
     // ZASTAVKA ; ZPŮSOB_DOPRAVY
     private HashSet<Pair<Station, Transport>> neighbours = new HashSet<>();
 
     public Station(String stationName) {
-        this.name = stationName;
+        this.prettyName = stationName;
+        this.name = TextNormalization.stringNormalize(stationName);
     }
 
     public String getName() {
@@ -39,5 +42,12 @@ public class Station {
     @Override
     public int hashCode() {
         return name.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "Station{" +
+                "name='" + prettyName + '\'' +
+                '}';
     }
 }

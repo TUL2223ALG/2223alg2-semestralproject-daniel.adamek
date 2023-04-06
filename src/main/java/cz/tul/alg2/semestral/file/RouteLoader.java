@@ -5,6 +5,7 @@ import cz.tul.alg2.semestral.transportation.Station;
 import cz.tul.alg2.semestral.transportation.Transport;
 import cz.tul.alg2.semestral.transportation.TypeOfTransportation;
 import cz.tul.alg2.semestral.utilities.Pair;
+import cz.tul.alg2.semestral.utilities.TextNormalization;
 
 import java.io.*;
 import java.util.HashMap;
@@ -45,7 +46,7 @@ public class RouteLoader {
                 if (stationName == null || stationName.equals("")) {
                     throw new InvalidFileFormatException("Error while loading file " + path + ". Skipping...");
                 };
-                actual = allStations.get(stationName);
+                actual = allStations.get(TextNormalization.stringNormalize(stationName));
                 if (actual == null)
                     actual = new Station(stationName);
 
