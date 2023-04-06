@@ -6,5 +6,6 @@ public enum TypeOfTransportation {
     BUS,
     AIRPLANE,
     CABLE_CAR,
-    FERRY
+    FERRY,
+    TROLLEY
 }
