@@ -22,6 +22,10 @@ public class Station {
         return name;
     }
 
+    public String getPrettyName() {
+        return prettyName;
+    }
+
     public HashSet<Pair<Station, Transport>> getNeighbours() {
         return neighbours;
     }
