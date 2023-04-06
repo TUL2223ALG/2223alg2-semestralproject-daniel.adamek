@@ -10,6 +10,7 @@ import java.io.*;
 import java.util.HashMap;
 
 public class RouteLoader {
+
     private final HashMap<String, Station> allStations = new HashMap<>();
     public void loadRoute(String path, TypeOfTransportation typeOfTransportation) {
         try {
@@ -17,13 +18,12 @@ public class RouteLoader {
             InputStream inputStream = RouteLoader.class.getClassLoader().getResourceAsStream(path);
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             String time;
-            int duration;
 
             // Station loading
             String stationName;
             Station station;
             Transport transport;
-            Station prev = null, actual;
+            Station prev, actual;
 
             stationName = reader.readLine();
             if (stationName == null || stationName.equals("")) {
@@ -65,5 +65,8 @@ public class RouteLoader {
             System.out.println("An error occured.");
             e.printStackTrace();
         }
+    }
+    public HashMap<String, Station> getAllStations() {
+        return allStations;
     }
 }
