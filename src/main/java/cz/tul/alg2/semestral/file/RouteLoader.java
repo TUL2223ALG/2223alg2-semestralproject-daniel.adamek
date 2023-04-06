@@ -31,10 +31,13 @@ public class RouteLoader {
         return foundRoutes;
     }
     public void loadRoute(String path, TypeOfTransportation typeOfTransportation) {
-        try {
             // Load file from resources folder
-            InputStream inputStream = RouteLoader.class.getClassLoader().getResourceAsStream(path);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            File file = new File(path);
+            if (!file.exists()) {
+                System.out.println("File not found");
+                return;
+            }
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String time;
 
             // Station loading
@@ -76,7 +79,6 @@ public class RouteLoader {
 
             // File closing
             reader.close();
-            inputStream.close();
 
         } catch (IOException | InvalidFileFormatException e) {
             System.out.println("An error occured.");
