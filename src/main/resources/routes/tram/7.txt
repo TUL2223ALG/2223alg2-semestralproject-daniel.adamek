@@ -1,0 +1,53 @@
+Laurová
+0
+Radlická
+1
+Braunova
+1
+Křížová
+5
+Anděl
+1
+Zborovská
+2
+Palackého náměstí
+1
+Výtoň
+1
+Albertov
+2
+Ostrčilovo náměstí
+1
+Svatoplukova
+1
+Divadlo Na Fidlovačce
+2
+Otakarova
+2
+Nádraží Vršovice
+2
+Bohemians
+2
+Koh-i-noor
+1
+Slavia - Nádraží Eden
+1
+Kubánské náměstí
+2
+Průběžná
+2
+Strašnická
+1
+Vozovna Strašnice
+1
+Vinice
+1
+Solidarita
+1
+Zborov - Strašnické divadlo
+1
+Limuzská
+1
+Nové Strašnice
+3
+Depo Hostivař

@@ -1,0 +1,55 @@
+Sídliště Barrandov
+1
+Poliklinika Barrandov
+1
+Chaplinovo náměstí
+1
+K Barrandovu
+1
+Geologická
+3
+Hlubočepy
+1
+Zlíchov
+2
+Lihovar
+2
+Smíchovské nádraží
+1
+Plzeňka
+1
+Na Knížecí
+2
+Anděl
+1
+Arbesovo náměstí
+1
+Švandovo divadlo
+1
+Újezd
+1
+Hellichova
+1
+Malostranské náměstí
+3
+Malostranská
+3
+Chotkovy sady
+1
+Hradčanská
+2
+Vítězné náměstí
+2
+Dejvická
+1
+Thákurova
+1
+Hadovka
+1
+Na Pískách
+1
+Bořislavka
+1
+Sídliště Červený Vrch
+1
+Červený Vrch
