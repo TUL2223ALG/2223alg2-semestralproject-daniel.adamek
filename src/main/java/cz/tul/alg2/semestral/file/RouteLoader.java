@@ -1,63 +1,67 @@
 package cz.tul.alg2.semestral.file;
 
+import cz.tul.alg2.semestral.exception.InvalidFileFormatException;
 import cz.tul.alg2.semestral.transportation.Station;
 import cz.tul.alg2.semestral.transportation.Transport;
 import cz.tul.alg2.semestral.transportation.TypeOfTransportation;
 import cz.tul.alg2.semestral.utilities.Pair;
 
 import java.io.*;
-import java.time.Duration;
-import java.util.HashSet;
-import java.util.MissingFormatArgumentException;
+import java.util.HashMap;
 
 public class RouteLoader {
-    private final HashSet<Pair<Station, Transport>> allStations = new HashSet<>();
-    public RouteLoader(String path, TypeOfTransportation typeOfTransportation) {
+    private final HashMap<String, Station> allStations = new HashMap<>();
+    public void loadRoute(String path, TypeOfTransportation typeOfTransportation) {
         try {
             // Load file from resources folder
             InputStream inputStream = RouteLoader.class.getClassLoader().getResourceAsStream(path);
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            String line, time;
+            String time;
             int duration;
 
             // Station loading
             String stationName;
             Station station;
             Transport transport;
-            Pair<Station, Transport> prev = null, actual;
+            Station prev = null, actual;
+
+            stationName = reader.readLine();
+            if (stationName == null || stationName.equals("")) {
+                throw new InvalidFileFormatException("Error while loading file " + path + ". Skipping...");
+            };
+            prev = new Station(stationName);
+            allStations.put(prev.getName(), prev);
 
             while (true) {
-                line = reader.readLine();
-                if (line == null) break;
-
                 time = reader.readLine();
-                if (time == null || time.equals("")) {
-                    if (prev == null) {
-                        System.out.println("Error while loading file " + path + ". Skipping...");
-                        break;
-                    }
-                    actual = new Pair<>(new Station(line), prev.second);
+                if (time == null) {
                     break;
-                }
-                else {
-                    duration = Integer.parseInt(time);
-                    actual = new Pair<>(new Station(line), new Transport(typeOfTransportation, duration));
+                } else if (time.equals("")) {
+                    throw new InvalidFileFormatException("Error while loading file " + path + ". Skipping...");
                 }
 
-                allStations.add(actual);
+                transport = new Transport(typeOfTransportation, Integer.parseInt(time));
 
-                if (prev != null) {
-                    prev.first.addNeighbour(actual);
-                    actual.first.addNeighbour(prev);
-                }
+                stationName = reader.readLine();
+                if (stationName == null || stationName.equals("")) {
+                    throw new InvalidFileFormatException("Error while loading file " + path + ". Skipping...");
+                };
+                actual = allStations.get(stationName);
+                if (actual == null)
+                    actual = new Station(stationName);
+
+                prev.addNeighbour(new Pair<>(actual, transport));
+                actual.addNeighbour(new Pair<>(prev, transport));
+
+                allStations.put(actual.getName(), actual);
                 prev = actual;
             }
 
-            // FIle closing
+            // File closing
             reader.close();
             inputStream.close();
 
-        } catch (IOException e) {
+        } catch (IOException | InvalidFileFormatException e) {
             System.out.println("An error occured.");
             e.printStackTrace();
         }
