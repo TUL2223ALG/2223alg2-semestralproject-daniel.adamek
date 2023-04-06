@@ -1,4 +1,4 @@
-package cz.tul.alg2.semestral.Utilities;
+package cz.tul.alg2.semestral.utilities;
 
 public class Pair<K,T> {
     public K first;
