@@ -4,7 +4,7 @@ public class TextNormalization {
     public static String stringNormalize(String toNormalize) {
         return toNormalize
                 .toLowerCase()
-                .replaceAll("[^ěščřžýáíéóúůďťňĎŇŤŠČŘŽÝÁÍÉÚŮĚÓa-zA-Z0-9]", "")
+                .replaceAll("[^a-zA-Z0-9]", "")
                 .replace('é', 'e')
                 .replace('í', 'i')
                 .replace('á', 'a')
