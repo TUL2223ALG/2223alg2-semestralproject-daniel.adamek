@@ -1,0 +1,59 @@
+Smíchovské nádraží
+2
+Lihovar
+10
+Chodovec
+2
+Chodovská tvrz
+1
+Litochlebské náměstí
+1
+Bachova
+1
+Mikulova
+1
+Hněvkovského
+1
+Modrá škola
+2
+Háje
+1
+Horčičkova
+3
+Jakobiho
+1
+Sídliště Petrovice
+1
+Poliklinika Petrovice
+1
+Veronské náměstí
+1
+Nové Petrovice
+1
+Livornská
+1
+Bolevecká
+1
+Na Vartě
+1
+Boloňská
+1
+Hostivařský pivovar
+1
+Řepčická
+1
+Gercenova
+2
+Nádraží Hostivař
+1
+Sklářská
+3
+Myšlínská
+1
+Mokřanská
+1
+Plošná
+2
+Michelangelova
+2
+Skalka

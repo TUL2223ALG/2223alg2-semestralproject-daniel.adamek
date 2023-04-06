@@ -1,0 +1,41 @@
+Poliklinika Petřiny
+1
+Vojenská nemocnice
+2
+U Vojenské nemocnice
+1
+Talichova
+1
+Náměstí Před Bateriemi
+1
+Norbertov
+1
+Sibeliova
+2
+Vozovna Střešovice
+1
+Macharovo náměstí
+1
+Pod Vyhlídkou
+1
+Starodejvická
+1
+Poliklinika Na Dlouhém Lánu
+1
+Bořislavka
+2
+Bořislavka
+3
+Sušická
+1
+Hanspaulka
+1
+Dyrinka
+1
+Špitálka
+1
+U Matěje
+1
+Matějská
+2
+Sídliště Baba

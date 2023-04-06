@@ -1,0 +1,61 @@
+Poliklinika Budějovická
+7
+Rosečská
+1
+Nad Rybníky
+1
+Nádraží Krč
+2
+Nad Havlem
+2
+Nemocnice Krč
+1
+Zálesí
+1
+Sulická
+2
+Novodvorská
+1
+Čechtická
+1
+Nové dvory
+1
+Cílkova
+1
+Lhotecký les
+1
+Sídliště Lhotka
+1
+Sídliště Lhotka
+1
+Labe
+1
+Hasova
+1
+Ke Schodům
+1
+Tyršova čtvrť
+1
+Darwinova
+1
+Lehárova
+1
+Modřanská škola
+2
+Obchodní náměstí
+1
+Na Havránce
+2
+Poliklinika Modřany
+2
+Čechova čtvrť
+2
+Cukrovar Modřany
+2
+Komořany
+1
+Komořany
+1
+Nové Komořany
+0
+Do Koutů
