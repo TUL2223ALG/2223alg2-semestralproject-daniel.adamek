@@ -4,6 +4,12 @@
 hromadné dopravy ze stanice na stanici a vypisovat dobu trvání.
 K sadě jsem si vybral otevřená data Prazské integrované dopravy.
 
+Osobní motivací je, abych implementoval úlohu, kterou již mám v C++ vyřešenou
+pomocí algoritmu BFS (vyhledávání do šířky), zkusil si kód napsat v Javě,
+pokusit se naprogramovat jiné prohledávací algoritmy (DFS, Dijskra) a porovnat
+efektivitu. Zároveň chci mé řešení rozšířit pouze ze stanic metra i na tramvaje,
+autobusy, trolejbusy, vlaky, přívozy a lanové pozemní dráhy. 
+
 ## Řešení
 Program načte ze souboru názvy stanic MHD a délku přesunu mezi nimi, následně
 vytvoří neorientovaný graf, nad kterým bude vyhledávat cesty pomocí algoritmu
