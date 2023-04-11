@@ -1,0 +1,133 @@
+Jinonice
+1
+Vidoule
+1
+Hutmanka
+1
+U Waltrovky
+1
+Farkáň
+1
+Urbanova
+1
+Malvazinky
+1
+Václavka
+1
+Santoška
+1
+Ženské domovy
+2
+Anděl
+1
+Zborovská
+2
+Jiráskovo náměstí
+1
+Štěpánská
+3
+I. P. Pavlova
+1
+Muzeum
+1
+Hlavní nádraží
+3
+Masarykovo nádraží
+1
+Bílá labuť
+1
+Florenc
+1
+Pernerova
+2
+U Památníku
+1
+Tachovské náměstí
+1
+Lukášova
+1
+Černínova
+1
+Ohrada
+1
+Biskupcova
+1
+Basilejské náměstí
+1
+Olgy Havlové
+0
+Malešická
+1
+Třebešín
+2
+Na Palouku
+1
+Hostýnská
+1
+Plaňanská
+1
+Sídliště Malešice
+1
+Limuzská
+2
+Donatellova
+1
+Michelangelova
+1
+Plošná
+1
+Mokřanská
+1
+Myšlínská
+1
+Kablo
+1
+Barvy a laky
+1
+Radiová
+2
+Ústřední
+1
+Kutnohorská
+1
+Dolnoměcholupská
+1
+Dolní Měcholupy
+1
+K Dubečku
+2
+Dubeček
+1
+Lázeňka
+1
+Za Pavilonem
+1
+Škola Dubeč
+1
+Dubeč
+2
+Kolodějská obora
+1
+Pod Oborou
+2
+Kvasinská
+1
+Ježovická
+1
+Pošta Újezd nad Lesy
+1
+Újezd nad Lesy
+1
+Hulická
+2
+Nádraží Klánovice-sever
+1
+Smiřická
+1
+Smržovská
+1
+Bazar
+1
+Přímské náměstí
+2
+Klánovice

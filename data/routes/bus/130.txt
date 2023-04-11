@@ -1,0 +1,37 @@
+Zličín
+3
+Obchodní centrum Sárská
+4
+Stodůlky-Bavorská
+1
+Lýskova
+2
+Stodůlky
+1
+Holýšovská
+2
+Raichlova
+1
+Slatinová
+1
+Náměstí U Lva
+2
+Řeporyjské náměstí
+2
+Zahrádky
+5
+Za Farou
+1
+Slivenec
+1
+K Holyni
+1
+Opálová
+1
+Nový Slivenec
+2
+Štěpařská
+1
+Poliklinika Barrandov
+2
+Chaplinovo náměstí

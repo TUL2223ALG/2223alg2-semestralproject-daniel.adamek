@@ -1,0 +1,85 @@
+Nádraží Holešovice
+1
+Jankovcova
+2
+Kuchyňka
+1
+Rokoska
+1
+Vychovatelna
+1
+Bulovka
+2
+Čertův vršek
+2
+Madlina
+1
+Teplická
+2
+Střížkov
+1
+Poliklinika Prosek
+1
+Zásadská
+1
+Českolipská
+1
+Letňanská
+3
+Letňany
+1
+Letňany
+1
+Výstaviště Letňany
+1
+Dobratická
+1
+Tupolevova
+2
+Fryčovická
+1
+Sídliště Letňany
+1
+Ivančická
+1
+Avia Letňany
+1
+Staré Letňany
+1
+Toužimská
+2
+Kbelský lesopark
+1
+Sportovní centrum Kbely
+2
+Bakovská
+1
+Kbely
+1
+Kbely
+1
+Nymburská
+1
+Dřevařská
+2
+Satalice
+1
+Satalická obora
+1
+Satalice
+1
+Sportareál Satalice
+2
+Sicherova
+1
+Lipnická
+1
+Hutě
+4
+Rajská zahrada
+1
+Ronešova
+1
+Poliklinika Černý Most
+2
+Černý Most

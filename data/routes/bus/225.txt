@@ -1,0 +1,55 @@
+Velká Ohrada
+1
+Červeňanského
+1
+Píškova
+1
+Amforová
+2
+Luka
+1
+Vackova
+2
+Stodůlky
+1
+Lýskova
+1
+Stodůlky-Bavorská
+1
+Bílý Beránek
+3
+Slánská
+1
+Bazovského
+1
+Za Slánskou silnicí
+1
+Radnice Řepy
+2
+Reinerova
+2
+Jiviny
+1
+Staré náměstí
+1
+Nádraží Ruzyně
+1
+Ciolkovského
+1
+Dlouhá míle
+2
+Navigátorů
+1
+Nová Šárka
+2
+Divoká Šárka
+1
+Vozovna Vokovice
+1
+Nad Džbánem
+3
+Nádraží Veleslavín
+2
+Na Pastvinách
+1
+Nové Vokovice

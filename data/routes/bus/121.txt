@@ -1,0 +1,35 @@
+Poliklinika Budějovická
+1
+Antala Staška
+1
+Ryšánka
+1
+Na Staré cestě
+1
+Nádraží Krč
+2
+Višňová
+1
+Zálesí
+2
+Sulická
+1
+Novodvorská
+1
+Lhotka
+2
+V Zátiší
+1
+Filosofská
+1
+Klánova
+1
+Korandova
+2
+Na Lysinách
+1
+V Mokřinách
+1
+Černý kůň
+2
+Nádraží Braník

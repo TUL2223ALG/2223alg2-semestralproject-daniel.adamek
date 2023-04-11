@@ -1,0 +1,79 @@
+Sídliště Řepy
+1
+Blatiny
+1
+Slánská
+1
+Hlušičkova
+1
+Krematorium Motol
+2
+Motol
+1
+Vozovna Motol
+1
+Hotel Golf
+1
+Poštovka
+1
+Kotlářka
+1
+Kavalírka
+1
+Klamovka
+1
+U Zvonu
+1
+Bertramka
+3
+Anděl
+2
+Arbesovo náměstí
+1
+Švandovo divadlo
+1
+Újezd
+2
+Národní divadlo
+2
+Národní třída
+1
+Lazarská
+7
+Karlovo náměstí
+2
+Štěpánská
+2
+I. P. Pavlova
+1
+Náměstí Míru
+2
+Jana Masaryka
+1
+Krymská
+1
+Ruská
+2
+Vršovické náměstí
+1
+Čechovo náměstí
+1
+Koh-i-noor
+1
+Slavia - Nádraží Eden
+1
+Kubánské náměstí
+2
+Průběžná
+1
+Staré Strašnice
+0
+Na Hroudě
+2
+Radošovická
+1
+Dubečská
+1
+Nádraží Zahradní Město
+1
+Zahradní Město

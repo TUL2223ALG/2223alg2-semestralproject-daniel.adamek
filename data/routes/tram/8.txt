@@ -1,0 +1,55 @@
+Nádraží Podbaba
+1
+Zelená
+1
+Lotyšská
+1
+Vítězné náměstí
+3
+Hradčanská
+2
+Sparta
+2
+Letenské náměstí
+1
+Kamenická
+1
+Strossmayerovo náměstí
+1
+Nábřeží Kapitána Jaroše
+2
+Dlouhá třída
+2
+Náměstí Republiky
+1
+Bílá labuť
+2
+Florenc
+1
+Karlínské náměstí
+1
+Křižíkova
+1
+Urxova
+1
+Invalidovna
+3
+Palmovka
+2
+Balabenka
+1
+Ocelářská
+2
+Arena Libeň jih
+1
+Nádraží Libeň
+1
+Kabešova
+1
+Podkovářská
+1
+U Elektry
+1
+Nademlejnská
+2
+Starý Hloubětín
