@@ -1,0 +1,33 @@
+Náměstí Míru
+2
+I. P. Pavlova
+2
+Štěpánská
+1
+Karlovo náměstí
+1
+Novoměstská radnice
+1
+Lazarská
+1
+Vodičkova
+2
+Václavské náměstí
+1
+Jindřišská
+2
+Masarykovo nádraží
+1
+Bílá labuť
+1
+Těšnov
+1
+Štvanice
+2
+Vltavská
+1
+Strossmayerovo náměstí
+2
+Veletržní palác
+2
+Výstaviště

@@ -1,0 +1,45 @@
+Skalka
+1
+Michelangelova
+1
+Plošná
+1
+Mokřanská
+1
+Myšlínská
+1
+Kablo
+1
+V Chotejně
+1
+V Nových domcích
+1
+U Továren
+1
+Továrny Hostivař
+1
+Za Nadjezdem
+1
+U Střediska
+1
+Dolní Měcholupy
+1
+K Dubečku
+3
+Dubeček
+1
+Lázeňka
+1
+Za Pavilonem
+1
+Škola Dubeč
+1
+Dubeč
+3
+Kolodějská obora
+2
+Pod Oborou
+2
+Kvasinská
+1
+Koloděje

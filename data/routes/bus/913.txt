@@ -1,0 +1,117 @@
+Dolní Chabry
+1
+Bílenecké náměstí
+1
+Měděnecká
+1
+Dvorní
+1
+Prunéřovská
+1
+Počeradská
+1
+Vozovna Kobylisy
+1
+Mirovická
+1
+Sídliště Kobylisy
+1
+Kobylisy
+1
+Kobylisy
+2
+Ládví
+1
+Štěpničná
+1
+Třebenická
+2
+Střížkov
+1
+Sídliště Prosek
+1
+Prosek
+1
+Nad Jetelkou
+2
+Vysočanská
+3
+Nádraží Libeň
+1
+K Žižkovu
+2
+Skloněná
+1
+Odlehlá
+1
+Krejcárek
+2
+Ohrada
+1
+Lukášova
+0
+Černínova
+1
+Rokycanova
+2
+Olšanské náměstí
+1
+Flora
+2
+Orionka
+1
+Vlašimská
+2
+Bělocerkevská
+1
+Slavia - Nádraží Eden
+2
+Bohdalec
+1
+Chodovská
+1
+Teplárna Michle
+2
+Spořilov
+1
+Lešanská
+1
+Nad Pahorkem
+4
+U Labutě
+2
+Nemocnice Krč
+1
+Zálesí
+1
+Sulická
+2
+Novodvorská
+1
+Čechtická
+1
+Nové dvory
+1
+Jalodvorská
+1
+U Zvoničky
+1
+Libuš
+1
+U Libušské sokolovny
+1
+Sídliště Písnice
+2
+Lipovická
+1
+Ke Březině
+1
+Písnice
+4
+Cholupické náměstí
+1
+Cholupice
+1
+Hrazanská
+2
+Točná

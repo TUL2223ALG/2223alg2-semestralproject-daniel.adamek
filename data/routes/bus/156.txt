@@ -1,0 +1,49 @@
+Nádraží Holešovice
+1
+Jankovcova
+1
+U Vody
+1
+Přívozní
+1
+V Přístavu
+1
+Přístav Holešovice
+2
+Maniny
+2
+Osadní
+1
+Argentinská
+2
+Vltavská
+1
+Strossmayerovo náměstí
+1
+Veletržní palác
+3
+OC Stromovka
+1
+Veletržní palác
+2
+Řezáčovo náměstí
+1
+Bubenská
+2
+Vltavská
+2
+Argentinská
+1
+Osadní
+2
+Maniny
+1
+Přístav Holešovice
+1
+V Přístavu
+1
+Přívozní
+1
+U Vody
+3
+Nádraží Holešovice

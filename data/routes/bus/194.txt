@@ -1,0 +1,21 @@
+Nemocnice pod Petřínem
+3
+Malostranské náměstí
+4
+Staroměstská
+2
+Mariánské náměstí
+3
+Staroměstské náměstí
+1
+Masná
+2
+Hradební
+2
+Truhlářská
+2
+Petrské náměstí
+2
+Bílá labuť
+1
+Florenc

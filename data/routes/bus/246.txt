@@ -1,0 +1,57 @@
+Zličín
+3
+Obchodní centrum Sárská
+4
+Stodůlky-Bavorská
+1
+Lýskova
+2
+Stodůlky
+1
+Holýšovská
+2
+Raichlova
+1
+Slatinová
+1
+Náměstí U Lva
+2
+Řeporyjské náměstí
+2
+Zahrádky
+3
+Zmrzlík
+2
+Zadní Kopanina
+3
+Maškův mlýn
+1
+Cikánka
+1
+Lomy
+1
+U Lomů
+1
+Cementárna Radotín
+1
+V Sudech
+1
+Safírová
+1
+Prvomájová
+2
+Nádraží Radotín
+1
+Vrážská
+0
+U Jankovky
+1
+Přeštínská
+2
+Přístav Radotín
+1
+Lahovice
+4
+Most Závodu míru
+1
+Zbraslavské náměstí
