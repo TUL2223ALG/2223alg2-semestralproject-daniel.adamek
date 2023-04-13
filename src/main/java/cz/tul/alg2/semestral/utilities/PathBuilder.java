@@ -1,5 +1,7 @@
 package cz.tul.alg2.semestral.utilities;
 
+import java.io.File;
+
 /**
 The PathBuilder class provides a static method to join an array of strings into a file system path
 using the system-specific path separator.
@@ -13,7 +15,7 @@ public class PathBuilder {
      */
     public static String joinPath(String[] partsOfPath) {
         StringBuilder sb = new StringBuilder();
-        String pathSeparator = System.getProperty("path.separator");
+        String pathSeparator = File.separator;
         for (String part: partsOfPath) {
             sb.append(part);
             sb.append(pathSeparator);

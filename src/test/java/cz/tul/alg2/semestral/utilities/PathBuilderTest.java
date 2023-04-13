@@ -2,6 +2,8 @@ package cz.tul.alg2.semestral.utilities;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -33,8 +35,8 @@ class PathBuilderTest {
     @Test
     void testMultipleParts() {
         String[] parts = {"dir1", "dir2", "file.txt"};
-        String expected = "dir1" + System.getProperty("path.separator") +
-                "dir2" + System.getProperty("path.separator") + "file.txt";
+        String expected = "dir1" + File.separator +
+                "dir2" + File.separator + "file.txt";
         assertEquals(expected, PathBuilder.joinPath(parts));
     }
 }
