@@ -2,22 +2,16 @@ package cz.tul.alg2.semestral.transportation;
 
 import java.util.LinkedList;
 
-public class Route {
+public abstract class ARoute {
     private final String name;
-    private final TypeOfTransportation type;
     private final LinkedList<Station> stations = new LinkedList<>();
 
-    public Route(String name, TypeOfTransportation type) {
+    public ARoute(String name) {
         this.name = name;
-        this.type = type;
     }
 
     public String getName() {
         return name;
-    }
-
-    public TypeOfTransportation getType() {
-        return type;
     }
 
     public LinkedList<Station> getStations() {
@@ -26,4 +20,6 @@ public class Route {
     public void addStation(Station station) {
         this.stations.addFirst(station);
     }
+
+    public abstract String getPrettyName();
 }

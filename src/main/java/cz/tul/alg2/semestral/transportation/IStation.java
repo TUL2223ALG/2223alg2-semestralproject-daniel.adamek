@@ -16,6 +16,9 @@ public interface IStation {
      */
     String getPrettyName();
 
+    HashSet<ARoute> getRoutes();
+    public void addRoute(ARoute route);
+
     /**
      * Returns neighbour stations of this station
      */

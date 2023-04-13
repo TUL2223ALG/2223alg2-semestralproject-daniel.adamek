@@ -9,7 +9,7 @@ public class Station {
 
     private final String name;
     private final String prettyName;
-    private final HashSet<Route> routes = new HashSet<>();
+    private final HashSet<ARoute> routes = new HashSet<>();
     private final HashSet<Pair<Station, Transport>> neighbours = new HashSet<>();
 
     public Station(String stationName) {
@@ -25,10 +25,10 @@ public class Station {
         return prettyName;
     }
 
-    public HashSet<Route> getRoutes() {
+    public HashSet<ARoute> getRoutes() {
         return routes;
     }
-    public void addRoute(Route route) {
+    public void addRoute(ARoute route) {
         this.routes.add(route);
     }
 
