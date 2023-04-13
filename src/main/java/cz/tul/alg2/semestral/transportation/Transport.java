@@ -1,7 +1,5 @@
 package cz.tul.alg2.semestral.transportation;
 
-import java.time.Duration;
-
 public class Transport {
     private TypeOfTransportation type;
 

@@ -7,10 +7,12 @@ import cz.tul.alg2.semestral.transportation.TypeOfTransportation;
 import cz.tul.alg2.semestral.utilities.Pair;
 import cz.tul.alg2.semestral.utilities.TextNormalization;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class RouteLoader {
 
@@ -20,7 +22,7 @@ public class RouteLoader {
 
         File dir = new File(path);
         if (!dir.exists()) {
-            System.out.println("Folder does not exist.");
+            System.err.println("Folder " + path + " does not exist.");
         } else {
             File[] files = dir.listFiles((dir1, name) -> name.endsWith(".txt"));
             for (File file : files)
