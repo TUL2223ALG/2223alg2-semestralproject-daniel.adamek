@@ -1,0 +1,79 @@
+Holyně
+1
+Náměstí Olgy Scheinpflugové
+1
+Sídliště Barrandov
+1
+Poliklinika Barrandov
+1
+Chaplinovo náměstí
+1
+K Barrandovu
+1
+Geologická
+3
+Hlubočepy
+1
+Zlíchov
+2
+Lihovar
+2
+Smíchovské nádraží
+1
+Plzeňka
+1
+Na Knížecí
+2
+Anděl
+1
+Zborovská
+2
+Jiráskovo náměstí
+2
+Myslíkova
+1
+Lazarská
+1
+Vodičkova
+2
+Václavské náměstí
+1
+Jindřišská
+2
+Hlavní nádraží
+1
+Viktoria Žižkov
+2
+Lipanská
+1
+Olšanské náměstí
+2
+Olšanská
+1
+Nákladové nádraží Žižkov
+1
+Mezi Hřbitovy
+2
+Želivského
+1
+Vinohradské hřbitovy
+1
+Krematorium Strašnice
+1
+Vinice
+1
+Solidarita
+1
+Zborov - Strašnické divadlo
+1
+Limuzská
+1
+Nové Strašnice
+1
+Depo Hostivař
+1
+Malešická továrna
+1
+Na Homoli
+2
+Ústřední dílny DP

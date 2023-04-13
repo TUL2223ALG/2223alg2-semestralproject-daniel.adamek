@@ -1,0 +1,29 @@
+Smíchovské nádraží
+2
+Lihovar
+4
+Pobřežní cesta
+1
+Nádraží Braník
+2
+Černý kůň
+2
+U Belárie
+1
+Zátišská
+2
+Družná
+1
+Tylova čtvrť
+1
+Poliklinika Modřany
+1
+Písková
+1
+Platónova
+1
+Petržílova
+1
+Pavelkova
+1
+Na Beránku

@@ -1,0 +1,65 @@
+Vozovna Kobylisy
+1
+Líbeznická
+1
+Březiněveská
+1
+Kobylisy
+1
+Ke Stírce
+1
+Okrouhlická
+1
+Vychovatelna
+1
+Bulovka
+1
+Vosmíkových
+1
+U Kříže
+1
+Libeňský zámek
+1
+Divadlo pod Palmovkou
+2
+Palmovka
+3
+Invalidovna
+1
+Urxova
+1
+Křižíkova
+1
+Karlínské náměstí
+1
+Florenc
+2
+Bílá labuť
+1
+Masarykovo nádraží
+2
+Jindřišská
+2
+Václavské náměstí
+1
+Vodičkova
+1
+Lazarská
+2
+Karlovo náměstí
+1
+Moráň
+2
+Botanická zahrada
+1
+Albertov
+2
+Ostrčilovo náměstí
+1
+Svatoplukova
+1
+Divadlo Na Fidlovačce
+2
+Otakarova
+1
+Náměstí Bratří Synků

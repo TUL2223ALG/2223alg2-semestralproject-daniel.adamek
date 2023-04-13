@@ -1,0 +1,103 @@
+Terminál 1
+1
+Terminál 2
+1
+Schengenská
+4
+K Tuchoměřicům
+1
+Přední Kopanina
+1
+K Juliáně
+1
+U Václava
+1
+Na Mlýnici
+1
+Nebušice
+0
+K Noskovně
+1
+Na Parcelách
+0
+Škola Nebušice
+1
+Průhonský háj
+1
+Nad Habrovkou
+1
+Jenerálka
+3
+Bořislavka
+2
+Sušická
+1
+Hanspaulka
+1
+Dyrinka
+1
+Špitálka
+1
+U Matěje
+1
+Dukla-Juliska
+1
+Na Santince
+2
+Zelená
+1
+Nemocnice Bubeneč
+1
+Sibiřské náměstí
+2
+Hradčanská
+2
+Korunovační
+3
+Dlouhá třída
+2
+Náměstí Republiky
+1
+Masarykovo nádraží
+2
+Hlavní nádraží
+1
+Muzeum
+1
+Ve Smečkách
+3
+Karlovo náměstí
+1
+Palackého náměstí
+1
+Zborovská
+2
+Anděl
+1
+Na Knížecí
+2
+Smíchovské nádraží
+0
+Smíchovské nádraží
+2
+Lihovar
+3
+Malá Chuchle
+1
+Dostihová
+1
+Lahovičky
+2
+Lahovice
+3
+Zbraslavské náměstí
+2
+U Včely
+2
+Žabovřesky
+1
+Na Drahách
+1
+Pod Zatáčkou
+1
+Baně

@@ -1,0 +1,57 @@
+Sídliště Spořilov
+1
+Měchenická
+1
+Spořilov
+2
+Lešanská
+1
+Roztylské náměstí
+1
+Starý Spořilov
+1
+Depo Kačerov
+1
+V Zápolí
+2
+Pod Dálnicí
+1
+Kačerov
+1
+U Labutě
+2
+Nemocnice Krč
+1
+Klárův ústav
+1
+Ústav mateřství
+1
+IKEM
+1
+Ústavy Akademie věd
+2
+Depo Kačerov
+1
+V Zápolí
+2
+Pod Dálnicí
+2
+Kačerov
+1
+U Labutě
+2
+Nemocnice Krč
+1
+Klárův ústav
+1
+Ústav mateřství
+1
+IKEM
+2
+Ústavy Akademie věd
+1
+Ústav mateřství
+1
+IKEM
+1
+Ústavy Akademie věd

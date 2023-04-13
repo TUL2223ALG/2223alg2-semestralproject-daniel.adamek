@@ -1,0 +1,69 @@
+Háje
+1
+Modrá škola
+1
+Brechtova
+1
+Šperlova
+2
+Donovalská
+2
+Brodského
+1
+Benkova
+1
+Pod Chodovem
+2
+Chodov
+1
+Jarníkova
+2
+Na Jelenách
+2
+Na Proutcích
+3
+U Studánky
+3
+Sídliště Písnice
+1
+U Libušské sokolovny
+1
+Libuš
+1
+U Zvoničky
+1
+Jalodvorská
+2
+Přírodní
+1
+Chýnovská
+1
+Nové dvory
+1
+Cílkova
+1
+Lhotecký les
+1
+Sídliště Lhotka
+1
+Lhotka
+1
+Novodvorská
+1
+Sídliště Novodvorská
+2
+Jílovská
+2
+Vrbova
+1
+Ve Studeném
+2
+Branické náměstí
+1
+U Staré pošty
+1
+Přístaviště
+4
+Lihovar
+3
+Smíchovské nádraží
