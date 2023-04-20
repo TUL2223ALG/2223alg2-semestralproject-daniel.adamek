@@ -1,13 +1,14 @@
 package cz.tul.alg2.semestral.file;
 
 import cz.tul.alg2.semestral.exception.InvalidFileFormatException;
-import cz.tul.alg2.semestral.transportation.IStation;
-import cz.tul.alg2.semestral.transportation.TypeOfTransportation;
+import cz.tul.alg2.semestral.transportation.Line;
+import cz.tul.alg2.semestral.transportation.Station;
+import cz.tul.alg2.semestral.transportation.transportationType;
 
 import java.util.HashMap;
 import java.util.List;
 
-public interface IRouteLoader {
+public interface ILineLoader {
 
     /**
      * Returns a list of file paths that end with ".txt" in the specified directory path.
@@ -24,13 +25,19 @@ public interface IRouteLoader {
      * @param typeOfTransportation the type of transportation of the route
      * @throws InvalidFileFormatException if there is an error while loading the file format
      */
-    void loadRoute(String path, TypeOfTransportation typeOfTransportation) throws InvalidFileFormatException;
+    void loadRoute(String path, transportationType typeOfTransportation) throws InvalidFileFormatException;
 
     /**
-     * Gets a map of all stations that have been loaded by this route loader.
+     * Gets a map of all stations that have been loaded by this loader.
      *
      * @return a map of all stations that have been loaded by this route loader
      */
-    HashMap<String, IStation> getAllStations();
+    HashMap<String, Station> getAllStations();
+    /**
+     * Gets a map of all lines that have been loaded by this loader.
+     *
+     * @return a map of all lines that have been loaded by this loader
+     */
+    HashMap<String, Line> getAllLines();
 
 }

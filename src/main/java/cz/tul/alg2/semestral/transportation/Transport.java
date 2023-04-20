@@ -1,20 +1,20 @@
 package cz.tul.alg2.semestral.transportation;
 
 public class Transport {
-    private TypeOfTransportation type;
+    private transportationType type;
 
     private int transferTime;
 
-    public Transport(TypeOfTransportation type, int duration) {
+    public Transport(transportationType type, int duration) {
         this.type = type;
         this.transferTime = duration;
     }
 
-    public TypeOfTransportation getType() {
+    public transportationType getType() {
         return type;
     }
 
-    public void setType(TypeOfTransportation type) {
+    public void setType(transportationType type) {
         this.type = type;
     }
 

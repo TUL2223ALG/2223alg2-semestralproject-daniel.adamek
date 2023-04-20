@@ -3,16 +3,24 @@ package cz.tul.alg2.semestral.transportation;
 import cz.tul.alg2.semestral.utilities.Pair;
 import cz.tul.alg2.semestral.utilities.TextNormalization;
 
-import java.util.HashSet;
+import java.util.Comparator;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 
-public class Station {
+public class Station implements Comparable<Station> {
 
     private final String name;
     private final String prettyName;
-    private final HashSet<ARoute> routes = new HashSet<>();
-    private final HashSet<Pair<Station, Transport>> neighbours = new HashSet<>();
+    private String zoneID = null;
+    private final Set<Line> lines = new TreeSet<>(Comparator.comparing(Line::getName));
+    private final Set<Pair<Station, Integer>> neighbours = new TreeSet<>(Comparator.comparing((Pair<Station, Integer> obj) -> obj.first));
 
-    public Station(String stationName) {
+    public Station(String stationName, String zoneID) {
+        this.prettyName = stationName;
+        this.name = TextNormalization.stringNormalize(stationName);
+        this.zoneID = zoneID;
+    }public Station(String stationName) {
         this.prettyName = stationName;
         this.name = TextNormalization.stringNormalize(stationName);
     }
@@ -25,18 +33,18 @@ public class Station {
         return prettyName;
     }
 
-    public HashSet<ARoute> getRoutes() {
-        return routes;
+    public Set<Line> getlines() {
+        return lines;
     }
-    public void addRoute(ARoute route) {
-        this.routes.add(route);
+    public void addRoute(Line line) {
+        this.lines.add(line);
     }
 
-    public HashSet<Pair<Station, Transport>> getNeighbours() {
+    public Set<Pair<Station, Integer>> getNeighbours() {
         return neighbours;
     }
 
-    public void addNeighbour(Pair<Station, Transport> neighbour) {
+    public void addNeighbour(Pair<Station, Integer> neighbour) {
         this.neighbours.add(neighbour);
     }
 
@@ -51,7 +59,7 @@ public class Station {
 
     @Override
     public int hashCode() {
-        return name.hashCode();
+        return Objects.hash(name);
     }
 
     @Override
@@ -60,4 +68,15 @@ public class Station {
                 "name='" + prettyName + '\'' +
                 '}';
     }
+
+    /**
+     * Comarator
+     * @param station 
+     * @return
+     */
+    @Override
+    public int compareTo(Station station) {
+        return this.name.compareTo(station.name);
+    }
+
 }
