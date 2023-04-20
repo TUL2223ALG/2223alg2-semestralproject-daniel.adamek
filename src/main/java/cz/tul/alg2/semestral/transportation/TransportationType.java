@@ -1,6 +1,6 @@
 package cz.tul.alg2.semestral.transportation;
 
-public enum transportationType {
+public enum TransportationType {
     METRO,
     TRAM,
     TRAIN,

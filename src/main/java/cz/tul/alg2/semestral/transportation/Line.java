@@ -5,10 +5,10 @@ import java.util.Objects;
 
 public class Line {
     private final String name;
-    private final transportationType lineType;
+    private final TransportationType lineType;
     private final List<Station> stations;
 
-    public Line(String name, transportationType lineType, List<Station> stations) {
+    public Line(String name, TransportationType lineType, List<Station> stations) {
         this.name = name;
         this.lineType = lineType;
         this.stations = stations;
@@ -18,7 +18,7 @@ public class Line {
         return name;
     }
 
-    public transportationType getLineType() {
+    public TransportationType getLineType() {
         return lineType;
     }
 

@@ -3,7 +3,7 @@ package cz.tul.alg2.semestral.file;
 import cz.tul.alg2.semestral.errorhandle.ErrorLogger;
 import cz.tul.alg2.semestral.transportation.Line;
 import cz.tul.alg2.semestral.transportation.Station;
-import cz.tul.alg2.semestral.transportation.transportationType;
+import cz.tul.alg2.semestral.transportation.TransportationType;
 import cz.tul.alg2.semestral.utilities.Pair;
 import cz.tul.alg2.semestral.utilities.PathBuilder;
 import cz.tul.alg2.semestral.utilities.TextNormalization;
@@ -90,27 +90,27 @@ public class GTFSLoader {
 
         for (Route route : dao.getAllRoutes()) {
             String id = route.getId().getId();
-            transportationType lineType =
+            TransportationType lineType =
             switch (route.getType()) {
                 case 0:
-                    yield transportationType.METRO;
+                    yield TransportationType.METRO;
                 case 1:
-                    yield transportationType.TRAM;
+                    yield TransportationType.TRAM;
                 case 2:
-                    yield transportationType.TRAIN;
+                    yield TransportationType.TRAIN;
                 case 3:
-                    yield transportationType.BUS;
+                    yield TransportationType.BUS;
                 case 4:
-                    yield transportationType.AIRPLANE;
+                    yield TransportationType.AIRPLANE;
                 case 5:
-                    yield transportationType.CABLE_CAR;
+                    yield TransportationType.CABLE_CAR;
                 case 6:
-                    yield transportationType.TROLLEY;
+                    yield TransportationType.TROLLEY;
                 case 7:
-                    yield transportationType.FERRY;
+                    yield TransportationType.FERRY;
                 default:
                     new ErrorLogger("error.log").logError("WARNING: Invalid type of transportation! Skipping... Route:" + route.toString(), new IllegalArgumentException());
-                    yield transportationType.NONE;
+                    yield TransportationType.NONE;
             };
 
             for (Trip trip : dao.getAllTrips()) {

@@ -3,7 +3,7 @@ package cz.tul.alg2.semestral.file;
 import cz.tul.alg2.semestral.exception.InvalidFileFormatException;
 import cz.tul.alg2.semestral.transportation.Line;
 import cz.tul.alg2.semestral.transportation.Station;
-import cz.tul.alg2.semestral.transportation.transportationType;
+import cz.tul.alg2.semestral.transportation.TransportationType;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +25,7 @@ public interface ILineLoader {
      * @param typeOfTransportation the type of transportation of the route
      * @throws InvalidFileFormatException if there is an error while loading the file format
      */
-    void loadRoute(String path, transportationType typeOfTransportation) throws InvalidFileFormatException;
+    void loadRoute(String path, TransportationType typeOfTransportation) throws InvalidFileFormatException;
 
     /**
      * Gets a map of all stations that have been loaded by this loader.
