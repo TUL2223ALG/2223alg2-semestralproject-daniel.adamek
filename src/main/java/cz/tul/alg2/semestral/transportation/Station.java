@@ -33,7 +33,7 @@ public class Station implements Comparable<Station> {
         return prettyName;
     }
 
-    public Set<Line> getlines() {
+    public Set<Line> getLines() {
         return lines;
     }
     public void addRoute(Line line) {
@@ -46,6 +46,10 @@ public class Station implements Comparable<Station> {
 
     public void addNeighbour(Pair<Station, Integer> neighbour) {
         this.neighbours.add(neighbour);
+    }
+
+    public String getZoneID() {
+        return zoneID;
     }
 
     @Override

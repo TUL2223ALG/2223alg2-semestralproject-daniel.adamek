@@ -1,8 +1,9 @@
 package cz.tul.alg2.semestral.transportation;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class CityTransport {
+public class CityTransport implements Serializable {
     private final HashMap<String, Station> stations;
     private final HashMap<String, Line> lines;
 
