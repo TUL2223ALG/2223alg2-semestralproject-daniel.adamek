@@ -27,7 +27,7 @@ public class TextSaver implements ISaver {
             // Saving stations
             writer.write("STATIONS\n");
             HashMap<Station, Integer> substitutionMap = new HashMap<>();
-            for (Station station : transport.getStations().values()) {
+            for (Station station : transport.stations().values()) {
                 writer.write(
                     substitutionMap.size() + "|" +
                     station.getPrettyName() + "|" +
@@ -38,7 +38,7 @@ public class TextSaver implements ISaver {
             }
             // Save neighbours
             writer.write("NEIGHBOURS\n");
-            for (Station station : transport.getStations().values()) {
+            for (Station station : transport.stations().values()) {
                 writer.write(substitutionMap.get(station) + "|");
                 for (Pair<Station, Integer> neighbour : station.getNeighbours()) {
                     writer.write( substitutionMap.get(neighbour.first) + "," + neighbour.second/60 + ";");
@@ -48,7 +48,7 @@ public class TextSaver implements ISaver {
 
             // Saving lines
             writer.write("LINES\n");
-            for (Line line : transport.getLines().values()) {
+            for (Line line : transport.lines().values()) {
                 writer.write(line.getName() + "|" + line.getLineType() + "|");
                 for (Station station : line.getStations()) {
                     writer.write(substitutionMap.get(station) + ",");
