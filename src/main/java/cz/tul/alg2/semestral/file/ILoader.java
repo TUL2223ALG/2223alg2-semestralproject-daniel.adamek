@@ -7,8 +7,8 @@ import cz.tul.alg2.semestral.transportation.Station;
 import java.util.HashMap;
 
 public interface ILoader {
-    HashMap<String, Station> allStations = new HashMap<>();
-    HashMap<String, Line> allLines = new HashMap<>();
+    HashMap<String, Station> allStations = new HashMap<>(8000);
+    HashMap<String, Line> allLines = new HashMap<>(800);
 
     /**
      * Returns a list of file paths that end with ".txt" in the specified directory path.
@@ -18,7 +18,6 @@ public interface ILoader {
     void loadFile(String path);
 
     /**
-     * @return
      */
     public default CityTransport getCityTransport() {
         return new CityTransport(this.allStations, this.allLines);
@@ -28,12 +27,12 @@ public interface ILoader {
      *
      * @return a map of all stations that have been loaded by this route loader
      */
-    HashMap<String, Station> getAllStations();
+    default HashMap<String, Station> getAllStations() {return this.allStations;}
     /**
      * Gets a map of all lines that have been loaded by this loader.
      *
      * @return a map of all lines that have been loaded by this loader
      */
-    HashMap<String, Line> getAllLines();
+    default HashMap<String, Line> getAllLines() {return this.allLines;};
 
 }

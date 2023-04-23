@@ -9,30 +9,29 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class TextLoaderTest {
+class BinaryLoaderTest {
     @Test
-    void testPIDTextLoader() {
+    void testPIDBinaryLoader() {
         GTFSLoader gtfs = new GTFSLoader();
         gtfs.loadFile(PathBuilder.joinPath(new String[]{"data", "pid-gtfs"}));
         CityTransport pid = new CityTransport(gtfs.getAllStations(), gtfs.getAllLines());
 
-        TextSaver ts = new TextSaver(pid);
-        TextLoader tl = new TextLoader();
+        BinarySaver bs = new BinarySaver(pid);
+        BinaryLoader bl = new BinaryLoader();
 
         try {
-            File tempFile = File.createTempFile("tempFile_", ".txt");
+            File tempFile = File.createTempFile("tempFile_", ".ser");
 
-            ts.saveTransport(tempFile.getAbsolutePath());
+            bs.saveTransport(tempFile.getAbsolutePath());
 
-            tl.loadFile(tempFile.getAbsolutePath());
-
+            bl.loadFile(tempFile.getAbsolutePath());
             tempFile.deleteOnExit();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        assertEquals(tl.getAllStations().toString(), gtfs.getAllStations().toString());
-        assertEquals(tl.getAllLines().toString(), gtfs.getAllLines().toString());
+        assertEquals(bl.getAllStations().toString(), gtfs.getAllStations().toString());
+        assertEquals(bl.getAllLines().toString(), gtfs.getAllLines().toString());
 
 
 
