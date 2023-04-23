@@ -26,10 +26,6 @@ class TextLoaderTest {
 
             tl.loadFile(tempFile.getAbsolutePath());
 
-            // Výpis úplné cesty dočasného souboru
-            System.out.println("Dočasný soubor byl vytvořen na: " + tempFile.getAbsolutePath());
-
-            // Pokud chcete smazat dočasný soubor při ukončení aplikace, nastavte následující příznak
             tempFile.deleteOnExit();
         } catch (IOException e) {
             e.printStackTrace();
