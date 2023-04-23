@@ -23,16 +23,16 @@ public class BinarySaver implements ISaver {
     public void saveTransport(String path) {
         try (DataOutputStream outputStream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(path)))) {
             // Saving stations
-            outputStream.writeInt(transport.getStations().size());
-            HashMap<Station, Integer> substitutionMap = new HashMap<>(transport.getStations().size());
-            for (Station station : transport.getStations().values()) {
+            outputStream.writeInt(transport.stations().size());
+            HashMap<Station, Integer> substitutionMap = new HashMap<>(transport.stations().size());
+            for (Station station : transport.stations().values()) {
                 outputStream.writeInt(substitutionMap.size());
                 outputStream.writeUTF(station.getPrettyName());
                 outputStream.writeUTF(station.getZoneID() != null ? station.getZoneID() : "");
                 substitutionMap.put(station, substitutionMap.size());
             }
             // Save neighbours
-            for (Station station : transport.getStations().values()) {
+            for (Station station : transport.stations().values()) {
                 outputStream.writeInt(substitutionMap.get(station));
                 outputStream.writeInt(station.getNeighbours().size());
                 for (Pair<Station, Integer> neighbour : station.getNeighbours()) {
@@ -42,8 +42,8 @@ public class BinarySaver implements ISaver {
             }
 
             // Saving lines
-            outputStream.writeInt(transport.getLines().size());
-            for (Line line : transport.getLines().values()) {
+            outputStream.writeInt(transport.lines().size());
+            for (Line line : transport.lines().values()) {
                 outputStream.writeUTF(line.getName());
                 outputStream.writeUTF(line.getLineType().name());
                 outputStream.writeInt(line.getStations().size());

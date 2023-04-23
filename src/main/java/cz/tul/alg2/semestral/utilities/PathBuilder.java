@@ -13,7 +13,7 @@ public class PathBuilder {
      * @param partsOfPath an array of strings representing the parts of the path
      * @return a string representing the joined path
      */
-    public static String joinPath(String[] partsOfPath) {
+    public static String joinPath(String... partsOfPath) {
         StringBuilder sb = new StringBuilder();
         String pathSeparator = File.separator;
         for (String part: partsOfPath) {

@@ -13,7 +13,7 @@ class BinaryLoaderTest {
     @Test
     void testPIDBinaryLoader() {
         GTFSLoader gtfs = new GTFSLoader();
-        gtfs.loadFile(PathBuilder.joinPath(new String[]{"data", "pid-gtfs"}));
+        gtfs.loadFile(PathBuilder.joinPath("data", "pid-gtfs"));
         CityTransport pid = new CityTransport(gtfs.getAllStations(), gtfs.getAllLines());
 
         BinarySaver bs = new BinarySaver(pid);
