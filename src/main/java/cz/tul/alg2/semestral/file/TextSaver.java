@@ -5,7 +5,6 @@ import cz.tul.alg2.semestral.transportation.CityTransport;
 import cz.tul.alg2.semestral.transportation.Line;
 import cz.tul.alg2.semestral.transportation.Station;
 import cz.tul.alg2.semestral.utilities.Pair;
-import cz.tul.alg2.semestral.utilities.PathBuilder;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -24,9 +23,7 @@ public class TextSaver implements ISaver {
 
     @Override
     public void saveTransport(String path) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(PathBuilder.joinPath(
-                new String[]{"data", path}
-        )))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
             // Saving stations
             writer.write("STATIONS\n");
             HashMap<Station, Integer> substitutionMap = new HashMap<>();

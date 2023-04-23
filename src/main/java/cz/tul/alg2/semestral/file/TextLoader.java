@@ -5,7 +5,6 @@ import cz.tul.alg2.semestral.transportation.Line;
 import cz.tul.alg2.semestral.transportation.Station;
 import cz.tul.alg2.semestral.transportation.TransportationType;
 import cz.tul.alg2.semestral.utilities.Pair;
-import cz.tul.alg2.semestral.utilities.PathBuilder;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -26,9 +25,7 @@ public class TextLoader implements ILoader {
     public void loadFile(String path) {
         HashMap<Integer, Station> indexToStationMap = new HashMap<>();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(PathBuilder.joinPath(
-                new String[]{"data", path}
-        )))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
             String line;
             boolean readingStations = false;
             boolean readingNeighbours = false;

@@ -5,7 +5,6 @@ import cz.tul.alg2.semestral.transportation.Line;
 import cz.tul.alg2.semestral.transportation.Station;
 import cz.tul.alg2.semestral.transportation.TransportationType;
 import cz.tul.alg2.semestral.utilities.Pair;
-import cz.tul.alg2.semestral.utilities.PathBuilder;
 import cz.tul.alg2.semestral.utilities.TextNormalization;
 import org.onebusaway.gtfs.impl.GtfsDaoImpl;
 import org.onebusaway.gtfs.model.Route;
@@ -31,7 +30,7 @@ public class GTFSLoader implements ILoader {
 
         reader.setEntityStore(dao);
         try {
-            reader.setInputLocation(new File(PathBuilder.joinPath(new String[]{"data", path})));
+            reader.setInputLocation(new File(path));
             reader.run();
         } catch (IOException e) {
             new ErrorLogger("error.log").logError("Error while reading GTFS file", e);
