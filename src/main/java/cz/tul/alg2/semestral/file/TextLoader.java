@@ -14,8 +14,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public class TextLoader implements ILoader {
-    HashMap<String, Station> allStations = new HashMap<>(8000);
-    HashMap<String, Line> allLines = new HashMap<>(800);
     /**
      * Returns a list of file paths that end with ".txt" in the specified directory path.
      *
