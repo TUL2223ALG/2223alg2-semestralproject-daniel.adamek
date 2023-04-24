@@ -43,7 +43,7 @@ class TextNormalizationTest {
 
         // specific czech characters
         a = "Nechť již hříšné saxofony ďáblů rozezvučí síň úděsnými tóny waltzu, tanga a quickstepu.";
-        b = "nechtjizhrisnesaxofonyablurozezvucisinudesnymitonywaltzutangaaquickstepu";
+        b = "nechtjizhrisnesaxofonydablurozezvucisinudesnymitonywaltzutangaaquickstepu";
         assertEquals(TextNormalization.stringNormalize(a), b);
     }
 
@@ -52,7 +52,7 @@ class TextNormalizationTest {
     void testStringNormalizePerformance() {
         StringBuilder sb = new StringBuilder();
         Random random = new Random();
-        String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ĚŠŘŽÝÁÍÉÚŤŇÓěščřžýáíéúůťňó";
+        String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ĚŠŘŽÝÁÍÉÚŤŇÓěščřžýáíéúůťňóěď!@#$%^&*{}=´\\¯[]$'<>\",.-?:_*|@()€¶←↓→~`°#^";
         for (int i = 0; i < 100_000_000; i++) {
             sb.append(alphabet.charAt(random.nextInt(alphabet.length())));
         }
@@ -82,8 +82,9 @@ class TextNormalizationTest {
                 case 'ň' -> expected.append('n');
                 case 'ó' -> expected.append('o');
                 case 'ú', 'ů' -> expected.append('u');
+                case 'ď' -> expected.append('d');
                 default -> {
-                    if (Character.isLetter(c)) {
+                    if (Character.isLetterOrDigit(c)) {
                         expected.append(c);
                     }
                 }

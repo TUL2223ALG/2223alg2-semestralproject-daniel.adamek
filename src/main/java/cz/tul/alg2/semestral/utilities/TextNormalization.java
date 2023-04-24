@@ -21,6 +21,7 @@ public class TextNormalization {
             map.put((int) 'ó', (int) 'o');
             map.put((int) 'ú', (int) 'u');
             map.put((int) 'ů', (int) 'u');
+            map.put((int) 'ď', (int) 'd');
     }
     public static String stringNormalize(String toNormalize) {
         sb.setLength(0);
@@ -28,10 +29,10 @@ public class TextNormalization {
         int c, mapped;
         for (int i = 0; i < toNormalize.length(); i++) {
             c = toNormalize.charAt(i);
-            if (c >= 0x30 && c <= 0x39)
+            if (c == 32 || !Character.isLetterOrDigit(c))
                 continue;
             c = Character.toLowerCase(c);
-            if (c >= 0x61 && c <= 0x7A)
+            if ((c >= 0x61 && c <= 0x7A) || (c >= 0x30 && c <= 0x39) )
                 sb.appendCodePoint(c);
             else {
                 mapped = map.get(c);
