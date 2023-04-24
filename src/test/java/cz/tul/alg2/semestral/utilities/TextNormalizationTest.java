@@ -80,8 +80,8 @@ class TextNormalizationTest {
                 case 'í' -> expected.append('i');
                 case 'ť' -> expected.append('t');
                 case 'ň' -> expected.append('n');
-                case 'ó' -> expected.append('o');
-                case 'ú', 'ů' -> expected.append('u');
+                case 'ó', 'ö' -> expected.append('o');
+                case 'ú', 'ů', 'ü' -> expected.append('u');
                 case 'ď' -> expected.append('d');
                 default -> {
                     if (Character.isLetterOrDigit(c)) {

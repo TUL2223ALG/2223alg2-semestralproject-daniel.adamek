@@ -19,14 +19,17 @@ public class TextNormalization {
             map.put((int) 'ť', (int) 't');
             map.put((int) 'ň', (int) 'n');
             map.put((int) 'ó', (int) 'o');
+            map.put((int) 'ö', (int) 'o');
             map.put((int) 'ú', (int) 'u');
             map.put((int) 'ů', (int) 'u');
+            map.put((int) 'ü', (int) 'u');
             map.put((int) 'ď', (int) 'd');
     }
     public static String stringNormalize(String toNormalize) {
         sb.setLength(0);
 
-        int c, mapped;
+        int c;
+        Integer mapped;
         for (int i = 0; i < toNormalize.length(); i++) {
             c = toNormalize.charAt(i);
             if (c == 32 || !Character.isLetterOrDigit(c))
@@ -36,6 +39,7 @@ public class TextNormalization {
                 sb.appendCodePoint(c);
             else {
                 mapped = map.get(c);
+                if (mapped == null) continue;
                 sb.appendCodePoint(mapped);
             }
         }
