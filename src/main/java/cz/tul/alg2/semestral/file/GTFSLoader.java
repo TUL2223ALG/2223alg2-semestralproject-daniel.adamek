@@ -98,7 +98,7 @@ public class GTFSLoader implements ILoader {
                     stopTime = stopTimesForTrip.get(i);
                     station = allStations.get(TextNormalization.stringNormalize(stopTime.getStop().getName()));
                     lineStations.add(station);
-                    station.addRoute(new Line(shortName, lineType, lineStations));
+                    station.addLine(new Line(shortName, lineType, lineStations));
 
                     if (i > 0) {
                         prevStopTime = stopTimesForTrip.get(i - 1);

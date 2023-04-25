@@ -36,7 +36,7 @@ public class Station implements Comparable<Station> {
     public Set<Line> getLines() {
         return lines;
     }
-    public void addRoute(Line line) {
+    public void addLine(Line line) {
         this.lines.add(line);
     }
 
