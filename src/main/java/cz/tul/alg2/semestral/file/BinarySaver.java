@@ -30,7 +30,9 @@ public class BinarySaver implements ISaver {
                 outputStream.writeUTF(station.getPrettyName());
                 outputStream.writeUTF(station.getZoneID() != null ? station.getZoneID() : "");
                 substitutionMap.put(station, substitutionMap.size());
+                System.out.println("Ukládání stanice: " + station.getPrettyName());
             }
+
             // Save neighbours
             for (Station station : transport.stations().values()) {
                 outputStream.writeInt(substitutionMap.get(station));
@@ -49,12 +51,13 @@ public class BinarySaver implements ISaver {
                 outputStream.writeInt(line.getStations().size());
                 for (Station station : line.getStations()) {
                     outputStream.writeInt(substitutionMap.get(station));
+                    System.out.println("Ukládání stanice " + station.getPrettyName() + " na lince " + line.getName());
                 }
             }
 
             System.out.println("Data uložena do souboru " + path);
         } catch (IOException e) {
-            new ErrorLogger("error.log").logError("Error while saving data", e);
+            new ErrorLogger("error.log").logError("Chyba při ukládání dat", e);
         }
     }
 }

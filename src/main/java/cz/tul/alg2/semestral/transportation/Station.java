@@ -3,10 +3,8 @@ package cz.tul.alg2.semestral.transportation;
 import cz.tul.alg2.semestral.utilities.Pair;
 import cz.tul.alg2.semestral.utilities.TextNormalization;
 
-import java.util.Comparator;
-import java.util.Objects;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Station implements Comparable<Station> {
 
@@ -68,9 +66,15 @@ public class Station implements Comparable<Station> {
 
     @Override
     public String toString() {
+        String linesToString = lines.stream().map(l -> l.getName() + ",").collect(Collectors.joining());
+        String neighboursToString = neighbours.stream().map(n -> n.first.getName() + ",").collect(Collectors.joining());
         return "Station{" +
-                "name='" + prettyName + '\'' +
-                '}';
+                "name='" + name + '\'' +
+                ", prettyName='" + prettyName + '\'' +
+                ", zoneID='" + zoneID + '\'' +
+                ", lines={" + linesToString +
+                "}, neighbours={" + neighboursToString +
+                "}}";
     }
 
     /**

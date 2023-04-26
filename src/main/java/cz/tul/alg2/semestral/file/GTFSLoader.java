@@ -15,12 +15,12 @@ import org.onebusaway.gtfs.serialization.GtfsReader;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class GTFSLoader implements ILoader {
+    HashMap<String, Station> allStations = new HashMap<>();
+    HashMap<String, Line> allLines = new HashMap<>();
+
     public void loadFile(String path) {
         GtfsReader reader = new GtfsReader();
         GtfsDaoImpl dao = new GtfsDaoImpl();
@@ -116,5 +116,34 @@ public class GTFSLoader implements ILoader {
                 allLines.put(shortName, line);
             }
         }
+
+        // Remove unreachable stations or lines = DUMP or
+        List<Station> toRemoveStations = new ArrayList<>();
+        for (Station s : allStations.values()) if (s.getLines().size() == 0 || s.getNeighbours().size() == 0) toRemoveStations.add(s);
+        for (Station s : toRemoveStations) allStations.remove(s.getName());
+
+        List<Line> toRemoveLines = new ArrayList<>();
+        for (Line l: allLines.values()) if (l.getStations().size() == 0) toRemoveLines.add(l);
+        for (Line l : toRemoveLines) allLines.remove(l.getName());
+    }
+
+    /**
+     * Gets a map of all stations that have been loaded by this loader.
+     *
+     * @return a map of all stations that have been loaded by this route loader
+     */
+    @Override
+    public HashMap<String, Station> getAllStations() {
+        return this.allStations;
+    }
+
+    /**
+     * Gets a map of all lines that have been loaded by this loader.
+     *
+     * @return a map of all lines that have been loaded by this loader
+     */
+    @Override
+    public HashMap<String, Line> getAllLines() {
+        return this.allLines;
     }
 }

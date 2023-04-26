@@ -15,55 +15,86 @@ import java.util.HashMap;
 import java.util.List;
 
 public class BinaryLoader implements ILoader {
+    HashMap<String, Station> allStations = new HashMap<>();
+    HashMap<String, Line> allLines = new HashMap<>();
 
     @Override
     public void loadFile(String path) {
         try (DataInputStream inputStream = new DataInputStream(new BufferedInputStream(new FileInputStream(path)))) {
+            // Načítání stanic
             int stationCount = inputStream.readInt();
-            HashMap<Integer, String> stationIdToName = new HashMap<>(stationCount);
-
+            HashMap<Integer, Station> indexToStationMap = new HashMap<>(stationCount);
             for (int i = 0; i < stationCount; i++) {
-                int id = inputStream.readInt();
-                String name = inputStream.readUTF();
-                String zoneID = inputStream.readUTF();
-                Station station = zoneID.isEmpty() ? new Station(name) : new Station(name, zoneID);
+                int stationIndex = inputStream.readInt();
+                String stationPrettyName = inputStream.readUTF();
+                String stationZoneID = inputStream.readUTF();
+                if (stationZoneID.isEmpty()) {
+                    stationZoneID = null;
+                }
+                Station station = new Station(stationPrettyName, stationZoneID);
                 allStations.put(station.getName(), station);
-                stationIdToName.put(id, station.getName());
+                indexToStationMap.put(stationIndex, station);
             }
 
+            // Načítání sousedů
             for (int i = 0; i < stationCount; i++) {
-                int stationId = inputStream.readInt();
-                String stationName = stationIdToName.get(stationId);
-                Station station = allStations.get(stationName);
-
+                int stationIndex = inputStream.readInt();
+                Station station = indexToStationMap.get(stationIndex);
                 int neighbourCount = inputStream.readInt();
                 for (int j = 0; j < neighbourCount; j++) {
-                    int neighbourId = inputStream.readInt();
+                    int neighbourIndex = inputStream.readInt();
                     int distance = inputStream.readInt();
-                    String neighbourName = stationIdToName.get(neighbourId);
-                    Station neighbour = allStations.get(neighbourName);
+                    Station neighbour = indexToStationMap.get(neighbourIndex);
                     station.addNeighbour(new Pair<>(neighbour, distance));
                 }
             }
 
+            // Načítání linek
             int lineCount = inputStream.readInt();
             for (int i = 0; i < lineCount; i++) {
-                String name = inputStream.readUTF();
-                TransportationType lineType = TransportationType.valueOf(inputStream.readUTF());
-
-                int stationCountInLine = inputStream.readInt();
-                List<Station> stations = new ArrayList<>(stationCountInLine);
-                for (int j = 0; j < stationCountInLine; j++) {
-                    int stationId = inputStream.readInt();
-                    String stationName = stationIdToName.get(stationId);
-                    stations.add(allStations.get(stationName));
+                String lineName = inputStream.readUTF();
+                String lineTypeName = inputStream.readUTF();
+                TransportationType lineType = TransportationType.valueOf(lineTypeName);
+                int stationsInLineCount = inputStream.readInt();
+                List<Station> lineStations = new ArrayList<>();
+                for (int j = 0; j < stationsInLineCount; j++) {
+                    int stationIndex = inputStream.readInt();
+                    Station station = indexToStationMap.get(stationIndex);
+                    lineStations.add(station);
+                    System.out.println("Načítání stanice " + station.getPrettyName() + " v lince " + lineName);
                 }
-
-                Line line = new Line(name, lineType, stations);
+                Line line = new Line(lineName, lineType, lineStations);
                 allLines.put(line.getName(), line);
+
+                // Přidejte linku do stanic
+                for (Station station : lineStations) {
+                    station.addLine(line);
+                }
             }
+
+            System.out.println("Data načtena ze souboru " + path);
         } catch (IOException e) {
-            new ErrorLogger("error.log").logError("Error while loading binary data", e);
+            new ErrorLogger("error.log").logError("Error while loading data", e);
         }
+    }
+
+    /**
+     * Gets a map of all stations that have been loaded by this loader.
+     *
+     * @return a map of all stations that have been loaded by this route loader
+     */
+    @Override
+    public HashMap<String, Station> getAllStations() {
+        return this.allStations;
+    }
+
+    /**
+     * Gets a map of all lines that have been loaded by this loader.
+     *
+     * @return a map of all lines that have been loaded by this loader
+     */
+    @Override
+    public HashMap<String, Line> getAllLines() {
+        return this.allLines;
     }
 }

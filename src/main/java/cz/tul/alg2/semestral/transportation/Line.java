@@ -2,6 +2,7 @@ package cz.tul.alg2.semestral.transportation;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Line {
     private final String name;
@@ -29,5 +30,15 @@ public class Line {
     @Override
     public int hashCode() {
         return Objects.hash(name);
+    }
+
+    @Override
+    public String toString() {
+        String stationsToString = stations.stream().map(s -> s.getName() + ",").collect(Collectors.joining());
+        return "Line{" +
+                "name='" + name + '\'' +
+                ", lineType=" + lineType +
+                ", stations={" + stationsToString +
+                "}}";
     }
 }
