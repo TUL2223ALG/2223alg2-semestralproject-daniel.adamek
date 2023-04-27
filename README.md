@@ -23,3 +23,5 @@ Program po spuštění disponuje nabídkou funkcí:
 
 ## Testování
 K testování poslouží knihovna JUnit verze 5.
+
+__Status JUnit5 testů__ [![JUnit5 Tests](https://github.com/TUL2223ALG/2223alg2-semestralproject-daniel.adamek/actions/workflows/maven.yml/badge.svg)](https://github.com/TUL2223ALG/2223alg2-semestralproject-daniel.adamek/actions/workflows/maven.yml)
