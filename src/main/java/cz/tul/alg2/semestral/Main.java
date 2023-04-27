@@ -1,6 +1,6 @@
 package cz.tul.alg2.semestral;
 
-import cz.tul.alg2.semestral.file.BinaryLoader;
+import cz.tul.alg2.semestral.file.GTFSLoader;
 import cz.tul.alg2.semestral.pathfinding.BFS;
 import cz.tul.alg2.semestral.pathfinding.PathSegment;
 import cz.tul.alg2.semestral.transportation.CityTransport;
@@ -15,10 +15,10 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        //GTFSLoader loader = new GTFSLoader();
-        //loader.loadFile(PathBuilder.joinPath("data", "pid-gtfs"));
-        BinaryLoader loader = new BinaryLoader();
-        loader.loadFile(PathBuilder.joinPath("data", "pid.ser"));
+        GTFSLoader loader = new GTFSLoader();
+        loader.loadFile(PathBuilder.joinPath("data", "PID_GTFS.zip"));
+        //BinaryLoader loader = new BinaryLoader();
+        //loader.loadFile(PathBuilder.joinPath("data", "pid.ser"));
 
         CityTransport cityTransport = new CityTransport(
                 loader.getAllStations(),
@@ -33,7 +33,7 @@ public class Main {
         StationGetter sg = new StationGetter(cityTransport);
         Station from, to;
         while (true) {
-            System.out.println("\n\n\n\n Hledátor v Pražské integrované dopravě");
+            System.out.println("\n\n\n\nHledátor v Pražské integrované dopravě");
             System.out.println("Zadejte počáteční stanici");
             from = sg.getStation();
 
