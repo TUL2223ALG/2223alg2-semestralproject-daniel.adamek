@@ -1,7 +1,6 @@
 package cz.tul.alg2.semestral;
 
 import cz.tul.alg2.semestral.file.GTFSLoader;
-import cz.tul.alg2.semestral.file.BinaryLoader;
 import cz.tul.alg2.semestral.pathfinding.BFS;
 import cz.tul.alg2.semestral.pathfinding.PathSegment;
 import cz.tul.alg2.semestral.transportation.CityTransport;
