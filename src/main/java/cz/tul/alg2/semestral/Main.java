@@ -33,7 +33,7 @@ public class Main {
         StationGetter sg = new StationGetter(cityTransport);
         Station from, to;
         while (true) {
-            System.out.println("\n\n\n\nHledátor v Pražské integrované dopravě");
+            System.out.println("\n\n\n\nerge Hledátor v Pražské integrované dopravě");
             System.out.println("Zadejte počáteční stanici");
             from = sg.getStation();
 
