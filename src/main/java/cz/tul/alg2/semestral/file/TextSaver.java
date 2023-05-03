@@ -12,17 +12,15 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class TextSaver implements ISaver {
+
     private final CityTransport transport;
 
-    /**
-     * @param transport
-     */
     public TextSaver(CityTransport transport) {
         this.transport = transport;
     }
 
     @Override
-    public void saveTransport(String path) {
+    public boolean saveTransport(String path) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
             // Saving stations
             writer.write("STATIONS\n");
@@ -36,29 +34,19 @@ public class TextSaver implements ISaver {
                 substitutionMap.put(station, substitutionMap.size());
                 writer.write("\n");
             }
-            // Save neighbours
-            writer.write("NEIGHBOURS\n");
-            for (Station station : transport.stations().values()) {
-                writer.write(substitutionMap.get(station) + "|");
-                for (Pair<Station, Integer> neighbour : station.getNeighbours()) {
-                    writer.write( substitutionMap.get(neighbour.first) + "," + neighbour.second/60 + ";");
-                }
-                writer.write("\n");
-            }
 
             // Saving lines
             writer.write("LINES\n");
             for (Line line : transport.lines().values()) {
                 writer.write(line.getName() + "|" + line.getLineType() + "|");
-                for (Station station : line.getStations()) {
-                    writer.write(substitutionMap.get(station) + ",");
-                }
+                for (Pair<Station, Integer> station : line.getStations())
+                    writer.write(substitutionMap.get(station.first) + "," + station.second + ";");
                 writer.write("\n");
             }
-
-            System.out.println("Data uložena do souboru " + path);
         } catch (IOException e) {
-            new ErrorLogger("error.log").logError("Error while saving data", e);
+            new ErrorLogger("error.log").logError("Chyba při ukládání dat", e);
+            return false;
         }
+        return true;
     }
 }

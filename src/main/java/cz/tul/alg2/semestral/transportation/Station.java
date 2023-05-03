@@ -63,7 +63,7 @@ public class Station implements Comparable<Station> {
     }
 
     public String getZoneID() {
-        return zoneID;
+        return (zoneID == null) ? "-" : zoneID ;
     }
 
     @Override

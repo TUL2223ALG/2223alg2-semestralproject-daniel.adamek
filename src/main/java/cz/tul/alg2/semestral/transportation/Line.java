@@ -34,6 +34,15 @@ public class Line {
     public void setStations(List<Pair<Station, Integer>> list) { stations = list; }
 
     @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+        Line other = (Line) obj;
+        return this.name.equals(other.name);
+    }
+
+    @Override
     public int hashCode() {
         return Objects.hash(name);
     }

@@ -15,14 +15,13 @@ import org.onebusaway.gtfs.serialization.GtfsReader;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+
+import static cz.tul.alg2.semestral.file.ILoader.*;
 
 public class GTFSLoader implements ILoader {
-    private HashMap<String, Station> allStations = new HashMap<>();
-    private HashMap<String, Line> allLines = new HashMap<>();
+    private final HashMap<String, Station> allStations = new HashMap<>();
+    private final HashMap<String, Line> allLines = new HashMap<>();
 
     /**
      * The loadFile function is used to load a GTFS file into the program.
@@ -126,7 +125,7 @@ public class GTFSLoader implements ILoader {
                 if (tmpLine == null) {
                     tmpLine = new Line(shortName, lineType, lineStations);
                 } else {
-                    if (lineStations.size() > tmpLine.getStations().size())
+                    if (lineStations.size() > tmpLine.getStations().size() && new HashSet<>(lineStations).containsAll(tmpLine.getStations()))
                         tmpLine.setStations(lineStations);
                     else
                         continue;
@@ -134,40 +133,13 @@ public class GTFSLoader implements ILoader {
                 allLines.put(shortName, tmpLine);
             }
 
-            // Compute neighbours
-            for (Line line : allLines.values()) {
-                List<Pair<Station, Integer>> lineStations = line.getStations();
-
-                // Iterate over each station pair in the line
-                for (int i = 0; i < lineStations.size(); i++) {
-                    Pair<Station, Integer> currentPair = lineStations.get(i);
-                    Station currentStation = currentPair.first;
-                    int currentTravelTime = currentPair.second;
-
-                    // Add the current line to the station's set of lines
-                    currentStation.addLine(line);
-
-                    // Update neighbors for the current station
-                    if (i > 0) {
-                        Pair<Station, Integer> previousPair = lineStations.get(i - 1);
-                        Station previousStation = previousPair.first;
-                        Pair<Station, Integer> neighbor = new Pair<>(previousStation, currentTravelTime);
-                        currentStation.getNeighbours().add(neighbor);
-                    }
-                    if (i < lineStations.size() - 1) {
-                        Pair<Station, Integer> nextPair = lineStations.get(i + 1);
-                        Station nextStation = nextPair.first;
-                        int nextTravelTime = nextPair.second;
-                        Pair<Station, Integer> neighbor = new Pair<>(nextStation, nextTravelTime);
-                        currentStation.getNeighbours().add(neighbor);
-                    }
-                }
-            }
         }
+        // Compute neighbours
+        computeNeighbours(allLines);
 
         // Remove unreachable stations or lines = DUMP or
         List<Station> toRemoveStations = new ArrayList<>();
-        for (Station s : allStations.values()) if (s.getLines().size() == 0 || s.getNeighbours().size() == 0) toRemoveStations.add(s);
+        for (Station s : allStations.values()) if (s.getLines().size() == 0 && s.getNeighbours().size() == 0) toRemoveStations.add(s);
         for (Station s : toRemoveStations) allStations.remove(s.getName());
 
         List<Line> toRemoveLines = new ArrayList<>();

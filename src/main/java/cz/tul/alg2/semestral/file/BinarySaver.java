@@ -6,7 +6,6 @@ import cz.tul.alg2.semestral.transportation.Line;
 import cz.tul.alg2.semestral.transportation.Station;
 import cz.tul.alg2.semestral.utilities.Pair;
 
-import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -20,44 +19,35 @@ public class BinarySaver implements ISaver {
     }
 
     @Override
-    public void saveTransport(String path) {
-        try (DataOutputStream outputStream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(path)))) {
+    public boolean saveTransport(String path) {
+        try (DataOutputStream writer = new DataOutputStream(new FileOutputStream(path))) {
             // Saving stations
-            outputStream.writeInt(transport.stations().size());
-            HashMap<Station, Integer> substitutionMap = new HashMap<>(transport.stations().size());
+            writer.writeUTF("STATIONS");
+            HashMap<Station, Integer> substitutionMap = new HashMap<>();
+            writer.writeInt(transport.stations().size());
             for (Station station : transport.stations().values()) {
-                outputStream.writeInt(substitutionMap.size());
-                outputStream.writeUTF(station.getPrettyName());
-                outputStream.writeUTF(station.getZoneID() != null ? station.getZoneID() : "");
+                writer.writeInt(substitutionMap.size());
+                writer.writeUTF(station.getPrettyName());
+                writer.writeUTF(station.getZoneID());
                 substitutionMap.put(station, substitutionMap.size());
-                System.out.println("Ukládání stanice: " + station.getPrettyName());
-            }
-
-            // Save neighbours
-            for (Station station : transport.stations().values()) {
-                outputStream.writeInt(substitutionMap.get(station));
-                outputStream.writeInt(station.getNeighbours().size());
-                for (Pair<Station, Integer> neighbour : station.getNeighbours()) {
-                    outputStream.writeInt(substitutionMap.get(neighbour.first));
-                    outputStream.writeInt(neighbour.second);
-                }
             }
 
             // Saving lines
-            outputStream.writeInt(transport.lines().size());
+            writer.writeUTF("LINES");
+            writer.writeInt(transport.lines().size());
             for (Line line : transport.lines().values()) {
-                outputStream.writeUTF(line.getName());
-                outputStream.writeUTF(line.getLineType().name());
-                outputStream.writeInt(line.getStations().size());
-                for (Station station : line.getStations()) {
-                    outputStream.writeInt(substitutionMap.get(station));
-                    System.out.println("Ukládání stanice " + station.getPrettyName() + " na lince " + line.getName());
+                writer.writeUTF(line.getName());
+                writer.writeUTF(line.getLineType().name());
+                writer.writeInt(line.getStations().size());
+                for (Pair<Station, Integer> station : line.getStations()) {
+                    writer.writeInt(substitutionMap.get(station.first));
+                    writer.writeInt(station.second);
                 }
             }
-
-            System.out.println("Data uložena do souboru " + path);
         } catch (IOException e) {
             new ErrorLogger("error.log").logError("Chyba při ukládání dat", e);
+            return false;
         }
+        return true;
     }
 }
