@@ -6,7 +6,6 @@ import cz.tul.alg2.semestral.transportation.Station;
 import cz.tul.alg2.semestral.transportation.TransportationType;
 import cz.tul.alg2.semestral.utilities.Pair;
 
-import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -18,69 +17,63 @@ public class BinaryLoader implements ILoader {
     HashMap<String, Station> allStations = new HashMap<>();
     HashMap<String, Line> allLines = new HashMap<>();
 
-    @Override
-    public void loadFile(String path) {
-        try (DataInputStream inputStream = new DataInputStream(new BufferedInputStream(new FileInputStream(path)))) {
-            // Načítání stanic
-            int stationCount = inputStream.readInt();
-            HashMap<Integer, Station> indexToStationMap = new HashMap<>(stationCount);
+    public boolean loadFile(String path) {
+        try (DataInputStream reader = new DataInputStream(new FileInputStream(path))) {
+            // Loading stations
+            String stationsSection = reader.readUTF();
+            if (!stationsSection.equals("STATIONS")) {
+                throw new IOException("Invalid file format");
+            }
+            int stationCount = reader.readInt();
+            HashMap<Integer, Station> substitutionMap = new HashMap<>();
+
             for (int i = 0; i < stationCount; i++) {
-                int stationIndex = inputStream.readInt();
-                String stationPrettyName = inputStream.readUTF();
-                String stationZoneID = inputStream.readUTF();
-                if (stationZoneID.isEmpty()) {
-                    stationZoneID = null;
-                }
-                Station station = new Station(stationPrettyName, stationZoneID);
+                int stationId = reader.readInt();
+                String prettyName = reader.readUTF();
+                String zoneId = reader.readUTF();
+                Station station = new Station(prettyName, zoneId);
+                substitutionMap.put(stationId, station);
                 allStations.put(station.getName(), station);
-                indexToStationMap.put(stationIndex, station);
             }
 
-            // Načítání sousedů
-            for (int i = 0; i < stationCount; i++) {
-                int stationIndex = inputStream.readInt();
-                Station station = indexToStationMap.get(stationIndex);
-                int neighbourCount = inputStream.readInt();
-                for (int j = 0; j < neighbourCount; j++) {
-                    int neighbourIndex = inputStream.readInt();
-                    int distance = inputStream.readInt();
-                    Station neighbour = indexToStationMap.get(neighbourIndex);
-                    station.addNeighbour(new Pair<>(neighbour, distance));
-                }
+            // Loading lines
+            String linesSection = reader.readUTF();
+            if (!linesSection.equals("LINES")) {
+                new ErrorLogger("error.log").logError("Chyba při načítání dat", new IOException("Invalid file format"));
+                return false;
             }
+            int lineCount = reader.readInt();
 
-            // Načítání linek
-            int lineCount = inputStream.readInt();
             for (int i = 0; i < lineCount; i++) {
-                String lineName = inputStream.readUTF();
-                String lineTypeName = inputStream.readUTF();
-                TransportationType lineType = TransportationType.valueOf(lineTypeName);
-                int stationsInLineCount = inputStream.readInt();
-                List<Station> lineStations = new ArrayList<>();
-                for (int j = 0; j < stationsInLineCount; j++) {
-                    int stationIndex = inputStream.readInt();
-                    Station station = indexToStationMap.get(stationIndex);
-                    lineStations.add(station);
-                    System.out.println("Načítání stanice " + station.getPrettyName() + " v lince " + lineName);
-                }
-                Line line = new Line(lineName, lineType, lineStations);
-                allLines.put(line.getName(), line);
+                String lineName = reader.readUTF();
+                TransportationType lineType = TransportationType.valueOf(reader.readUTF());
+                int stationPairCount = reader.readInt();
+                List<Pair<Station, Integer>> lineStations = new ArrayList<>();
 
-                // Přidejte linku do stanic
-                for (Station station : lineStations) {
-                    station.addLine(line);
+                for (int j = 0; j < stationPairCount; j++) {
+                    int stationId = reader.readInt();
+                    int travelTime = reader.readInt();
+                    Station station = substitutionMap.get(stationId);
+                    Pair<Station, Integer> stationPair = new Pair<>(station, travelTime);
+                    lineStations.add(stationPair);
                 }
+
+                Line line = new Line(lineName, lineType, lineStations);
+                allLines.put(lineName, line);
             }
 
-            System.out.println("Data načtena ze souboru " + path);
         } catch (IOException e) {
-            new ErrorLogger("error.log").logError("Error while loading data", e);
+            new ErrorLogger("error.log").logError("Chyba při načítání dat", e);
+            return false;
         }
+
+        // Compute neighbours
+        ILoader.computeNeighbours(allLines);
+        return true;
     }
 
     /**
      * Gets a map of all stations that have been loaded by this loader.
-     *
      * @return a map of all stations that have been loaded by this route loader
      */
     @Override
@@ -90,7 +83,6 @@ public class BinaryLoader implements ILoader {
 
     /**
      * Gets a map of all lines that have been loaded by this loader.
-     *
      * @return a map of all lines that have been loaded by this loader
      */
     @Override

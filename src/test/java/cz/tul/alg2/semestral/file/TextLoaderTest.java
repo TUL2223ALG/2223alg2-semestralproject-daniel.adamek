@@ -1,7 +1,6 @@
 package cz.tul.alg2.semestral.file;
 
 import cz.tul.alg2.semestral.transportation.CityTransport;
-import cz.tul.alg2.semestral.transportation.Station;
 import cz.tul.alg2.semestral.utilities.PathBuilder;
 import org.junit.jupiter.api.Test;
 
@@ -14,15 +13,15 @@ class TextLoaderTest {
     @Test
     void testPIDTextLoader() {
         GTFSLoader gtfs = new GTFSLoader();
-        gtfs.loadFile(PathBuilder.joinPath("data", "pid-gtfs"));
-        CityTransport pid = new CityTransport(gtfs.getAllStations(), gtfs.getAllLines());
+        gtfs.loadFile(PathBuilder.joinPath("data", "PID_GTFS.zip"));
+        CityTransport transport = new CityTransport(gtfs.getAllStations(), gtfs.getAllLines());
 
-        TextSaver ts = new TextSaver(pid);
+        TextSaver ts = new TextSaver(transport);
         TextLoader tl = new TextLoader();
-        assertEquals(0, tl.allStations.size());
-        assertNotSame(tl.allStations, gtfs.allStations);
-        assertEquals(0, tl.allStations.size());
-        assertNotSame(tl.allLines, gtfs.allLines);
+        assertEquals(0, tl.getAllStations().size());
+        assertNotSame(tl.getAllStations(), gtfs.getAllStations());
+        assertEquals(0, tl.getAllStations().size());
+        assertNotSame(tl.getAllLines(), gtfs.getAllLines());
 
         try {
             File tempFile = File.createTempFile("tempFile_", ".txt");
@@ -35,21 +34,7 @@ class TextLoaderTest {
             e.printStackTrace();
         }
 
-        assertEquals(tl.getAllStations().toString(), gtfs.getAllStations().toString());
-        assertEquals(tl.getAllLines().toString(), gtfs.getAllLines().toString());
-
-        int zeroLinesCount = 0;
-        for (Station station: gtfs.getAllStations().values()) if (station.getLines().size() != 0) zeroLinesCount++;
-
-        // Same
-        assertNotSame(tl.allStations, gtfs.allStations);
-        assertEquals(tl.allStations.toString(), gtfs.allStations.toString());
-        assertNotSame(tl.allLines, gtfs.allLines);
-        assertEquals(tl.allLines.toString(), gtfs.allLines.toString());
-
-        // Same size of content
-        assertNotEquals(0, zeroLinesCount);
-        assertEquals(tl.getAllStations().size(), zeroLinesCount);
-
+        assertEquals(transport.stations(), tl.getAllStations());
+        assertEquals(transport.lines(), tl.getAllLines());
     }
 }

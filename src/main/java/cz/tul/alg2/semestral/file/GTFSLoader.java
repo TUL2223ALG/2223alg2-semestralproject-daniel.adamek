@@ -17,22 +17,38 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class GTFSLoader implements ILoader {
-    HashMap<String, Station> allStations = new HashMap<>();
-    HashMap<String, Line> allLines = new HashMap<>();
+import static cz.tul.alg2.semestral.file.ILoader.*;
 
-    public void loadFile(String path) {
+public class GTFSLoader implements ILoader {
+    private final HashMap<String, Station> allStations = new HashMap<>();
+    private final HashMap<String, Line> allLines = new HashMap<>();
+
+    /**
+     * The loadFile function is used to load a GTFS file into the program.
+     * It uses the GtfsReader class from OpenTripPlanner to read in all the data, and then it parses that data into our own classes.
+     * The function returns true if everything went well, or false if there was an error while reading in the file.
+
+     *
+     * @param path Specify the path to the gtfs file
+     *
+     * @return True if the file is loaded successfully, otherwise false
+     *
+     */
+    public boolean loadFile(String path) {
         GtfsReader reader = new GtfsReader();
         GtfsDaoImpl dao = new GtfsDaoImpl();
 
+        // Set the entity store for the reader
         reader.setEntityStore(dao);
         try {
             reader.setInputLocation(new File(path));
             reader.run();
         } catch (IOException e) {
             new ErrorLogger("error.log").logError("Error while reading GTFS file", e);
+            return false;
         }
 
+        // Populate allStations map
         for (Stop stop : dao.getAllStops()) {
             if (stop.getName() == null) continue;
 
@@ -42,30 +58,22 @@ public class GTFSLoader implements ILoader {
             );
         }
 
-        // Vytvoříme mapu tripId -> stopTimes
+        // Map trip IDs to their corresponding stop times
         HashMap<String, List<StopTime>> tripStopTimesMap = new HashMap<>(80000);
         for (StopTime stopTime : dao.getAllStopTimes()) {
             tripStopTimesMap.computeIfAbsent(stopTime.getTrip().getId().getId(), k -> new ArrayList<>()).add(stopTime);
         }
 
-        // Vytvoříme mapu routeId -> trips
+        // Map route IDs to their corresponding trips
         HashMap<String, List<Trip>> routeTripsMap = new HashMap<>(800);
         for (Trip trip : dao.getAllTrips()) {
             routeTripsMap.computeIfAbsent(trip.getRoute().getId().getId(), k -> new ArrayList<>()).add(trip);
         }
 
-        String shortName;
-        TransportationType lineType;
-        List<Trip> tripsForRoute;
-        List<StopTime> stopTimesForTrip;
-        List<Station> lineStations;
-        int travelTime;
-        StopTime stopTime, prevStopTime;
-        Station station, prevStation;
-        Pair<Station, Integer> neighbour, reverseNeighbour;
+        // Iterate over all routes
         for (Route route : dao.getAllRoutes()) {
-            shortName = route.getShortName();
-            lineType = switch (route.getType()) {
+            String shortName = route.getShortName();
+            TransportationType lineType = switch (route.getType()) {
                 case 0:
                     yield TransportationType.TRAM;
                 case 1:
@@ -86,50 +94,62 @@ public class GTFSLoader implements ILoader {
                     new ErrorLogger("error.log").logError("WARNING: Invalid type of transportation! Skipping... Route:" + route, new IllegalArgumentException());
                     yield TransportationType.NONE;
             };
+            if (lineType == TransportationType.NONE) continue;
 
-            tripsForRoute = routeTripsMap.get(route.getId().getId());
+            // Get trips for the current route
+            List<Trip> tripsForRoute = routeTripsMap.get(route.getId().getId());
 
+            // Iterate over trips of the route
             for (Trip trip : tripsForRoute) {
-                stopTimesForTrip = tripStopTimesMap.get(trip.getId().getId());
+                List<StopTime> stopTimesForTrip = tripStopTimesMap.get(trip.getId().getId());
                 stopTimesForTrip.sort(Comparator.comparingInt(StopTime::getStopSequence));
-                lineStations = new ArrayList<>(stopTimesForTrip.size());
+                List<Pair<Station, Integer>> lineStations = new ArrayList<>(stopTimesForTrip.size());
 
+                // Create a list of station-distance pair for the lines
                 for (int i = 0; i < stopTimesForTrip.size(); i++) {
-                    stopTime = stopTimesForTrip.get(i);
-                    station = allStations.get(TextNormalization.stringNormalize(stopTime.getStop().getName()));
-                    lineStations.add(station);
-                    station.addLine(new Line(shortName, lineType, lineStations));
+                    StopTime stopTime = stopTimesForTrip.get(i);
+                    Station station = allStations.get(TextNormalization.stringNormalize(stopTime.getStop().getName()));
 
-                    if (i > 0) {
-                        prevStopTime = stopTimesForTrip.get(i - 1);
-                        prevStation = allStations.get(TextNormalization.stringNormalize(prevStopTime.getStop().getName()));
-                        travelTime = (int) Math.ceil((double)(stopTime.getArrivalTime() - prevStopTime.getDepartureTime()) / 60);
-
-                        neighbour = new Pair<>(prevStation, travelTime);
-                        station.getNeighbours().add(neighbour);
-                        reverseNeighbour = new Pair<>(station, travelTime);
-                        prevStation.getNeighbours().add(reverseNeighbour);
+                    if (i < stopTimesForTrip.size() - 1) {
+                        StopTime nextStopTime = stopTimesForTrip.get(i + 1);
+                        int travelTime = (int) Math.ceil((double) (nextStopTime.getArrivalTime() - stopTime.getDepartureTime()) / 60);
+                        Pair<Station, Integer> stationWithDistance = new Pair<>(station, travelTime);
+                        lineStations.add(stationWithDistance);
+                    } else {
+                        Pair<Station, Integer> stationWithDistance = new Pair<>(station, 0);
+                        lineStations.add(stationWithDistance);
                     }
                 }
-
-                Line line = new Line(shortName, lineType, lineStations);
-                allLines.put(shortName, line);
+                // Get or create the Line object for the current shortName
+                Line tmpLine = allLines.get(shortName);
+                if (tmpLine == null) {
+                    tmpLine = new Line(shortName, lineType, lineStations);
+                } else {
+                    if (lineStations.size() > tmpLine.getStations().size() && new HashSet<>(lineStations).containsAll(tmpLine.getStations()))
+                        tmpLine.setStations(lineStations);
+                    else
+                        continue;
+                }
+                allLines.put(shortName, tmpLine);
             }
+
         }
+        // Compute neighbours
+        computeNeighbours(allLines);
 
         // Remove unreachable stations or lines = DUMP or
         List<Station> toRemoveStations = new ArrayList<>();
-        for (Station s : allStations.values()) if (s.getLines().size() == 0 || s.getNeighbours().size() == 0) toRemoveStations.add(s);
+        for (Station s : allStations.values()) if (s.getLines().size() == 0 && s.getNeighbours().size() == 0) toRemoveStations.add(s);
         for (Station s : toRemoveStations) allStations.remove(s.getName());
 
         List<Line> toRemoveLines = new ArrayList<>();
-        for (Line l: allLines.values()) if (l.getStations().size() == 0) toRemoveLines.add(l);
+        for (Line l : allLines.values()) if (l.getStations().size() == 0) toRemoveLines.add(l);
         for (Line l : toRemoveLines) allLines.remove(l.getName());
+        return true;
     }
 
     /**
-     * Gets a map of all stations that have been loaded by this loader.
-     *
+     * Gets a map of all stations that have been loaded by this loader
      * @return a map of all stations that have been loaded by this route loader
      */
     @Override
@@ -139,7 +159,6 @@ public class GTFSLoader implements ILoader {
 
     /**
      * Gets a map of all lines that have been loaded by this loader.
-     *
      * @return a map of all lines that have been loaded by this loader
      */
     @Override
