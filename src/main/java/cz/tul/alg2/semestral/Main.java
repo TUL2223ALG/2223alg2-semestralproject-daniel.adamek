@@ -33,8 +33,8 @@ public class Main {
                 " | |_| | |   |  _| | | | |/ _ \\ | || | | | |_) |\n" +
                 " |  _  | |___| |___| |_| / ___ \\| || |_| |  _ < \n" +
                 " |_| |_|_____|_____|____/_/   \\_\\_| \\___/|_| \\_\\\n\n" +
-                "             - CityTransportation Path Finder -\n" +
-                "                     VÍTEJTE V HLEDATORU\n");
+                "       - CityTransportation Path Finder -\n" +
+                "               VÍTEJTE V HLEDATORU\n");
 
         ILoader loader = LoaderSelector.getLoaderMethod();
         System.out.printf("\nÚspěšně načteno: %d stanic a %d linek.", loader.getAllStations().size(), loader.getAllLines().size());

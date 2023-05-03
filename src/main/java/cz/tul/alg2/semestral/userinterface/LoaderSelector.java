@@ -15,7 +15,7 @@ public class LoaderSelector {
 
         System.out.println("Zadejte cestu k souboru, ze kterého chcete načíst MHD: \n - \"*.ser\" pro binární soubory\n - \"*.txt\" pro textové soubory\n - \"*.zip\" pro GTFS formát.");
         System.out.println("-----------------------------------\n" +
-                           "| 3 možné testovací varianty:     |\n" +
+                           "| 3 možné testovací varianty:      |\n" +
                            "|   \"data/pid.(ser|txt)\" (rychlé)  |\n" +
                            "|   \"data/PID_GTFS.zip\"  (pomalé)  |\n" +
                             "-----------------------------------");
