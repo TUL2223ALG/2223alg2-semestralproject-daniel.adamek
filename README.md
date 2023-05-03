@@ -25,3 +25,31 @@ Program po spuštění disponuje nabídkou funkcí:
 K testování poslouží knihovna JUnit verze 5.
 
 __Status JUnit5 testů__ [![JUnit5 Tests](https://github.com/TUL2223ALG/2223alg2-semestralproject-daniel.adamek/actions/workflows/maven.yml/badge.svg)](https://github.com/TUL2223ALG/2223alg2-semestralproject-daniel.adamek/actions/workflows/maven.yml)
+
+## Splněné požadavky
+- [ ] Menu, které umožní opakovaný výběr funkcí aplikácie a ukončení aplikace
+- [ ] Víceúrovňové menu - zobrazovat vždy jenom zrovna dostupné  volby
+- [ ] Přehledný výpis výsledků na konzoli - použijte alespoň jednou String.format() a StringBuilder
+- [x] Načítání vstupních dat z minimálně dvou souborů
+- [ ] Zápis výstupních dat do souboru
+- [x] Možnost výběru práce s textovými nebo binárními soubory (načítání i výpis)
+- [ ] Kontrolní program pro výpis binárního souboru
+- [x] Ideálně využití reálných otevřených dat
+- [x] Adresář data (na rovnaké úrovni jako src) se všemi datovými soubory a případně třídu Datastore se statickými metodami, které budou poskytovat další statická data
+- [ ] Nastavení cesty k adresáři data uživatelem na začátku programu, nebo v konfiguračním souboru
+- [x] Rozdělení tříd do balíčků. Např.
+  - ui – třídy, tvořící uživatelské rozhraní - komunikaci s uživatelem
+  - app – třídy, tvořící logiku a práci s daty - modely, kontrolery
+  - utils – pomocné třídy např. vlastní výjimky, vlastní rozhraní
+- [x] Programování vůči rozhraní a použití vlastního rozhraní
+- [ ] Použití java.time API pro práci s časem
+- [x] Použít enum typ
+- [x] Použití kontejnerové třídy jazyka Java (ArrayList, LinkedList, HashMap ...) z Collections frameworku.
+- [ ] Alespoň dvě možnosti třídění s využitím rozhraní Comparable a Comparator
+- [ ] Použití regulárního výrazu
+- [x] Ošetření vstupů, aby chybné vstupy nezpůsobily pád programu - pomocí existujících a vlastních výjimek
+- [x] Vhodné ošetření povinně ošetřovaných výjimek
+- [x] Použití Vámi vybrané externí knihovny (audio, posílání emailů, práce s obrázkem, junit testování, jiné formáty uložení dat ...)
+- [ ] Javadoc - každá třída a metoda musí mít javadoc popis, abyste mohli na závěr vygenerovat javadoc dokumentaci
+- [ ] Vhodné hlášky pro uživatele nebo Help, aby mohl aplikaci otestovat i ten, kdo ji netvořil
+
