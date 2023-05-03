@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * The type Text loader.
  */
-public class TextLoader {
+public class TextLoader implements ILoader {
     /**
      * The All stations.
      */
@@ -94,14 +94,14 @@ public class TextLoader {
      *
      * @return a map of all stations that have been loaded by this route loader
      */
-    HashMap<String, Station> getAllStations() { return this.allStations; }
+    public HashMap<String, Station> getAllStations() { return this.allStations; }
 
     /**
      * Gets a map of all lines that have been loaded by this loader.
      *
      * @return a map of all lines that have been loaded by this loader
      */
-    HashMap<String, Line> getAllLines() { return this.allLines; }
+    public HashMap<String, Line> getAllLines() { return this.allLines; }
 
 
 }
