@@ -37,6 +37,22 @@ public class Station implements Comparable<Station> {
     public void addLine(Line line) {
         this.lines.add(line);
     }
+    public void removeLine(Line line) {
+        this.lines.remove(line);
+        this.neighbours.clear();
+
+        /*
+        for (Line l : this.lines) {
+            for (int i = 0; i < l.getStations().size(); i++) {
+                if (l.getStations().get(i).name.equals(this.name)) {
+                    if (i > 0)
+                        this.neighbours
+                }
+            }
+        }
+
+         */
+    }
 
     public Set<Pair<Station, Integer>> getNeighbours() {
         return neighbours;
