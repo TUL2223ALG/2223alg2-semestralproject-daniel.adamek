@@ -8,13 +8,29 @@ import cz.tul.alg2.semestral.utilities.TextNormalization;
 
 import java.util.*;
 
+/**
+ * The type Bfs.
+ */
 public class BFS implements PathFinder{
     private final CityTransport transport;
 
+    /**
+     * The BFS function takes in a starting city and an ending city, and returns the shortest path between them.
+     *
+     * @param transport Pass the citytransport object to the bfs class
+     */
     public BFS(CityTransport transport) {
         this.transport = transport;
     }
     //@Override
+    /**
+     * The findShortestPath function finds the shortest path between two stations.
+     *
+     * @param start Find the start station in the transport
+     * @param end Find the shortest path between two stations
+     *
+     * @return A list of pathsegment objects that represent the shortest path between two stations
+     */
     public List<PathSegment> findShortestPath(String start, String end) {
         Map<String, Pair<Station, Integer>> visited = new HashMap<>();
         Queue<Station> queue = new LinkedList<>();
@@ -50,6 +66,20 @@ public class BFS implements PathFinder{
         return null; // Path not found
     }
 
+/**
+ * The buildPath function takes in a map of visited stations, the start station, and the end station.
+ * It then creates a linked list of pairs that contains all the stations on our path and their distances from
+ * each other. Then it iterates through this list to create PathSegments which contain information about what lines
+ * are used for each segment as well as what stations are included in that segment. This is done by checking if there
+ * is any common line between two adjacent segments (if not we know we have to change lines). If there is no common line
+ * between two adjacent segments then we add all previous
+ *
+ * @param visited Store the visited stations and their parent station
+ * @param startStation Determine the starting point of the path
+ * @param endStation Get the station name
+ *
+ * @return A list of pathsegments
+ */
 private List<PathSegment> buildPath(Map<String, Pair<Station, Integer>> visited, Station startStation, Station endStation) {
     LinkedList<Pair<Station, Integer>> fullPath = new LinkedList<>();
     Station current = endStation;
@@ -96,19 +126,17 @@ private List<PathSegment> buildPath(Map<String, Pair<Station, Integer>> visited,
     return pathSegments;
 }
 
+    /**
+     * The findCommonLines function takes two stations and returns a set of lines that are common to both.
+     *
+     * @param station1 Find the lines that are common between station 1 and 2
+     * @param station2 Find the common lines between station 1 and 2
+     *
+     * @return A set of all the lines that are common to both stations, or null if there are no common lines
+     */
     private Set<Line> findCommonLines(Station station1, Station station2) {
         Set<Line> commonLines = new HashSet<>(station1.getLines());
         commonLines.retainAll(station2.getLines());
         return (commonLines.isEmpty()) ? null : commonLines;
     }
-
-    private Line findCommonLine(Station station1, Station station2) {
-        Set<Line> commonLines = new HashSet<>(station1.getLines());
-        commonLines.retainAll(station2.getLines());
-        if (!commonLines.isEmpty()) {
-            return commonLines.iterator().next();
-        }
-        return null; // No common line found, should not happen in a correct input
-    }
-
 }

@@ -13,10 +13,25 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * The type Binary loader.
+ */
 public class BinaryLoader implements ILoader {
+    /**
+     * The stations.
+     */
     HashMap<String, Station> allStations = new HashMap<>();
+    /**
+     * The lines.
+     */
     HashMap<String, Line> allLines = new HashMap<>();
 
+    /**
+     * The loadFile function loads the data from a file into the program.
+     *
+     * @param path Specify the path to the file that is being loaded
+     * @return True if the file was loaded successfully, false otherwise
+     */
     public boolean loadFile(String path) {
         try (DataInputStream reader = new DataInputStream(new FileInputStream(path))) {
             // Loading stations

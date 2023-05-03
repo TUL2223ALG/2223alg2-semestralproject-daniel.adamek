@@ -12,10 +12,28 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * The type Text loader.
+ */
 public class TextLoader {
+    /**
+     * The All stations.
+     */
     HashMap<String, Station> allStations = new HashMap<>();
+    /**
+     * The All lines.
+     */
     HashMap<String, Line> allLines = new HashMap<>();
 
+    /**
+     * The loadFile function takes in a path to a file and reads the contents of that file.
+     * The function then parses the data from that file into Station objects, Line objects,
+     * and adds those objects to their respective HashMaps. It also computes all neighbours for each station.
+     *
+     * @param path Specify the path of the file to be loaded
+     *
+     * @return A boolean, which is true if the file was successfully loaded and false otherwise
+     */
     public boolean loadFile(String path) {
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
             String line;

@@ -19,6 +19,9 @@ import java.util.*;
 
 import static cz.tul.alg2.semestral.file.ILoader.*;
 
+/**
+ * The type Gtfs loader.
+ */
 public class GTFSLoader implements ILoader {
     private final HashMap<String, Station> allStations = new HashMap<>();
     private final HashMap<String, Line> allLines = new HashMap<>();

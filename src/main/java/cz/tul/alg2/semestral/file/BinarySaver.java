@@ -11,13 +11,27 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 
+/**
+ * The type Binary saver.
+ */
 public class BinarySaver implements ISaver {
     private final CityTransport transport;
 
+    /**
+     * Instantiates a new Binary saver.
+     *
+     * @param transport the transport
+     */
     public BinarySaver(CityTransport transport) {
         this.transport = transport;
     }
 
+    /**
+     * The saveTransport function saves the transport object to a file.
+     *
+     * @param String path Specify the path to the file we want to load
+     * @return A boolean value
+     */
     @Override
     public boolean saveTransport(String path) {
         try (DataOutputStream writer = new DataOutputStream(new FileOutputStream(path))) {

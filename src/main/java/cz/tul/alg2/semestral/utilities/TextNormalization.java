@@ -25,6 +25,17 @@ public class TextNormalization {
             map.put((int) 'ü', (int) 'u');
             map.put((int) 'ď', (int) 'd');
     }
+    /**
+     * The stringNormalize function takes a string and returns a normalized version of it.
+     * The normalization process is as follows:
+     * 1) All characters are converted to lowercase.
+     * 2) All non-alphanumeric characters are removed, except for spaces (which become underscores).
+     * 3) Any character that does not have an ASCII code between 0x61 and 0x7A or between 0x30 and 0x39 is replaced by its Unicode decomposition mapping, if one exists; otherwise the character is removed. For example, the Euro symbol € becomes &quot;euro&quot; (U+20AC -&gt; U+0065 U
+     *
+     * @param toNormalize Pass in the string that needs to be normalized
+     *
+     * @return A string with all the characters that are not letters or digits removed, and all the remaining letters converted to lowercase
+     */
     public static String stringNormalize(String toNormalize) {
         sb.setLength(0);
 

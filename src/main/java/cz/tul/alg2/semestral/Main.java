@@ -13,7 +13,16 @@ import cz.tul.alg2.semestral.utilities.PathBuilder;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * The type Main.
+ */
 public class Main {
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     * @throws IOException the io exception
+     */
     public static void main(String[] args) throws IOException {
         GTFSLoader loader = new GTFSLoader();
         loader.loadFile(PathBuilder.joinPath("data", "PID_GTFS.zip"));
@@ -36,9 +45,11 @@ public class Main {
             System.out.println("\n\n\n\nHledátor v Pražské integrované dopravě");
             System.out.println("Zadejte počáteční stanici");
             from = sg.getStation();
+            if (from == null) break;
 
             System.out.println("Zadejte koncovou stanici");
             to = sg.getStation();
+            if (to == null) break;
 
             long startTime = System.nanoTime();
             List<PathSegment> path = pf1.findShortestPath(

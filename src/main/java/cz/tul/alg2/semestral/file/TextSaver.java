@@ -11,14 +11,29 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 
+/**
+ * The type Text saver.
+ */
 public class TextSaver implements ISaver {
 
     private final CityTransport transport;
 
+    /**
+     * Instantiates a new Text saver.
+     *
+     * @param transport the transport
+     */
     public TextSaver(CityTransport transport) {
         this.transport = transport;
     }
 
+    /**
+     * The saveTransport function saves the transport data to a file.
+     *
+     * @param path Specify the path to the file where we want to save our transport data
+     *
+     * @return A boolean value
+     */
     @Override
     public boolean saveTransport(String path) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {

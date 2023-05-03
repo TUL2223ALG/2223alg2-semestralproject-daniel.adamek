@@ -6,31 +6,68 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * The type Line.
+ */
 public class Line {
     private final String name;
     private final TransportationType lineType;
     private List<Pair<Station, Integer>> stations;
 
+    /**
+     * Instantiates a new Line.
+     *
+     * @param name     the name
+     * @param lineType the line type
+     * @param stations the stations
+     */
     public Line(String name, TransportationType lineType, List<Pair<Station, Integer>> stations) {
         this.name = name;
         this.lineType = lineType;
         this.stations = stations;
     }
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Gets line type.
+     *
+     * @return the line type
+     */
     public TransportationType getLineType() {
         return lineType;
     }
 
+    /**
+     * Gets stations.
+     *
+     * @return the stations
+     */
     public List<Pair<Station, Integer>> getStations() {
         return stations;
     }
+
+    /**
+     * Add station.
+     *
+     * @param s the s
+     */
     public void addStation(Pair<Station, Integer> s) {
         stations.add(s);
     }
+
+    /**
+     * Sets stations.
+     *
+     * @param list the list
+     */
     public void setStations(List<Pair<Station, Integer>> list) { stations = list; }
 
     @Override

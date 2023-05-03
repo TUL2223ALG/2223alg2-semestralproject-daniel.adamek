@@ -12,11 +12,25 @@ import java.util.List;
 import java.util.Scanner;
 
 public class StationGetter {
-    private CityTransport transport;
+    private final CityTransport transport;
+
+    /**
+     * The StationGetter function is used to get the station name from a given line and stop number.
+     *
+     * @param transport Pass the citytransport object to the stationgetter class
+     */
     public StationGetter(CityTransport transport) {
         this.transport = transport;
     }
 
+    /**
+     * The getStation function is used to get a station from the user.
+     * It first checks if the input string matches any of the stations in our database, and if it does, returns that station.
+     * If not, it uses Hirschberg's algorithm to find similar strings and suggests them to the user.
+     *
+     * @return The station that the user wants to find
+     *
+     */
     public Station getStation() {
         Scanner sc = new Scanner(System.in);
         String str;
@@ -35,6 +49,8 @@ public class StationGetter {
                     System.out.print("Neplatný vstup. Zadejte prosím znovu.\n> ");
                 }
             }
+            // Detect stop
+            if (str.equals("EXIT")) return null;
 
             if (transport.stations().containsKey(str)) {
                 System.out.println("Nalezeno!");
@@ -61,11 +77,9 @@ public class StationGetter {
 
             System.out.print("Jejda, nic takového jsme nenašli\nNeměli jste na mysli: ");
             for (int i = 0; i < SUGGEST_LEN; i++) {
-                System.out.print(
-                        transport.stations().get(pq.get(pq.size()-1 - i).first).getPrettyName() +
-                        "[" +
-                        pq.get(pq.size()-1 - i).second +
-                        "]"
+                System.out.printf("%s [%.2f]%%",
+                        transport.stations().get(pq.get(pq.size()-1 - i).first).getPrettyName(),
+                        pq.get(pq.size()-1 - i).second
                 );
                 if (i < SUGGEST_LEN-1) System.out.print(", ");
             }
