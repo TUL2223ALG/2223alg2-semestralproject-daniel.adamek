@@ -1,14 +1,18 @@
 package cz.tul.alg2.semestral;
 
 import cz.tul.alg2.semestral.file.GTFSLoader;
+import cz.tul.alg2.semestral.file.ILoader;
 import cz.tul.alg2.semestral.pathfinding.BFS;
 import cz.tul.alg2.semestral.pathfinding.PathSegment;
 import cz.tul.alg2.semestral.transportation.CityTransport;
 import cz.tul.alg2.semestral.transportation.Line;
 import cz.tul.alg2.semestral.transportation.Station;
+import cz.tul.alg2.semestral.userinterface.LoaderSelector;
 import cz.tul.alg2.semestral.userinterface.StationGetter;
 import cz.tul.alg2.semestral.utilities.Pair;
 import cz.tul.alg2.semestral.utilities.PathBuilder;
+import cz.tul.alg2.semestral.file.BinarySaver;
+import cz.tul.alg2.semestral.file.TextSaver;
 
 import java.io.IOException;
 import java.util.List;
@@ -24,8 +28,19 @@ public class Main {
      * @throws IOException the io exception
      */
     public static void main(String[] args) throws IOException {
-        GTFSLoader loader = new GTFSLoader();
-        loader.loadFile(PathBuilder.joinPath("data", "PID_GTFS.zip"));
+        System.out.println( "\n  _   _ _     _____ ____    _  _____ ___  ____  \n" +
+                " | | | | |   | ____|  _ \\  / \\|_   _/ _ \\|  _ \\ \n" +
+                " | |_| | |   |  _| | | | |/ _ \\ | || | | | |_) |\n" +
+                " |  _  | |___| |___| |_| / ___ \\| || |_| |  _ < \n" +
+                " |_| |_|_____|_____|____/_/   \\_\\_| \\___/|_| \\_\\\n\n" +
+                "             - CityTransportation Path Finder -\n" +
+                "                     VÍTEJTE V HLEDATORU\n");
+
+        ILoader loader = LoaderSelector.getLoaderMethod();
+        System.out.printf("\nÚspěšně načteno: %d stanic a %d linek.", loader.getAllStations().size(), loader.getAllLines().size());
+
+        //GTFSLoader loader = new GTFSLoader();
+        //loader.loadFile(PathBuilder.joinPath("data", "PID_GTFS.zip"));
         //BinaryLoader loader = new BinaryLoader();
         //loader.loadFile(PathBuilder.joinPath("data", "pid.ser"));
 
@@ -34,15 +49,16 @@ public class Main {
                 loader.getAllLines()
         );
         //BinarySaver bs = new BinarySaver(cityTransport);
-
-
         //bs.saveTransport(PathBuilder.joinPath("data", "pid.ser"));
+
+        //TextSaver ts = new TextSaver(cityTransport);
+        //ts.saveTransport(PathBuilder.joinPath("data", "pid.txt"));
 
         BFS pf1 = new BFS(cityTransport);
         StationGetter sg = new StationGetter(cityTransport);
         Station from, to;
         while (true) {
-            System.out.println("\n\n\n\nHledátor v Pražské integrované dopravě");
+            System.out.println("\nHledátor v Pražské integrované dopravě");
             System.out.println("Zadejte počáteční stanici");
             from = sg.getStation();
             if (from == null) break;

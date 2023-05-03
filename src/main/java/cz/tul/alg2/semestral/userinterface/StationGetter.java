@@ -50,7 +50,7 @@ public class StationGetter {
                 }
             }
             // Detect stop
-            if (str.equals("EXIT")) return null;
+            if (str.equals("exit")) return null;
 
             if (transport.stations().containsKey(str)) {
                 System.out.println("Nalezeno!");
