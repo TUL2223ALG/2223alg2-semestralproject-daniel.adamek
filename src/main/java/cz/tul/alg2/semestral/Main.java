@@ -1,6 +1,5 @@
 package cz.tul.alg2.semestral;
 
-import cz.tul.alg2.semestral.file.GTFSLoader;
 import cz.tul.alg2.semestral.file.ILoader;
 import cz.tul.alg2.semestral.pathfinding.BFS;
 import cz.tul.alg2.semestral.pathfinding.PathSegment;
@@ -8,13 +7,10 @@ import cz.tul.alg2.semestral.transportation.CityTransport;
 import cz.tul.alg2.semestral.transportation.Line;
 import cz.tul.alg2.semestral.transportation.Station;
 import cz.tul.alg2.semestral.userinterface.LoaderSelector;
+import cz.tul.alg2.semestral.userinterface.Menu;
 import cz.tul.alg2.semestral.userinterface.StationGetter;
 import cz.tul.alg2.semestral.utilities.Pair;
-import cz.tul.alg2.semestral.utilities.PathBuilder;
-import cz.tul.alg2.semestral.file.BinarySaver;
-import cz.tul.alg2.semestral.file.TextSaver;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -25,10 +21,10 @@ public class Main {
      * The entry point of application.
      *
      * @param args the input arguments
-     * @throws IOException the io exception
      */
-    public static void main(String[] args) throws IOException {
-        System.out.println( "\n  _   _ _     _____ ____    _  _____ ___  ____  \n" +
+    public static void main(String[] args) {
+        System.out.println(
+                "\n  _   _ _     _____ ____    _  _____ ___  ____  \n" +
                 " | | | | |   | ____|  _ \\  / \\|_   _/ _ \\|  _ \\ \n" +
                 " | |_| | |   |  _| | | | |/ _ \\ | || | | | |_) |\n" +
                 " |  _  | |___| |___| |_| / ___ \\| || |_| |  _ < \n" +
@@ -37,17 +33,24 @@ public class Main {
                 "               VÍTEJTE V HLEDATORU\n");
 
         ILoader loader = LoaderSelector.getLoaderMethod();
-        System.out.printf("\nÚspěšně načteno: %d stanic a %d linek.", loader.getAllStations().size(), loader.getAllLines().size());
+        System.out.printf("\nÚspěšně načteno: %d stanic a %d linek.\n", loader.getAllStations().size(), loader.getAllLines().size());
 
         //GTFSLoader loader = new GTFSLoader();
         //loader.loadFile(PathBuilder.joinPath("data", "PID_GTFS.zip"));
         //BinaryLoader loader = new BinaryLoader();
         //loader.loadFile(PathBuilder.joinPath("data", "pid.ser"));
 
+        Menu menu = new Menu(loader);
+        menu.mainMenu();
+        int a = 1;
+        if (a == 1) return;
+
+
         CityTransport cityTransport = new CityTransport(
                 loader.getAllStations(),
                 loader.getAllLines()
         );
+
         //BinarySaver bs = new BinarySaver(cityTransport);
         //bs.saveTransport(PathBuilder.joinPath("data", "pid.ser"));
 
