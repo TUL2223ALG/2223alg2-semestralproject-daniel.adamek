@@ -26,11 +26,11 @@ public class LoaderSelector {
             // exists?
             if (str.matches("^(.+/)*.+\\.(ser|txt|zip)$")) {
                 if (! new File(str).exists()) {
-                    System.out.println("Soubor v takovéto cestě neexistuje. Opravte prosím.  Formát: cesta/k/souboru.(ser|txt|zip)");
+                    System.out.println("Soubor na takovéto cestě neexistuje.  Formát: cesta/k/souboru");
                     continue;
                 }
             } else {
-                System.out.println("Neplatný formát. Zadejte prosím znovu. Formát: cesta/k/souboru.(ser|txt|zip)");
+                System.out.println("Neplatný formát. Zadejte znovu. Formát: povolené koncovky: .ser, .txt a .zip");
                 continue;
             }
 
@@ -46,10 +46,10 @@ public class LoaderSelector {
                 GTFSLoader gtfsl = new GTFSLoader();
                 if (gtfsl.loadFile(str)) return gtfsl;
             } else {
-                System.out.println("Neplatný formát. Zadejte prosím znovu. Formát: cesta/k/souboru.(ser|txt|zip)");
+                System.out.println("Neplatný formát. Zadejte znovu. Formát: povolené koncovky: .ser, .txt a .zip");
                 continue;
             }
-            System.out.println("Soubor se nepodačilo načíct. Zadejte správnou cestu.");
+            System.out.println("Soubor se nepodačilo načíst. Zadejte správnou cestu.");
         }
     }
 }
