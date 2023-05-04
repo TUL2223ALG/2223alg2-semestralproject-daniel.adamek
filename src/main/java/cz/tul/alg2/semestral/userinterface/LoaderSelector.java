@@ -14,11 +14,12 @@ public class LoaderSelector {
         String str;
 
         System.out.println("Zadejte cestu k souboru, ze kterého chcete načíst MHD: \n - \"*.ser\" pro binární soubory\n - \"*.txt\" pro textové soubory\n - \"*.zip\" pro GTFS formát.");
-        System.out.println("-----------------------------------\n" +
+        System.out.println("------------------------------------\n" +
                            "| 3 možné testovací varianty:      |\n" +
-                           "|   \"data/pid.(ser|txt)\" (rychlé)  |\n" +
+                           "|   \"data/pid.txt\"       (rychlé)  |\n" +
+                           "|   \"data/pid.ser\"       (rychlé)  |\n" +
                            "|   \"data/PID_GTFS.zip\"  (pomalé)  |\n" +
-                            "-----------------------------------");
+                            "------------------------------------");
         while (true) {
             System.out.print("> ");
             str = sc.nextLine();
