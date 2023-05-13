@@ -14,14 +14,16 @@ import java.util.Scanner;
 
 public class InteractiveGetter {
     private final CityTransport transport;
+    private final Scanner sc;
 
     /**
      * The StationGetter function is used to get the station name from a given line and stop number.
      *
      * @param transport Pass the citytransport object to the stationgetter class
      */
-    public InteractiveGetter(CityTransport transport) {
+    public InteractiveGetter(CityTransport transport, Scanner sc) {
         this.transport = transport;
+        this.sc = sc;
     }
 
     /**
@@ -29,12 +31,10 @@ public class InteractiveGetter {
      * It first checks if the input string matches any of the stations in our database, and if it does, returns that station.
      * If not, it uses Hirschberg's algorithm to find similar strings and suggests them to the user.
      *
-     * @param sc Get input from the user
-     *
      * @return The station that the user wants to find
      *
      */
-    public Station getStation(Scanner sc) {
+    public Station getStation() {
         String str;
         List<Pair<String, Double>> pq = new ArrayList<>();
         double similarity;
@@ -96,11 +96,9 @@ public class InteractiveGetter {
      * It first checks if the input is an existing line, and returns it if so.
      * If not, it uses HirschbergMatching to find similar lines and suggests them to the user.
      *
-     * @param sc Get input from the user
-     *
      * @return A line with the given name
      */
-    public Line getLine(Scanner sc) {
+    public Line getLine() {
         String str;
         List<Pair<String, Double>> pq = new ArrayList<>();
         double similarity;
