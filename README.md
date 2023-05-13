@@ -27,8 +27,8 @@ K testování poslouží knihovna JUnit verze 5.
 __Status JUnit5 testů__ [![JUnit5 Tests](https://github.com/TUL2223ALG/2223alg2-semestralproject-daniel.adamek/actions/workflows/maven.yml/badge.svg)](https://github.com/TUL2223ALG/2223alg2-semestralproject-daniel.adamek/actions/workflows/maven.yml)
 
 ## Splněné požadavky
-- [ ] Menu, které umožní opakovaný výběr funkcí aplikácie a ukončení aplikace
-- [ ] Víceúrovňové menu - zobrazovat vždy jenom zrovna dostupné  volby
+- [x] Menu, které umožní opakovaný výběr funkcí aplikácie a ukončení aplikace
+- [X] Víceúrovňové menu - zobrazovat vždy jenom zrovna dostupné  volby
 - [x] Přehledný výpis výsledků na konzoli - použijte alespoň jednou String.format() a StringBuilder
 - [x] Načítání vstupních dat z minimálně dvou souborů
 - [ ] Zápis výstupních dat do souboru
@@ -42,7 +42,7 @@ __Status JUnit5 testů__ [![JUnit5 Tests](https://github.com/TUL2223ALG/2223alg2
   - app – třídy, tvořící logiku a práci s daty - modely, kontrolery
   - utils – pomocné třídy např. vlastní výjimky, vlastní rozhraní
 - [x] Programování vůči rozhraní a použití vlastního rozhraní
-- [ ] Použití java.time API pro práci s časem
+- [x] Použití java.time API pro práci s časem
 - [x] Použít enum typ
 - [x] Použití kontejnerové třídy jazyka Java (ArrayList, LinkedList, HashMap ...) z Collections frameworku.
 - [ ] Alespoň dvě možnosti třídění s využitím rozhraní Comparable a Comparator
@@ -51,5 +51,5 @@ __Status JUnit5 testů__ [![JUnit5 Tests](https://github.com/TUL2223ALG/2223alg2
 - [x] Vhodné ošetření povinně ošetřovaných výjimek
 - [x] Použití Vámi vybrané externí knihovny (audio, posílání emailů, práce s obrázkem, junit testování, jiné formáty uložení dat ...)
 - [x] Javadoc - každá třída a metoda musí mít javadoc popis, abyste mohli na závěr vygenerovat javadoc dokumentaci
-- [ ] Vhodné hlášky pro uživatele nebo Help, aby mohl aplikaci otestovat i ten, kdo ji netvořil
+- [x] Vhodné hlášky pro uživatele nebo Help, aby mohl aplikaci otestovat i ten, kdo ji netvořil
 

@@ -1,17 +1,9 @@
 package cz.tul.alg2.semestral;
 
-import cz.tul.alg2.semestral.file.ILoader;
-import cz.tul.alg2.semestral.pathfinding.BFS;
-import cz.tul.alg2.semestral.pathfinding.PathSegment;
+import cz.tul.alg2.semestral.file.BinaryLoader;
 import cz.tul.alg2.semestral.transportation.CityTransport;
-import cz.tul.alg2.semestral.transportation.Line;
-import cz.tul.alg2.semestral.transportation.Station;
-import cz.tul.alg2.semestral.userinterface.LoaderSelector;
 import cz.tul.alg2.semestral.userinterface.Menu;
-import cz.tul.alg2.semestral.userinterface.StationGetter;
-import cz.tul.alg2.semestral.utilities.Pair;
-
-import java.util.List;
+import cz.tul.alg2.semestral.utilities.PathBuilder;
 
 /**
  * The type Main.
@@ -32,13 +24,18 @@ public class Main {
                 "       - CityTransportation Path Finder -\n" +
                 "               VÍTEJTE V HLEDATORU\n");
 
-        ILoader loader = LoaderSelector.getLoaderMethod();
-        System.out.printf("\nÚspěšně načteno: %d stanic a %d linek.\n", loader.getAllStations().size(), loader.getAllLines().size());
+        //ILoader loader = LoaderSelector.getLoaderMethod();
 
         //GTFSLoader loader = new GTFSLoader();
         //loader.loadFile(PathBuilder.joinPath("data", "PID_GTFS.zip"));
-        //BinaryLoader loader = new BinaryLoader();
-        //loader.loadFile(PathBuilder.joinPath("data", "pid.ser"));
+        BinaryLoader loader = new BinaryLoader();
+        loader.loadFile(PathBuilder.joinPath("data", "pid.ser"));
+        //System.out.printf("\nÚspěšně načteno: %d stanic a %d linek.\n", loader.getAllStations().size(), loader.getAllLines().size());
+
+        CityTransport cityTransport = new CityTransport(
+                loader.getAllStations(),
+                loader.getAllLines()
+        );
 
         Menu menu = new Menu(loader);
         menu.mainMenu();
@@ -46,19 +43,15 @@ public class Main {
         if (a == 1) return;
 
 
-        CityTransport cityTransport = new CityTransport(
-                loader.getAllStations(),
-                loader.getAllLines()
-        );
-
         //BinarySaver bs = new BinarySaver(cityTransport);
         //bs.saveTransport(PathBuilder.joinPath("data", "pid.ser"));
 
         //TextSaver ts = new TextSaver(cityTransport);
         //ts.saveTransport(PathBuilder.joinPath("data", "pid.txt"));
 
+        /*
         BFS pf1 = new BFS(cityTransport);
-        StationGetter sg = new StationGetter(cityTransport);
+        InteractiveGetter sg = new InteractiveGetter(cityTransport);
         Station from, to;
         while (true) {
             System.out.println("\nHledátor v Pražské integrované dopravě");
@@ -96,6 +89,8 @@ public class Main {
             System.out.println(total + " minut");
             System.out.println("Čas vyhledávání: " + (endTime - startTime) / 1e6 + " ms");
         }
+
+         */
 
     }
 

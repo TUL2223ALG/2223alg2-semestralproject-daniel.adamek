@@ -63,33 +63,26 @@ public class LoaderSelector {
                 System.out.println("Neplatný formát. Zadejte znovu. Formát: povolené koncovky: .ser, .txt a .zip");
                 continue;
             }
-
+            ILoader loader = null;
             if (str.matches("^(.+/)*.+\\.ser$")) {
-                BinaryLoader bl = new BinaryLoader();
-                if (bl.loadFile(
-                    PathBuilder.joinPath(
-                        str.split("/")
-                    )
-                )) return bl;
+                loader = new BinaryLoader();
             }
             else if (str.matches("^(.+/)*.+\\.txt$")) {
-                TextLoader tl = new TextLoader();
-                if (tl.loadFile(
-                    PathBuilder.joinPath(
-                        str.split("/")
-                    ))) return tl;
+                loader = new TextLoader();
             }
             else if (str.matches("^(.+/)*.+\\.zip$")) {
-                GTFSLoader gtfsl = new GTFSLoader();
-                if (gtfsl.loadFile(
-                    PathBuilder.joinPath(
-                        str.split("/")
-                    ))) return gtfsl;
+                loader = new GTFSLoader();
             } else {
                 System.out.println("Neplatný formát. Zadejte znovu. Formát: povolené koncovky: .ser, .txt a .zip");
                 continue;
             }
-            System.out.println("Soubor se nepodačilo načíst. Zadejte správnou cestu nebo validní soubor.");
+
+            if (loader.loadFile(
+                    PathBuilder.joinPath(
+                        str.split("/")
+                    )
+                )
+            ) return loader;
         }
     }
 }
