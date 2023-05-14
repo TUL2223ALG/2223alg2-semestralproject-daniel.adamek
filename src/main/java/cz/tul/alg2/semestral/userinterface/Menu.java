@@ -1,6 +1,9 @@
 package cz.tul.alg2.semestral.userinterface;
 
 import cz.tul.alg2.semestral.file.ILoader;
+import cz.tul.alg2.semestral.pathfinding.BFS;
+import cz.tul.alg2.semestral.pathfinding.PathFinder;
+import cz.tul.alg2.semestral.pathfinding.PathSegment;
 import cz.tul.alg2.semestral.transportation.CityTransport;
 import cz.tul.alg2.semestral.transportation.Line;
 import cz.tul.alg2.semestral.transportation.Station;
@@ -33,7 +36,7 @@ public class Menu {
                 loader.getAllStations(),
                 loader.getAllLines()
         );
-        this.ig = new InteractiveGetter(this.transport);
+        this.ig = new InteractiveGetter(this.transport, this.sc);
     }
     /**
      * The mainMenu function is the main menu of the program.
@@ -54,9 +57,8 @@ public class Menu {
             System.out.print("> ");
             str = sc.nextLine().toLowerCase();
             switch (str) {
-                case "p" -> {
-                    transportViewerMenu();
-                }
+                case "h" -> findPathMenu();
+                case "p" -> transportViewerMenu();
                 case "n" -> {
                     this.loader = LoaderSelector.getLoaderMethod();
                     System.out.println(
@@ -76,12 +78,83 @@ public class Menu {
 
         }
     }
+    private void findPathMenu() {
+        Station from, to;
+        int tmpCharCounter, lineCharCounter, totalTravelTime = 0;
+        while (true) {
+            sb.setLength(0);
+            // Get from
+            from = ig.getStation();
+            if (from == null) break;
+            // Get to
+            to = ig.getStation();
+            if (to == null) break;
+
+            // Find path
+            PathFinder pf = new BFS(this.transport);
+            List<PathSegment> path = pf.findShortestPath(from, to);
+
+            Pair<Station, Integer>  prevStation = null;
+            lineCharCounter = 0;
+            for (PathSegment ps : path) {
+                sb.append("Úsek: \n  ");
+
+                if (prevStation != null) {
+                    sb.append(prevStation.first.getPrettyName())
+                        .append(" [")
+                        .append(prevStation.second)
+                        .append(" min] -> ");
+                    lineCharCounter += sb.length();
+                }
+
+                for (Pair<Station, Integer> part : ps.getStations()) {
+                    totalTravelTime += part.second;
+                    // length of stations pretty name + time digits + 3 as braces and spaces
+                    if (lineCharCounter + part.first.getPrettyName().length() + part.second.toString().length() + 3 > 70) {
+                        sb.append("\n  ");
+                        lineCharCounter = 0;
+                    }
+                    tmpCharCounter = sb.length();
+
+                    sb.append(part.first.getPrettyName())
+                        .append(" [")
+                        .append(part.second)
+                        .append(" min] -> ");
+                    lineCharCounter += sb.length() - tmpCharCounter;
+                    prevStation = part;
+                }
+                sb.delete(sb.length()-4, sb.length()-1)
+                    .append("\nLze jet linkami: \n  ");
+
+                lineCharCounter = 0;
+                for (Line line : ps.getLines()
+                                    .stream()
+                                    .sorted(Comparator.comparing(Line::getName))
+                                    .toList()) {
+                    if (lineCharCounter + line.getName().length()+1 > 70) {
+                        sb.append("\n  ");
+                        lineCharCounter = 0;
+                    }
+                    tmpCharCounter = sb.length();
+                    sb.append(line.getName()).append(", ");
+                    lineCharCounter += sb.length() - tmpCharCounter;
+                }
+                sb.delete(sb.length()-2, sb.length()).append("\n\n");
+            }
+            sb.delete(sb.length()-1, sb.length());
+
+            System.out.println("---------------------------[VÝSLEDEK HLEDÁNÍ]---------------------------");
+            System.out.println( sb.toString() );
+            System.out.println("CELKOVÁ DOBA TRASY: " + LangFormatter.formatCzechMinutes(totalTravelTime) + "." );
+            System.out.println("------------------------------------------------------------------------");
+        }
+    }
 
     /**
      * The transportViewerMenu function is the menu of the program.
      * It allows you to choose between searching stations or lines.
      */
-    public void transportViewerMenu() {
+    private void transportViewerMenu() {
         String str;
         boolean br = true;
         while (br) {
@@ -105,12 +178,12 @@ public class Menu {
      * The stationViewer function is the menu of the program.
      * It allows you to find information about specific station.
      */
-    public void stationViewer() {
+    private void stationViewer() {
         Station station;
         int tmpCharCounter, lineCharCounter;
         while (true) {
             sb.setLength(0);
-            station = ig.getStation(sc);
+            station = ig.getStation();
             if (station == null) break;
 
             // Pretty list the lines
@@ -122,11 +195,12 @@ public class Menu {
             for (Map.Entry<TransportationType, List<Line>> entry : transportTypeGroups
                                                                     .entrySet()
                                                                     .stream()
-                                                                    .sorted(Comparator.comparing(Map.Entry::getKey))
+                                                                    .sorted(Map.Entry.comparingByKey())
                                                                     .toList()) {
                 sb.append(" ").append(entry.getKey()).append(":\n  ");
                 lineCharCounter = 0;
                 for (Line l : entry.getValue()) {
+                    // length of line's name + 1 space
                     if (lineCharCounter + l.getName().length()+1 > 70) {
                         sb.append("\n  ");
                         lineCharCounter = 0;
@@ -135,7 +209,7 @@ public class Menu {
                     sb.append(l.getName()).append(", ");
                     lineCharCounter += sb.length() - tmpCharCounter;
                 }
-                sb.delete(sb.length()-2, sb.length()-1).append("\n");
+                sb.delete(sb.length()-2, sb.length()).append("\n");
             }
 
             System.out.println("---------------------------[PROHLÍŽEČ STANIC]---------------------------");
@@ -153,11 +227,11 @@ public class Menu {
      * The lineViewer function is the menu of the program.
      * It allows you to find information about specific line.
      */
-    public void lineViewer() {
+    private void lineViewer() {
         Line line;
         while (true) {
             sb.setLength(0);
-            line = ig.getLine(sc);
+            line = ig.getLine();
             if (line == null) break;
 
             // Pretty list the stations
