@@ -131,13 +131,7 @@ public class Menu {
                                     .stream()
                                     .sorted(Comparator.comparing(Line::getName))
                                     .toList()) {
-                    if (lineCharCounter + line.getName().length()+1 > 70) {
-                        sb.append("\n  ");
-                        lineCharCounter = 0;
-                    }
-                    tmpCharCounter = sb.length();
-                    sb.append(line.getName()).append(", ");
-                    lineCharCounter += sb.length() - tmpCharCounter;
+                    lineCharCounter = getLineCharCounter(lineCharCounter, line);
                 }
                 sb.delete(sb.length()-2, sb.length()).append("\n\n");
             }
@@ -148,6 +142,25 @@ public class Menu {
             System.out.println("CELKOVÁ DOBA TRASY: " + LangFormatter.formatCzechMinutes(totalTravelTime) + "." );
             System.out.println("------------------------------------------------------------------------");
         }
+    }
+    /**
+     * Calculates the character counter for the line information and appends the line name to the StringBuilder.
+     * If the lineCharCounter exceeds the maximum limit of 70 characters, a line break is added.
+     *
+     * @param lineCharCounter the current character counter for the line information
+     * @param line the line object representing the public transportation line
+     * @return the updated lineCharCounter after appending the line name
+     */
+    private int getLineCharCounter(int lineCharCounter, Line line) {
+        int tmpCharCounter;
+        if (lineCharCounter + line.getName().length()+1 > 70) {
+            sb.append("\n  ");
+            lineCharCounter = 0;
+        }
+        tmpCharCounter = sb.length();
+        sb.append(line.getName()).append(", ");
+        lineCharCounter += sb.length() - tmpCharCounter;
+        return lineCharCounter;
     }
 
     /**
@@ -201,13 +214,7 @@ public class Menu {
                 lineCharCounter = 0;
                 for (Line l : entry.getValue()) {
                     // length of line's name + 1 space
-                    if (lineCharCounter + l.getName().length()+1 > 70) {
-                        sb.append("\n  ");
-                        lineCharCounter = 0;
-                    }
-                    tmpCharCounter = sb.length();
-                    sb.append(l.getName()).append(", ");
-                    lineCharCounter += sb.length() - tmpCharCounter;
+                    lineCharCounter = getLineCharCounter(lineCharCounter, l);
                 }
                 sb.delete(sb.length()-2, sb.length()).append("\n");
             }
