@@ -1,5 +1,6 @@
 package cz.tul.alg2.semestral.file;
 
+import cz.tul.alg2.semestral.errorhandle.ErrorLogger;
 import cz.tul.alg2.semestral.transportation.Line;
 import cz.tul.alg2.semestral.transportation.Station;
 import cz.tul.alg2.semestral.transportation.TransportationType;
@@ -35,6 +36,7 @@ public class TextLoader implements ILoader {
      * @return A boolean, which is true if the file was successfully loaded and false otherwise
      */
     public boolean loadFile(String path) {
+        int lineCounter = 0;
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
             String line;
             HashMap<Integer, Station> substitutionMap = new HashMap<>();
@@ -53,6 +55,7 @@ public class TextLoader implements ILoader {
                 Station station = new Station(prettyName, zoneID);
                 substitutionMap.put(stationID, station);
                 allStations.put(station.getName(), station);
+                lineCounter++;
             }
 
             // Read lines
@@ -75,10 +78,11 @@ public class TextLoader implements ILoader {
                 Line currentLine = new Line(lineName, lineType, stationList);
 
                 allLines.put(currentLine.getName(), currentLine);
+                lineCounter++;
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            new ErrorLogger("error.log").logError("Chyba při načítání dat na řádku " + lineCounter, e);
             return false;
         }
 
