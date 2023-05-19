@@ -193,41 +193,55 @@ public class Menu {
      */
     private void stationViewer() {
         Station station;
-        int tmpCharCounter, lineCharCounter;
+
         while (true) {
-            sb.setLength(0);
             station = ig.getStation();
             if (station == null) break;
+            printStationInfo(station);
+        }
+    }
 
-            // Pretty list the lines
-            // Group lines by transportation type
-            Map<TransportationType, List<Line>> transportTypeGroups = station.getLines()
-                                                                        .stream()
-                                                                        .collect(Collectors.groupingBy(Line::getLineType));
-            // sort by type
-            for (Map.Entry<TransportationType, List<Line>> entry : transportTypeGroups
-                                                                    .entrySet()
-                                                                    .stream()
-                                                                    .sorted(Map.Entry.comparingByKey())
-                                                                    .toList()) {
-                sb.append(" ").append(entry.getKey()).append(":\n  ");
+    /**
+     * Method for sorting lines by transportation type.
+     */
+    private List<Map.Entry<TransportationType, List<Line>>> sortLinesByTransportationType(Station station) {
+        return station
+                .getLines()
+                .stream()
+                .collect(Collectors.groupingBy(Line::getLineType))
+                .entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByKey())
+                .toList();
+
+    }
+
+    /**
+     * Method for printing station information.
+     */
+    private void printStationInfo(Station station) {
+        sb.setLength(0);
+        int lineCharCounter;
+        List<Map.Entry<TransportationType, List<Line>>> transportTypeGroups = sortLinesByTransportationType(station);
+
+        for (Map.Entry<TransportationType, List<Line>> entry : transportTypeGroups) {
+            sb.append(" ").append(entry.getKey()).append(":\n  ");
                 lineCharCounter = 0;
                 for (Line l : entry.getValue()) {
                     // length of line's name + 1 space
                     lineCharCounter = getLineCharCounter(lineCharCounter, l);
                 }
                 sb.delete(sb.length()-2, sb.length()).append("\n");
-            }
-
-            System.out.println("---------------------------[PROHLÍŽEČ STANIC]---------------------------");
-            System.out.println(
-                    "Jméno: " + station.getPrettyName() +
-                    "\nNormalizované jméno: " + station.getName() +
-                    "\nZóna: " + station.getZoneID() +
-                    "\nLinky: \n" + sb.toString()
-            );
-            System.out.println("------------------------------------------------------------------------");
         }
+
+        System.out.println("---------------------------[PROHLÍŽEČ STANIC]---------------------------");
+        System.out.println(
+                "Jméno: " + station.getPrettyName() +
+                        "\nNormalizované jméno: " + station.getName() +
+                        "\nZóna: " + station.getZoneID() +
+                        "\nLinky: \n" + sb.toString()
+        );
+        System.out.println("------------------------------------------------------------------------");
     }
 
     /**
