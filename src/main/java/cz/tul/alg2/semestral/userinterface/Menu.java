@@ -36,8 +36,27 @@ public class Menu {
                 loader.getAllStations(),
                 loader.getAllLines()
         );
+    }
+
+    /**
+     * The Menu function is the constructor for the Menu class.
+     * It loads all the data from a menu.
+     */
+    public Menu() {
+        do {
+            loadTransportMenu(false);
+            if (this.loader == null) System.out.println("Je nutné, načíst nějaká data!");
+        } while (this.loader == null);
         this.ig = new InteractiveGetter(this.transport, this.sc);
     }
+
+    /**
+     * The getTransport function returns the transport object of a CityTransport.
+     */
+    public CityTransport getTransport() {
+        return transport;
+    }
+
     /**
      * The mainMenu function is the main menu of the program.
      * It allows you to choose between searching for a path,
@@ -47,28 +66,20 @@ public class Menu {
         String str;
         while (true) {
             System.out.println(
-                    "Vyberte jednu z možností:\n" +
-                    "H    Hledat cestu\n" + // TODO
-                    "HU   Hledat cestu s možností uložení výpisu\n" + // TODO
-                    "P    Prohledávat stanice a linky (menu)\n" +
-                    "N    Načíst nové stanice\n" +
-                    "V    Zkontrolovat validitu souboru\n" + // TODO
-                    "O    Opustit program");
+                    """
+                    Vyberte jednu z možností:
+                    H    Hledat cestu
+                    HU   Hledat cestu s možností uložení výpisu
+                    P    Prohledávat stanice a linky (menu)
+                    N    Načíst nové stanice
+                    V    Zkontrolovat validitu souboru
+                    O    Opustit program""");
             System.out.print("> ");
             str = sc.nextLine().toLowerCase();
             switch (str) {
                 case "h" -> findPathMenu();
                 case "p" -> transportViewerMenu();
-                case "n" -> {
-                    this.loader = LoaderSelector.getLoaderMethod();
-                    System.out.println(
-                            "Načteno " + this.loader.getAllStations().size() +
-                            " stanic a " + this.loader.getAllLines().size() + " linek." );
-                    this.transport = new CityTransport(
-                            loader.getAllStations(),
-                            loader.getAllLines()
-                    );
-                }
+                case "n" -> loadTransportMenu(true);
                 case "o", "opustit" -> {
                     System.out.println("Opouštíte program.");
                     return;
@@ -78,6 +89,29 @@ public class Menu {
 
         }
     }
+
+    /**
+     * The loadDataMenu function is used to load the data from a file.
+     * It uses the LoaderSelector class to determine which loader should be used, and then loads all the stations
+     * and lines into a CityTransport object.
+     */
+    public void loadTransportMenu(boolean possibleReturn) {
+        ILoader newLoader = LoaderSelector.getLoaderMethod(possibleReturn);
+        if (newLoader == null) {
+            System.out.println("Nic nového nebylo načteno.");
+            return;
+        }
+
+        this.loader = newLoader;
+        System.out.println(
+                "Načteno " + this.loader.getAllStations().size() +
+                " stanic a " + this.loader.getAllLines().size() + " linek." );
+        this.transport = new CityTransport(
+                loader.getAllStations(),
+                loader.getAllLines()
+        );
+    }
+
     private void findPathMenu() {
         Station from, to;
         int tmpCharCounter, lineCharCounter, totalTravelTime = 0;
@@ -267,7 +301,7 @@ public class Menu {
 
             System.out.println("---------------------------[PROHLÍŽEČ LINEK]----------------------------");
             System.out.println(
-                    "Jméno: " + line.getName() +
+                    "Jméno: " + line.getPrettyName() +
                     "\nDruh dopravy: " + line.getLineType() +
                     "\nStanice: \n" + sb.toString()
             );
