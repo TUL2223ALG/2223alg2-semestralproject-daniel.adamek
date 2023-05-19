@@ -7,6 +7,7 @@ import cz.tul.alg2.semestral.transportation.Station;
 import cz.tul.alg2.semestral.utilities.Pair;
 import cz.tul.alg2.semestral.utilities.TextNormalization;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -91,6 +92,7 @@ public class InteractiveGetter {
 
         }
     }
+
     /**
      * The getLine function is used to get a line from the user.
      * It first checks if the input is an existing line, and returns it if so.
@@ -151,6 +153,31 @@ public class InteractiveGetter {
                 if (i < SUGGEST_LEN-1) System.out.print(", ");
             }
             System.out.println("?");
+
+        }
+    }
+
+    public File getFile() {
+        File file;
+        String str;
+        while (true) {
+            str = "";
+            System.out.println("Zadejte cestu k souboru. Zadejte ZPET pro zrušení volby.");
+            System.out.print("> ");
+            while (str.length() == 0) {
+                str = TextNormalization.stringNormalize(sc.nextLine());
+                if (str.length() == 0) System.out.print("Neplatný vstup. Zadejte prosím znovu.\n> ");
+            }
+            // Detect stop
+            if (TextNormalization.stringNormalize(str).equals("zpet")) return null;
+
+            // Create file object and check, if file exist
+            file = new File(str);
+            if (file.exists()) {
+                System.out.println("Na této cestě již soubor existuje. Zadejte jinou cestu.");
+                continue;
+            }
+            return file;
 
         }
     }

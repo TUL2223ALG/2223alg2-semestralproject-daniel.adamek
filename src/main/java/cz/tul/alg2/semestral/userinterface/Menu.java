@@ -1,5 +1,6 @@
 package cz.tul.alg2.semestral.userinterface;
 
+import cz.tul.alg2.semestral.file.DescriptionSaver;
 import cz.tul.alg2.semestral.file.ILoader;
 import cz.tul.alg2.semestral.pathfinding.BFS;
 import cz.tul.alg2.semestral.pathfinding.PathFinder;
@@ -11,6 +12,7 @@ import cz.tul.alg2.semestral.transportation.TransportationType;
 import cz.tul.alg2.semestral.utilities.LangFormatter;
 import cz.tul.alg2.semestral.utilities.Pair;
 
+import java.io.File;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -77,7 +79,8 @@ public class Menu {
             System.out.print("> ");
             str = sc.nextLine().toLowerCase();
             switch (str) {
-                case "h" -> findPathMenu();
+                case "h" -> findPathMenu(false);
+                case "hu" -> findPathMenu(true);
                 case "p" -> transportViewerMenu();
                 case "n" -> loadTransportMenu(true);
                 case "o", "opustit" -> {
@@ -112,15 +115,19 @@ public class Menu {
         );
     }
 
-    private void findPathMenu() {
-        Station from, to;
-        int tmpCharCounter, lineCharCounter, totalTravelTime = 0;
+    private void findPathMenu(boolean save) {
+        Station from;
+        Station to;
         while (true) {
-            sb.setLength(0);
+            System.out.println("Vyhledejte spojení v Pražské MHD!");
+
             // Get from
+            System.out.println("Zadejte počáteční stanici");
             from = ig.getStation();
             if (from == null) break;
+
             // Get to
+            System.out.println("Zadejte koncovou stanici");
             to = ig.getStation();
             if (to == null) break;
 
@@ -128,8 +135,38 @@ public class Menu {
             PathFinder pf = new BFS(this.transport);
             List<PathSegment> path = pf.findShortestPath(from, to);
 
+            String description = generatePathFindReport(path);
+
+            System.out.println("---------------------------[VÝSLEDEK HLEDÁNÍ]---------------------------");
+            System.out.println( description );
+            System.out.println("------------------------------------------------------------------------");
+
+            if (save) {
+                File file = ig.getFile();
+                if (file != null) DescriptionSaver.saveTextToFile(file, description);
+            }
+        }
+    }
+
+    /**
+     * Generates a report of the given path in the form of a formatted string.
+     *
+     * @param path The list of PathSegments representing the path.
+     * @return The report in string format.
+     *
+     * The report includes each segment of the path with the following details:
+     *  - Each station on the segment, with the station's pretty name and the travel time to the station.
+     *  - A list of all lines that can be used on the segment, sorted by line name.
+     */
+    private String generatePathFindReport(List<PathSegment> path) {
+            // clear string buffer
+            sb.setLength(0);
+
             Pair<Station, Integer>  prevStation = null;
-            lineCharCounter = 0;
+            int lineCharCounter = 0;
+            int totalTravelTime = 0;
+            int tmpCharCounter = 0;
+
             for (PathSegment ps : path) {
                 sb.append("Úsek: \n  ");
 
@@ -170,13 +207,10 @@ public class Menu {
                 sb.delete(sb.length()-2, sb.length()).append("\n\n");
             }
             sb.delete(sb.length()-1, sb.length());
-
-            System.out.println("---------------------------[VÝSLEDEK HLEDÁNÍ]---------------------------");
-            System.out.println( sb.toString() );
-            System.out.println("CELKOVÁ DOBA TRASY: " + LangFormatter.formatCzechMinutes(totalTravelTime) + "." );
-            System.out.println("------------------------------------------------------------------------");
-        }
+            sb.append("\nCELKOVÁ DOBA TRASY: ").append(LangFormatter.formatCzechMinutes(totalTravelTime)).append(".");
+            return sb.toString();
     }
+
     /**
      * Calculates the character counter for the line information and appends the line name to the StringBuilder.
      * If the lineCharCounter exceeds the maximum limit of 70 characters, a line break is added.
