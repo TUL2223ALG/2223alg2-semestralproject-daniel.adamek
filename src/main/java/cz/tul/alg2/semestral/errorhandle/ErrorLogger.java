@@ -28,15 +28,17 @@ public class ErrorLogger {
      * @param throwable Print the stack trace of an exception
      */
     public void logError(String message, Throwable throwable) {
+        LocalDateTime now = LocalDateTime.now();
+        System.out.printf("[%s] ERROR: %s%n", now, message);
+
         try (FileWriter fileWriter = new FileWriter(logFileName, true);
-             PrintWriter printWriter = new PrintWriter(fileWriter)) {
-            LocalDateTime now = LocalDateTime.now();
-            printWriter.printf("[%s] ERROR: %s%n", now.toString(), message);
+            PrintWriter printWriter = new PrintWriter(fileWriter)) {
+            printWriter.printf("[%s] ERROR: %s%n", now, message);
             if (throwable != null) {
                 throwable.printStackTrace(printWriter);
             }
         } catch (IOException e) {
-            System.err.println("Failed to write error log: " + e.getMessage());
+            System.err.println("Nebylo možné zapsat chybu do logu: " + e.getMessage());
         }
     }
 }
