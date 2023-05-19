@@ -178,6 +178,7 @@ public class Menu {
                     lineCharCounter += sb.length();
                 }
 
+                // Print stations on this part
                 for (Pair<Station, Integer> part : ps.getStations()) {
                     totalTravelTime += part.second;
                     // length of stations pretty name + time digits + 3 as braces and spaces
@@ -197,6 +198,7 @@ public class Menu {
                 sb.delete(sb.length()-4, sb.length()-1)
                     .append("\nLze jet linkami: \n  ");
 
+                // Print possible lines on this part
                 lineCharCounter = 0;
                 for (Line line : ps.getLines()
                                     .stream()
@@ -226,7 +228,7 @@ public class Menu {
             lineCharCounter = 0;
         }
         tmpCharCounter = sb.length();
-        sb.append(line.getName()).append(", ");
+        sb.append(line.getPrettyName()).append(", ");
         lineCharCounter += sb.length() - tmpCharCounter;
         return lineCharCounter;
     }
@@ -240,10 +242,11 @@ public class Menu {
         boolean br = true;
         while (br) {
             System.out.println(
-                    "Vyberte jednu z možností:\n" +
-                    "S    Prohlížet stanice\n" +
-                    "L    Prohlížet linky\n" +
-                    "Z    Vrátit se zpátky");
+                    """
+                    Vyberte jednu z možností:
+                    "S    Prohlížet stanice
+                    "L    Prohlížet linky
+                    "Z    Vrátit se zpátky""");
             System.out.print("> ");
             str = sc.nextLine().toLowerCase();
             switch (str) {
@@ -290,9 +293,9 @@ public class Menu {
     private void printStationInfo(Station station) {
         sb.setLength(0);
         int lineCharCounter;
-        List<Map.Entry<TransportationType, List<Line>>> transportTypeGroups = sortLinesByTransportationType(station);
+        List<Map.Entry<TransportationType, List<Line>>> transportTypeGrouped = sortLinesByTransportationType(station);
 
-        for (Map.Entry<TransportationType, List<Line>> entry : transportTypeGroups) {
+        for (Map.Entry<TransportationType, List<Line>> entry : transportTypeGrouped) {
             sb.append(" ").append(entry.getKey()).append(":\n  ");
                 lineCharCounter = 0;
                 for (Line l : entry.getValue()) {
