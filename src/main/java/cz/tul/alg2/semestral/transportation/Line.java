@@ -1,6 +1,7 @@
 package cz.tul.alg2.semestral.transportation;
 
 import cz.tul.alg2.semestral.utilities.Pair;
+import cz.tul.alg2.semestral.utilities.TextNormalization;
 
 import java.util.List;
 import java.util.Objects;
@@ -11,6 +12,7 @@ import java.util.stream.Collectors;
  */
 public class Line {
     private final String name;
+    private final String prettyName;
     private final TransportationType lineType;
     private List<Pair<Station, Integer>> stations;
 
@@ -22,7 +24,8 @@ public class Line {
      * @param stations the stations
      */
     public Line(String name, TransportationType lineType, List<Pair<Station, Integer>> stations) {
-        this.name = name;
+        this.prettyName = name;
+        this.name = TextNormalization.stringNormalize(name);
         this.lineType = lineType;
         this.stations = stations;
     }
@@ -35,6 +38,8 @@ public class Line {
     public String getName() {
         return name;
     }
+
+    public String getPrettyName() { return prettyName; }
 
     /**
      * Gets line type.

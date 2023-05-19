@@ -124,7 +124,7 @@ public class GTFSLoader implements ILoader {
                     }
                 }
                 // Get or create the Line object for the current shortName
-                Line tmpLine = allLines.get(shortName);
+                Line tmpLine = allLines.get(TextNormalization.stringNormalize(shortName));
                 if (tmpLine == null) {
                     tmpLine = new Line(shortName, lineType, lineStations);
                 } else {
@@ -133,7 +133,7 @@ public class GTFSLoader implements ILoader {
                     else
                         continue;
                 }
-                allLines.put(shortName, tmpLine);
+                allLines.put(TextNormalization.stringNormalize(shortName), tmpLine);
             }
 
         }
@@ -142,11 +142,11 @@ public class GTFSLoader implements ILoader {
 
         // Remove unreachable stations or lines = DUMP or
         List<Station> toRemoveStations = new ArrayList<>();
-        for (Station s : allStations.values()) if (s.getLines().size() == 0 && s.getNeighbours().size() == 0) toRemoveStations.add(s);
+        for (Station s : allStations.values()) if (s.getLines().isEmpty() && s.getNeighbours().isEmpty()) toRemoveStations.add(s);
         for (Station s : toRemoveStations) allStations.remove(s.getName());
 
         List<Line> toRemoveLines = new ArrayList<>();
-        for (Line l : allLines.values()) if (l.getStations().size() == 0) toRemoveLines.add(l);
+        for (Line l : allLines.values()) if (l.getStations().isEmpty()) toRemoveLines.add(l);
         for (Line l : toRemoveLines) allLines.remove(l.getName());
         return true;
     }
