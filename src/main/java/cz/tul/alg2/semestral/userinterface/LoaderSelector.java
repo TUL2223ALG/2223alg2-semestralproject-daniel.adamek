@@ -45,11 +45,11 @@ public class LoaderSelector {
             // exists?
             if (str.matches("^(.+/)*.+\\.(ser|txt|zip)$")) {
                 if (!new File(str).exists()) {
-                    System.out.println("Soubor na takovéto cestě neexistuje.  Formát: cesta/k/souboru");
+                    System.out.println(ConsoleColors.RED_BOLD + "Soubor na takovéto cestě neexistuje.  Formát: cesta/k/souboru" + ConsoleColors.RESET);
                     continue;
                 }
             } else {
-                System.out.println("Neplatný formát. Zadejte znovu. Formát: povolené koncovky: .ser, .txt a .zip");
+                System.out.println(ConsoleColors.RED_BOLD + "Neplatný formát. Zadejte znovu. Formát: povolené koncovky: .ser, .txt a .zip" + ConsoleColors.RESET);
                 continue;
             }
             ILoader loader;
@@ -57,11 +57,8 @@ public class LoaderSelector {
                 loader = new BinaryLoader();
             } else if (str.matches("^(.+/)*.+\\.txt$")) {
                 loader = new TextLoader();
-            } else if (str.matches("^(.+/)*.+\\.zip$")) {
-                loader = new GTFSLoader();
             } else {
-                System.out.println("Neplatný formát. Zadejte znovu. Formát: povolené koncovky: .ser, .txt a .zip");
-                continue;
+                loader = new GTFSLoader();
             }
 
             if (loader.loadFile(
@@ -70,6 +67,7 @@ public class LoaderSelector {
                     )
                 )
             ) return loader;
+            System.out.println(ConsoleColors.RED_BOLD + "Nepodařilo se načíst soubor, je pravděpodobně porouchaný. Zkuste jiný soubor." + ConsoleColors.RESET);
         }
     }
 
@@ -77,34 +75,48 @@ public class LoaderSelector {
      * The suggestActualFiles function is a static function that prints out the three possible test files
      * that can be used to run the program.
      */
-    private static void suggestActualFiles() {
+    public static void suggestActualFiles() {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime lastEdited;
         Duration age;
 
-        System.out.println("-------------------------------------------------------------------------");
-        System.out.println("| 3 možné testovací varianty:                                           |");
+        System.out.println("--------------------------------------------------------------------------");
+        System.out.println("| 3 možné testovací varianty:                                            |");
         File file = new File(PathBuilder.joinPath("data", "pid.txt"));
         if (file.exists()) {
             lastEdited = Instant.ofEpochMilli(file.lastModified()).atZone(ZoneId.systemDefault()).toLocalDateTime();
             age = Duration.between(lastEdited, now);
-            System.out.printf("|   \"data/pid.txt\"       (rychlé)  Naposledy upraveno: %2d dní, %02d:%02d:%02d |%n", age.toDays(), age.toHoursPart(), age.toMinutesPart(), age.toSecondsPart());
+            System.out.printf("|   \"data/pid.txt\"        (rychlé)  Naposledy upraveno: %2d dní, %02d:%02d:%02d |%n", age.toDays(), age.toHoursPart(), age.toMinutesPart(), age.toSecondsPart());
+        }
+
+        file = new File(PathBuilder.joinPath("data", "pid-broken.txt"));
+        if (file.exists()) {
+            lastEdited = Instant.ofEpochMilli(file.lastModified()).atZone(ZoneId.systemDefault()).toLocalDateTime();
+            age = Duration.between(lastEdited, now);
+            System.out.printf("|   \"data/pid-broken.txt\" (rychlé)  Naposledy upraveno: %2d dní, %02d:%02d:%02d |%n", age.toDays(), age.toHoursPart(), age.toMinutesPart(), age.toSecondsPart());
         }
 
         file = new File(PathBuilder.joinPath("data", "pid.ser"));
         if (file.exists()) {
             lastEdited = Instant.ofEpochMilli(file.lastModified()).atZone(ZoneId.systemDefault()).toLocalDateTime();
             age = Duration.between(lastEdited, now);
-            System.out.printf("|   \"data/pid.ser\"       (rychlé)  Naposledy upraveno: %2d dní, %02d:%02d:%02d |%n", age.toDays(), age.toHoursPart(), age.toMinutesPart(), age.toSecondsPart());
+            System.out.printf("|   \"data/pid.ser\"        (rychlé)  Naposledy upraveno: %2d dní, %02d:%02d:%02d |%n", age.toDays(), age.toHoursPart(), age.toMinutesPart(), age.toSecondsPart());
+        }
+
+        file = new File(PathBuilder.joinPath("data", "pid-broken.ser"));
+        if (file.exists()) {
+            lastEdited = Instant.ofEpochMilli(file.lastModified()).atZone(ZoneId.systemDefault()).toLocalDateTime();
+            age = Duration.between(lastEdited, now);
+            System.out.printf("|   \"data/pid-broken.ser\" (rychlé)  Naposledy upraveno: %2d dní, %02d:%02d:%02d |%n", age.toDays(), age.toHoursPart(), age.toMinutesPart(), age.toSecondsPart());
         }
 
         file = new File(PathBuilder.joinPath("data", "PID_GTFS.zip"));
         if (file.exists()) {
             lastEdited = Instant.ofEpochMilli(file.lastModified()).atZone(ZoneId.systemDefault()).toLocalDateTime();
             age = Duration.between(lastEdited, now);
-            System.out.printf("|   \"data/PID_GTFS.zip\"  (pomalé)  Naposledy upraveno: %2d dní, %02d:%02d:%02d |%n", age.toDays(), age.toHoursPart(), age.toMinutesPart(), age.toSecondsPart());
+            System.out.printf("|   \"data/PID_GTFS.zip\"   (pomalé)  Naposledy upraveno: %2d dní, %02d:%02d:%02d |%n", age.toDays(), age.toHoursPart(), age.toMinutesPart(), age.toSecondsPart());
         }
-        System.out.println("-------------------------------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------------");
 
     }
 }

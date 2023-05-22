@@ -69,6 +69,9 @@ public class TextLoader implements ILoader {
                 String[] stationPairs = parts[2].split(";");
                 for (String pair : stationPairs) {
                     String[] pairParts = pair.split(",");
+                    // Wrong format - should be: ...;STATION,TIME;...
+                    if (pairParts.length != 2) return false;
+
                     stationID = Integer.parseInt(pairParts[0]);
                     travelTime = Integer.parseInt(pairParts[1]);
 

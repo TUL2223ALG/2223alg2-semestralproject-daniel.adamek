@@ -7,6 +7,10 @@ import java.time.LocalDateTime;
 
 public class ErrorLogger {
 
+    public static final String ERROR_FILE = "error.log";
+    public static final String WARNING_FILE = "warning.log";
+    public static final String INFO_FILE = "info.log";
+
     private final String logFileName;
 
     /**
