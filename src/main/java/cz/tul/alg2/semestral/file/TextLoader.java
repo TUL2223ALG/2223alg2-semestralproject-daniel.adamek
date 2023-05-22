@@ -59,7 +59,8 @@ public class TextLoader implements ILoader {
             }
 
             // Read lines
-            int stationID, travelTime;
+            int stationID;
+            int travelTime;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split("\\|");
                 String lineName = parts[0];
