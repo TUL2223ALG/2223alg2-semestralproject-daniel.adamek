@@ -12,10 +12,7 @@ import cz.tul.alg2.semestral.utilities.LangFormatter;
 import cz.tul.alg2.semestral.utilities.Pair;
 
 import java.io.File;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Menu {
@@ -333,9 +330,12 @@ public class Menu {
         int lineCharCounter;
         List<Map.Entry<TransportationType, List<Line>>> transportTypeGrouped = sortLinesByTransportationType(station);
 
+        List<Line> lines;
         for (Map.Entry<TransportationType, List<Line>> entry : transportTypeGrouped) {
             sb.append(" ").append(entry.getKey()).append(":\n  ");
                 lineCharCounter = 0;
+                lines = entry.getValue();
+                Collections.sort(lines);
                 for (Line l : entry.getValue()) {
                     // length of line's name + 1 space
                     lineCharCounter = getLineCharCounter(lineCharCounter, l);
@@ -364,8 +364,11 @@ public class Menu {
             line = ig.getLine();
             if (line == null) break;
 
+            // sort stations
+            List<Pair<Station, Integer>> stations = line.getStations();
+            Collections.sort(stations);
+
             // Pretty list the stations
-            // sort by type
             for (Pair<Station, Integer> station : line.getStations()) {
                 sb.append(" ").append(station.first.getPrettyName());
                 if (station.second != 0)

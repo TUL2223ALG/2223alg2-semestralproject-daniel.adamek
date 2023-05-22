@@ -1,6 +1,6 @@
 package cz.tul.alg2.semestral.utilities;
 
-public class Pair<K,T> {
+public class Pair<K extends Comparable<K>, T extends Comparable<T>> implements Comparable<Pair<K, T>>{
     public K first;
     public T second;
     /**
@@ -12,5 +12,16 @@ public class Pair<K,T> {
     public Pair(K first, T second) {
         this.first = first;
         this.second = second;
+    }
+
+    /**
+     * @param pair 
+     * @return
+     */
+    @Override
+    public int compareTo(Pair<K, T> pair) {
+        int cmp = this.first.compareTo(pair.first);
+        if (cmp == 0) cmp = this.second.compareTo(pair.second);
+        return cmp;
     }
 }

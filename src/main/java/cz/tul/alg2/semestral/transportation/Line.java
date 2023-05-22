@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 /**
  * The type Line.
  */
-public class Line {
+public class Line implements Comparable<Line>{
     private final String name;
     private final String prettyName;
     private final TransportationType lineType;
@@ -97,5 +97,16 @@ public class Line {
                 ", lineType=" + lineType +
                 ", stations={" + stationsToString +
                 "}}";
+    }
+
+    /**
+     * Comarator
+     * @param line
+     * @return
+     */
+
+    @Override
+    public int compareTo(Line line) {
+        return this.name.compareTo(line.name);
     }
 }
