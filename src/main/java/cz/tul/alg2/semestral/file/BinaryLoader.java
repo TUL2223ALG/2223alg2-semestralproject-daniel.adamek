@@ -37,7 +37,8 @@ public class BinaryLoader implements ILoader {
             // Loading stations
             String stationsSection = reader.readUTF();
             if (!stationsSection.equals("STATIONS")) {
-                throw new IOException("Invalid file format");
+                new ErrorLogger(ErrorLogger.ERROR_FILE).logError("", new IOException("Invalid file format"));
+                return false;
             }
             int stationCount = reader.readInt();
             HashMap<Integer, Station> substitutionMap = new HashMap<>();
@@ -54,7 +55,7 @@ public class BinaryLoader implements ILoader {
             // Loading lines
             String linesSection = reader.readUTF();
             if (!linesSection.equals("LINES")) {
-                new ErrorLogger("error.log").logError("Chyba při načítání dat", new IOException("Invalid file format"));
+                new ErrorLogger(ErrorLogger.ERROR_FILE).logError("Chyba při načítání dat", new IOException("Invalid file format"));
                 return false;
             }
             int lineCount = reader.readInt();
@@ -78,7 +79,7 @@ public class BinaryLoader implements ILoader {
             }
 
         } catch (IOException e) {
-            new ErrorLogger("error.log").logError("Chyba při načítání dat", e);
+            new ErrorLogger(ErrorLogger.ERROR_FILE).logError("Chyba při načítání dat", e);
             return false;
         }
 

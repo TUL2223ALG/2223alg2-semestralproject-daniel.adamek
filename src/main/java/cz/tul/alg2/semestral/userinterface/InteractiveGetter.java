@@ -50,7 +50,7 @@ public class InteractiveGetter {
             while (str.length() == 0) {
                 str = TextNormalization.stringNormalize(sc.nextLine());
                 if (str.length() == 0) {
-                    System.out.print("Neplatný vstup. Zadejte prosím znovu.\n> ");
+                    System.out.print(ConsoleColors.RED_BOLD + "Neplatný vstup. Zadejte prosím znovu.\n> " + ConsoleColors.RESET);
                 }
             }
             // Detect stop
@@ -115,7 +115,7 @@ public class InteractiveGetter {
             while (str.length() == 0) {
                 str = TextNormalization.stringNormalize(sc.nextLine());
                 if (str.length() == 0) {
-                    System.out.print("Neplatný vstup. Zadejte prosím znovu.\n> ");
+                    System.out.print(ConsoleColors.RED_BOLD + "Neplatný vstup. Zadejte prosím znovu.\n> " + ConsoleColors.RESET);
                 }
             }
             // Detect stop
@@ -157,7 +157,15 @@ public class InteractiveGetter {
         }
     }
 
-    public File getFile() {
+    /**
+     * Prompts the user to enter a path for a new file.
+     * The method will continue to ask for a path until a valid one is entered, or until the user enters "ZPET" to cancel.
+     * The method checks if a file already exists at the given path and asks for re-entry if it does.
+     *
+     * @return A File object representing the new file at the entered path.
+     *         Returns null if the user chooses to cancel by entering "ZPET".
+     */
+    public File getFile(boolean checkFileExists) {
         File file;
         String str;
         while (true) {
@@ -165,20 +173,19 @@ public class InteractiveGetter {
             System.out.println("Zadejte cestu k souboru. Zadejte ZPET pro zrušení volby.");
             System.out.print("> ");
             while (str.length() == 0) {
-                str = TextNormalization.stringNormalize(sc.nextLine());
-                if (str.length() == 0) System.out.print("Neplatný vstup. Zadejte prosím znovu.\n> ");
+                str = sc.nextLine();
+                if (str.length() == 0) System.out.print(ConsoleColors.RED_BOLD + "Neplatný vstup. Zadejte prosím znovu.\n> " + ConsoleColors.RESET);
             }
             // Detect stop
             if (TextNormalization.stringNormalize(str).equals("zpet")) return null;
 
             // Create file object and check, if file exist
             file = new File(str);
-            if (file.exists()) {
-                System.out.println("Na této cestě již soubor existuje. Zadejte jinou cestu.");
+            if (checkFileExists && file.exists()) {
+                System.out.println(ConsoleColors.RED_BOLD + "Na této cestě již soubor existuje. Zadejte jinou cestu." + ConsoleColors.RESET);
                 continue;
             }
             return file;
-
         }
     }
 }

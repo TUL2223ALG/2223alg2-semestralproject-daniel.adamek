@@ -1,7 +1,6 @@
 package cz.tul.alg2.semestral.userinterface;
 
-import cz.tul.alg2.semestral.file.DescriptionSaver;
-import cz.tul.alg2.semestral.file.ILoader;
+import cz.tul.alg2.semestral.file.*;
 import cz.tul.alg2.semestral.pathfinding.BFS;
 import cz.tul.alg2.semestral.pathfinding.PathFinder;
 import cz.tul.alg2.semestral.pathfinding.PathSegment;
@@ -83,13 +82,48 @@ public class Menu {
                 case "hu" -> findPathMenu(true);
                 case "p" -> transportViewerMenu();
                 case "n" -> loadTransportMenu(true);
+                case "v" -> checkValidityOfFileMenu();
                 case "o", "opustit" -> {
                     System.out.println("Opouštíte program.");
                     return;
                 }
-                default -> System.out.println("\nNeplatná volba.\n");
+                default -> System.out.println(ConsoleColors.RED_BOLD + "\nNeplatná volba.\n" + ConsoleColors.RESET);
             }
 
+        }
+    }
+
+    public void checkValidityOfFileMenu() {
+        while (true) {
+            String fileName;
+            File file;
+            while (true) {
+                System.out.println("""
+                        Ověřte validitu souboru!
+                         - "*.ser" pro binární soubory
+                         - "*.txt" pro textové soubory""");
+                LoaderSelector.suggestActualFiles();
+                file = ig.getFile(false);
+                if (file == null) return;
+
+                // Validate .ser or .txt
+                fileName = file.getName();
+                if (fileName.matches("^(.+/)*.+\\.(ser|txt)$"))
+                    break;
+                System.out.println(ConsoleColors.RED_BOLD + "Neplatný druh souboru! Povoleny jsou pouze *.ser pro binární a *.txt pro textové" + ConsoleColors.RESET);
+            }
+
+            IValidator validator;
+            if (fileName.matches("^(.+/)*.+\\.ser$"))
+                validator = new BinaryValidator();
+            else
+                validator = new TextValidator();
+
+            // Check validity by loading
+            if (validator.validateFile(file))
+                System.out.println(ConsoleColors.YELLOW_BOLD + "Soubor je správně zapsán!" + ConsoleColors.RESET);
+            else
+                System.out.println(ConsoleColors.YELLOW_BOLD + "Soubor je porouchaný!" + ConsoleColors.RESET);
         }
     }
 
@@ -115,6 +149,10 @@ public class Menu {
         );
     }
 
+    /**
+     * Interactive menu of path finding between stations
+     * @param save save to file?
+     */
     private void findPathMenu(boolean save) {
         Station from;
         Station to;
@@ -142,7 +180,7 @@ public class Menu {
             System.out.println("------------------------------------------------------------------------");
 
             if (save) {
-                File file = ig.getFile();
+                File file = ig.getFile(false);
                 if (file != null) DescriptionSaver.saveTextToFile(file, description);
             }
         }
@@ -253,7 +291,7 @@ public class Menu {
                 case "s" -> stationViewer();
                 case "l" -> lineViewer();
                 case "z", "zpet" -> br = false;
-                default -> System.out.println("\nNeplatná volba.\n");
+                default -> System.out.println(ConsoleColors.RED_BOLD + "\nNeplatná volba.\n" + ConsoleColors.RESET);
             }
         }
     }
