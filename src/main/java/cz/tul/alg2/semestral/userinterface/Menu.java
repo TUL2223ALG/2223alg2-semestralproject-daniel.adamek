@@ -12,17 +12,32 @@ import cz.tul.alg2.semestral.utilities.LangFormatter;
 import cz.tul.alg2.semestral.utilities.Pair;
 
 import java.io.File;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * The type Menu.
+ */
 public class Menu {
+    /**
+     * The Loader.
+     */
     ILoader loader;
+    /**
+     * The Transport.
+     */
     CityTransport transport;
+    /**
+     * The Sc.
+     */
     Scanner sc = new Scanner(System.in);
+    /**
+     * The Sb.
+     */
     StringBuilder sb = new StringBuilder();
+    /**
+     * The Ig.
+     */
     InteractiveGetter ig;
 
     /**
@@ -53,6 +68,8 @@ public class Menu {
 
     /**
      * The getTransport function returns the transport object of a CityTransport.
+     *
+     * @return the transport
      */
     public CityTransport getTransport() {
         return transport;
@@ -93,6 +110,9 @@ public class Menu {
         }
     }
 
+    /**
+     * Check validity of file menu.
+     */
     public void checkValidityOfFileMenu() {
         while (true) {
             String fileName;
@@ -131,6 +151,8 @@ public class Menu {
      * The loadDataMenu function is used to load the data from a file.
      * It uses the LoaderSelector class to determine which loader should be used, and then loads all the stations
      * and lines into a CityTransport object.
+     *
+     * @param possibleReturn the possible return
      */
     public void loadTransportMenu(boolean possibleReturn) {
         ILoader newLoader = LoaderSelector.getLoaderMethod(possibleReturn);
@@ -151,6 +173,7 @@ public class Menu {
 
     /**
      * Interactive menu of path finding between stations
+     *
      * @param save save to file?
      */
     private void findPathMenu(boolean save) {
@@ -190,11 +213,7 @@ public class Menu {
      * Generates a report of the given path in the form of a formatted string.
      *
      * @param path The list of PathSegments representing the path.
-     * @return The report in string format.
-     *
-     * The report includes each segment of the path with the following details:
-     *  - Each station on the segment, with the station's pretty name and the travel time to the station.
-     *  - A list of all lines that can be used on the segment, sorted by line name.
+     * @return The report in string format. The report includes each segment of the path with the following details:  - Each station on the segment, with the station's pretty name and the travel time to the station.  - A list of all lines that can be used on the segment, sorted by line name.
      */
     private String generatePathFindReport(List<PathSegment> path) {
             // clear string buffer
@@ -256,7 +275,7 @@ public class Menu {
      * If the lineCharCounter exceeds the maximum limit of 70 characters, a line break is added.
      *
      * @param lineCharCounter the current character counter for the line information
-     * @param line the line object representing the public transportation line
+     * @param line            the line object representing the public transportation line
      * @return the updated lineCharCounter after appending the line name
      */
     private int getLineCharCounter(int lineCharCounter, Line line) {
@@ -312,6 +331,9 @@ public class Menu {
 
     /**
      * Method for sorting lines by transportation type.
+     *
+     * @param station the station
+     * @return the list
      */
     private List<Map.Entry<TransportationType, List<Line>>> sortLinesByTransportationType(Station station) {
         return station
@@ -327,15 +349,20 @@ public class Menu {
 
     /**
      * Method for printing station information.
+     *
+     * @param station the station
      */
     private void printStationInfo(Station station) {
         sb.setLength(0);
         int lineCharCounter;
         List<Map.Entry<TransportationType, List<Line>>> transportTypeGrouped = sortLinesByTransportationType(station);
 
+        List<Line> lines;
         for (Map.Entry<TransportationType, List<Line>> entry : transportTypeGrouped) {
             sb.append(" ").append(entry.getKey()).append(":\n  ");
                 lineCharCounter = 0;
+                lines = entry.getValue();
+                Collections.sort(lines);
                 for (Line l : entry.getValue()) {
                     // length of line's name + 1 space
                     lineCharCounter = getLineCharCounter(lineCharCounter, l);
@@ -364,8 +391,11 @@ public class Menu {
             line = ig.getLine();
             if (line == null) break;
 
+            // sort stations
+            List<Pair<Station, Integer>> stations = line.getStations();
+            Collections.sort(stations);
+
             // Pretty list the stations
-            // sort by type
             for (Pair<Station, Integer> station : line.getStations()) {
                 sb.append(" ").append(station.first.getPrettyName());
                 if (station.second != 0)

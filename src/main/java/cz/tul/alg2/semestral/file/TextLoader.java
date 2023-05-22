@@ -32,7 +32,6 @@ public class TextLoader implements ILoader {
      * and adds those objects to their respective HashMaps. It also computes all neighbours for each station.
      *
      * @param path Specify the path of the file to be loaded
-     *
      * @return A boolean, which is true if the file was successfully loaded and false otherwise
      */
     public boolean loadFile(String path) {

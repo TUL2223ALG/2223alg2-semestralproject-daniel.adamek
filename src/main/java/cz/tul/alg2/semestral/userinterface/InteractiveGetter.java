@@ -13,14 +13,24 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The type Interactive getter.
+ */
 public class InteractiveGetter {
+    /**
+     * The Transport.
+     */
     private final CityTransport transport;
+    /**
+     * The Sc.
+     */
     private final Scanner sc;
 
     /**
      * The StationGetter function is used to get the station name from a given line and stop number.
      *
      * @param transport Pass the citytransport object to the stationgetter class
+     * @param sc        the sc
      */
     public InteractiveGetter(CityTransport transport, Scanner sc) {
         this.transport = transport;
@@ -33,7 +43,6 @@ public class InteractiveGetter {
      * If not, it uses Hirschberg's algorithm to find similar strings and suggests them to the user.
      *
      * @return The station that the user wants to find
-     *
      */
     public Station getStation() {
         String str;
@@ -162,8 +171,8 @@ public class InteractiveGetter {
      * The method will continue to ask for a path until a valid one is entered, or until the user enters "ZPET" to cancel.
      * The method checks if a file already exists at the given path and asks for re-entry if it does.
      *
-     * @return A File object representing the new file at the entered path.
-     *         Returns null if the user chooses to cancel by entering "ZPET".
+     * @param checkFileExists the check file exists
+     * @return A File object representing the new file at the entered path.         Returns null if the user chooses to cancel by entering "ZPET".
      */
     public File getFile(boolean checkFileExists) {
         File file;

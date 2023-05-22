@@ -13,6 +13,9 @@ import java.util.*;
  * The type Bfs.
  */
 public class BFS implements PathFinder{
+    /**
+     * The Transport.
+     */
     private final CityTransport transport;
 
     /**
@@ -28,8 +31,7 @@ public class BFS implements PathFinder{
      * The findShortestPath function finds the shortest path between two stations.
      *
      * @param start Start station in the transport as string
-     * @param end End station in the transport as string
-     *
+     * @param end   End station in the transport as string
      * @return A list of pathsegment objects that represent the shortest path between two stations
      */
     public List<PathSegment> findShortestPath(String start, String end) {
@@ -49,12 +51,12 @@ public class BFS implements PathFinder{
 
             return findShortestPath(startStation, endStation);
     }
+
     /**
      * The findShortestPath function finds the shortest path between two stations.
      *
      * @param start Start station in the transport
-     * @param end End station in the transport
-     *
+     * @param end   End station in the transport
      * @return A list of pathsegment objects that represent the shortest path between two stations
      */
     public List<PathSegment> findShortestPath(Station start, Station end) {
@@ -96,10 +98,9 @@ public class BFS implements PathFinder{
      * is any common line between two adjacent segments (if not we know we have to change lines). If there is no common line
      * between two adjacent segments then we add all previous
      *
-     * @param visited Store the visited stations and their parent station
+     * @param visited      Store the visited stations and their parent station
      * @param startStation Determine the starting point of the path
-     * @param endStation Get the station name
-     *
+     * @param endStation   Get the station name
      * @return A list of pathsegments
      */
     private List<PathSegment> buildPath(Map<String, Pair<Station, Integer>> visited, Station startStation, Station endStation) {
@@ -153,7 +154,6 @@ public class BFS implements PathFinder{
      *
      * @param station1 Find the lines that are common between station 1 and 2
      * @param station2 Find the common lines between station 1 and 2
-     *
      * @return A set of all the lines that are common to both stations, or null if there are no common lines
      */
     private Set<Line> findCommonLines(Station station1, Station station2) {

@@ -1,5 +1,8 @@
 package cz.tul.alg2.semestral.utilities;
 
+/**
+ * The type Lang formatter.
+ */
 public class LangFormatter {
     /**
      * The formatCzechMinutes function takes an integer and returns a string.
@@ -7,7 +10,6 @@ public class LangFormatter {
      * For example, formatCzechMinutes(5) would return 5 minut.
      *
      * @param a Determine the correct suffix
-     *
      * @return A string that is the number of minutes followed by a word
      */
     public static String formatCzechMinutes(int a) {

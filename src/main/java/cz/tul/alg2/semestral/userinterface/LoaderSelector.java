@@ -14,6 +14,9 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Scanner;
 
+/**
+ * The type Loader selector.
+ */
 public class LoaderSelector {
     /**
      * The getLoaderMethod function is a static method that returns an ILoader object.
@@ -21,6 +24,7 @@ public class LoaderSelector {
      * to load it using one of three different methods: BinaryLoader, TextLoader or GTFSLoader.
      * If any of these methods fail (i.e., if the file cannot be loaded), then getLoaderMethod() will ask again for another path until either a valid path is given or Ctrl+C is pressed by the user.
      *
+     * @param possibleReturn the possible return
      * @return A loader object
      */
     public static ILoader getLoaderMethod(boolean possibleReturn) {

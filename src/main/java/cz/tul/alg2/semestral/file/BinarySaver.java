@@ -15,6 +15,9 @@ import java.util.HashMap;
  * The type Binary saver.
  */
 public class BinarySaver implements ISaver {
+    /**
+     * The Transport.
+     */
     private final CityTransport transport;
 
     /**
@@ -29,7 +32,7 @@ public class BinarySaver implements ISaver {
     /**
      * The saveTransport function saves the transport object to a file.
      *
-     * @param String path Specify the path to the file we want to load
+     * @param path the path
      * @return A boolean value
      */
     @Override

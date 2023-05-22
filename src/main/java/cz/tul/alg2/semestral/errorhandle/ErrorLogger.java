@@ -5,12 +5,27 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 
+/**
+ * The type Error logger.
+ */
 public class ErrorLogger {
 
+    /**
+     * The constant ERROR_FILE.
+     */
     public static final String ERROR_FILE = "error.log";
+    /**
+     * The constant WARNING_FILE.
+     */
     public static final String WARNING_FILE = "warning.log";
+    /**
+     * The constant INFO_FILE.
+     */
     public static final String INFO_FILE = "info.log";
 
+    /**
+     * The Log file name.
+     */
     private final String logFileName;
 
     /**
@@ -26,9 +41,8 @@ public class ErrorLogger {
      * The logError function takes a message and an optional Throwable object,
      * and writes the message to the log file with a timestamp. If there is a
      * Throwable object, it also prints out its stack trace.
-
      *
-     * @param message Print the error message
+     * @param message   Print the error message
      * @param throwable Print the stack trace of an exception
      */
     public void logError(String message, Throwable throwable) {

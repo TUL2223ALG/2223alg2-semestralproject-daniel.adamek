@@ -1,15 +1,18 @@
 package cz.tul.alg2.semestral.patternmatcher;
 
+/**
+ * The type Hirschberg matching.
+ */
 public class HirschbergMatching {
 
     /**
- * Calculates the percentage similarity between two strings using the Hirschberg algorithm.
- * This implementation uses dynamic programming to optimize performance.
- *
- * @param s1 the first string
- * @param s2 the second string
- * @return the percentage similarity between s1 and s2 as a double from 0.0 to 1.0
- */
+     * Calculates the percentage similarity between two strings using the Hirschberg algorithm.
+     * This implementation uses dynamic programming to optimize performance.
+     *
+     * @param s1 the first string
+     * @param s2 the second string
+     * @return the percentage similarity between s1 and s2 as a double from 0.0 to 1.0
+     */
     public static double similarity(String s1, String s2) {
         // Initialize variables to store string lengths
         int n = s1.length();

@@ -23,19 +23,22 @@ import static cz.tul.alg2.semestral.file.ILoader.*;
  * The type Gtfs loader.
  */
 public class GTFSLoader implements ILoader {
+    /**
+     * The All stations.
+     */
     private final HashMap<String, Station> allStations = new HashMap<>();
+    /**
+     * The All lines.
+     */
     private final HashMap<String, Line> allLines = new HashMap<>();
 
     /**
      * The loadFile function is used to load a GTFS file into the program.
      * It uses the GtfsReader class from OpenTripPlanner to read in all the data, and then it parses that data into our own classes.
      * The function returns true if everything went well, or false if there was an error while reading in the file.
-
      *
      * @param path Specify the path to the gtfs file
-     *
      * @return True if the file is loaded successfully, otherwise false
-     *
      */
     public boolean loadFile(String path) {
         GtfsReader reader = new GtfsReader();
@@ -153,6 +156,7 @@ public class GTFSLoader implements ILoader {
 
     /**
      * Gets a map of all stations that have been loaded by this loader
+     *
      * @return a map of all stations that have been loaded by this route loader
      */
     @Override
@@ -162,6 +166,7 @@ public class GTFSLoader implements ILoader {
 
     /**
      * Gets a map of all lines that have been loaded by this loader.
+     *
      * @return a map of all lines that have been loaded by this loader
      */
     @Override
