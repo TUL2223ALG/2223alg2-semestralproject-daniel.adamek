@@ -37,7 +37,7 @@ public class BinaryLoader implements ILoader {
             // Loading stations
             String stationsSection = reader.readUTF();
             if (!stationsSection.equals("STATIONS")) {
-                new ErrorLogger(ErrorLogger.ERROR_FILE).logError("", new IOException("Invalid file format"));
+                new ErrorLogger(ErrorLogger.ERROR_FILE).logError("", new IOException("Neplatný formát souboru"));
                 return false;
             }
             int stationCount = reader.readInt();
@@ -55,7 +55,7 @@ public class BinaryLoader implements ILoader {
             // Loading lines
             String linesSection = reader.readUTF();
             if (!linesSection.equals("LINES")) {
-                new ErrorLogger(ErrorLogger.ERROR_FILE).logError("Chyba při načítání dat", new IOException("Invalid file format"));
+                new ErrorLogger(ErrorLogger.ERROR_FILE).logError("Chyba při načítání dat", new IOException("Neplatný formát souboru"));
                 return false;
             }
             int lineCount = reader.readInt();
