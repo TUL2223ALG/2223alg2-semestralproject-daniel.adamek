@@ -5,9 +5,8 @@ hromadné dopravy ze stanice na stanici a vypisovat dobu trvání.
 K sadě jsem si vybral otevřená data Prazské integrované dopravy.
 
 Osobní motivací je, abych implementoval úlohu, kterou již mám v C++ vyřešenou
-pomocí algoritmu BFS (vyhledávání do šířky), zkusil si kód napsat v Javě,
-pokusit se naprogramovat jiné prohledávací algoritmy (DFS, Dijskra) a porovnat
-efektivitu. Zároveň chci mé řešení rozšířit pouze ze stanic metra i na tramvaje,
+pomocí algoritmu BFS (vyhledávání do šířky), zkusil si kód napsat v Javě.
+Zároveň chci mé řešení rozšířit pouze ze stanic metra i na tramvaje,
 autobusy, trolejbusy, vlaky, přívozy a lanové pozemní dráhy. 
 
 ## Řešení
@@ -16,10 +15,22 @@ vytvoří neorientovaný graf, nad kterým bude vyhledávat cesty pomocí algori
 Vyhledávání do šířky.
 
 Program po spuštění disponuje nabídkou funkcí:
- - vyhledávání
-   - název stanice Z (s podporou REGEX)
-   - název stanice DO (s podporou REGEX)
- - historie vyhledávání
+ - Hledat cestu
+   - název stanice Z (s podporou suggesce podobné stanice, pokud zadané jméno neexistuje)
+   - název stanice DO (s podporou suggesce podobné stanice, pokud zadané jméno neexistuje)
+ - Hledat cestu s možností uložení výsledku
+   - název stanice Z (s podporou suggesce podobné stanice, pokud zadané jméno neexistuje)
+   - název stanice DO (s podporou suggesce podobné stanice, pokud zadané jméno neexistuje)
+ - Prohledávání stanic a linek
+   - Stanic
+     - Název stanice (s podporou suggesce podobné stanice, pokud zadané jméno neexistuje)
+   - Linek
+     - Název linky (s podporou suggesce podobné stanice, pokud zadané jméno neexistuje)
+ - Načítání nových stanic
+   - cesta k souboru (s podporou REGEX)
+ - Kontrola validity souboru
+   - cesta k souboru (s podporou REGEX)
+ - Opuštění programu
 
 ## Testování
 K testování poslouží knihovna JUnit verze 5.
@@ -31,9 +42,9 @@ __Status JUnit5 testů__ [![JUnit5 Tests](https://github.com/TUL2223ALG/2223alg2
 - [X] Víceúrovňové menu - zobrazovat vždy jenom zrovna dostupné  volby
 - [x] Přehledný výpis výsledků na konzoli - použijte alespoň jednou String.format() a StringBuilder
 - [x] Načítání vstupních dat z minimálně dvou souborů
-- [ ] Zápis výstupních dat do souboru
+- [X] Zápis výstupních dat do souboru
 - [x] Možnost výběru práce s textovými nebo binárními soubory (načítání i výpis)
-- [ ] Kontrolní program pro výpis binárního souboru
+- [X] Kontrolní program pro výpis binárního souboru
 - [x] Ideálně využití reálných otevřených dat
 - [x] Adresář data (na rovnaké úrovni jako src) se všemi datovými soubory a případně třídu Datastore se statickými metodami, které budou poskytovat další statická data
 - [x] Nastavení cesty k adresáři data uživatelem na začátku programu, nebo v konfiguračním souboru
@@ -45,7 +56,7 @@ __Status JUnit5 testů__ [![JUnit5 Tests](https://github.com/TUL2223ALG/2223alg2
 - [x] Použití java.time API pro práci s časem
 - [x] Použít enum typ
 - [x] Použití kontejnerové třídy jazyka Java (ArrayList, LinkedList, HashMap ...) z Collections frameworku.
-- [ ] Alespoň dvě možnosti třídění s využitím rozhraní Comparable a Comparator
+- [X] Alespoň dvě možnosti třídění s využitím rozhraní Comparable a Comparator
 - [x] Použití regulárního výrazu
 - [x] Ošetření vstupů, aby chybné vstupy nezpůsobily pád programu - pomocí existujících a vlastních výjimek
 - [x] Vhodné ošetření povinně ošetřovaných výjimek

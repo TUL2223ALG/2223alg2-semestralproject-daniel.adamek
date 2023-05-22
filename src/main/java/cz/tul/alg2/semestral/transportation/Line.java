@@ -11,9 +11,21 @@ import java.util.stream.Collectors;
  * The type Line.
  */
 public class Line implements Comparable<Line>{
+    /**
+     * The Name.
+     */
     private final String name;
+    /**
+     * The Pretty name.
+     */
     private final String prettyName;
+    /**
+     * The Line type.
+     */
     private final TransportationType lineType;
+    /**
+     * The Stations.
+     */
     private List<Pair<Station, Integer>> stations;
 
     /**
@@ -39,6 +51,11 @@ public class Line implements Comparable<Line>{
         return name;
     }
 
+    /**
+     * Gets pretty name.
+     *
+     * @return the pretty name
+     */
     public String getPrettyName() { return prettyName; }
 
     /**
@@ -75,6 +92,12 @@ public class Line implements Comparable<Line>{
      */
     public void setStations(List<Pair<Station, Integer>> list) { stations = list; }
 
+    /**
+     * Equals boolean.
+     *
+     * @param obj the obj
+     * @return the boolean
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -84,11 +107,21 @@ public class Line implements Comparable<Line>{
         return this.name.equals(other.name);
     }
 
+    /**
+     * Hash code int.
+     *
+     * @return the int
+     */
     @Override
     public int hashCode() {
         return Objects.hash(name);
     }
 
+    /**
+     * To string string.
+     *
+     * @return the string
+     */
     @Override
     public String toString() {
         String stationsToString = stations.stream().map(s -> s.first.getName() + "," + s.second + ";").collect(Collectors.joining());
@@ -101,10 +134,10 @@ public class Line implements Comparable<Line>{
 
     /**
      * Comarator
-     * @param line
-     * @return
+     *
+     * @param line the line
+     * @return int
      */
-
     @Override
     public int compareTo(Line line) {
         return this.name.compareTo(line.name);

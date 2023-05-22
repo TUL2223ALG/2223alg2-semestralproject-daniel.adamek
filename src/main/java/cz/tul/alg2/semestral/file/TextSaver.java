@@ -16,6 +16,9 @@ import java.util.HashMap;
  */
 public class TextSaver implements ISaver {
 
+    /**
+     * The Transport.
+     */
     private final CityTransport transport;
 
     /**
@@ -31,7 +34,6 @@ public class TextSaver implements ISaver {
      * The saveTransport function saves the transport data to a file.
      *
      * @param path Specify the path to the file where we want to save our transport data
-     *
      * @return A boolean value
      */
     @Override

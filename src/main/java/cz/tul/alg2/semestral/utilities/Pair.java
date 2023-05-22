@@ -1,12 +1,25 @@
 package cz.tul.alg2.semestral.utilities;
 
+/**
+ * The type Pair.
+ *
+ * @param <K> the type parameter
+ * @param <T> the type parameter
+ */
 public class Pair<K extends Comparable<K>, T extends Comparable<T>> implements Comparable<Pair<K, T>>{
+    /**
+     * The First.
+     */
     public K first;
+    /**
+     * The Second.
+     */
     public T second;
+
     /**
      * The Pair function is a constructor that creates a new Pair object.
      *
-     * @param first Set the key of a pair
+     * @param first  Set the key of a pair
      * @param second Store the second value in a pair
      */
     public Pair(K first, T second) {
@@ -15,8 +28,10 @@ public class Pair<K extends Comparable<K>, T extends Comparable<T>> implements C
     }
 
     /**
-     * @param pair 
-     * @return
+     * Compare to int.
+     *
+     * @param pair the pair
+     * @return int
      */
     @Override
     public int compareTo(Pair<K, T> pair) {

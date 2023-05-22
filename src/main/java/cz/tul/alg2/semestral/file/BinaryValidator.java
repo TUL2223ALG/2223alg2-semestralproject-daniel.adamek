@@ -2,6 +2,9 @@ package cz.tul.alg2.semestral.file;
 
 import java.io.File;
 
+/**
+ * The type Binary validator.
+ */
 public class BinaryValidator implements IValidator {
     /**
      * Validates file structure of records of CityTransport

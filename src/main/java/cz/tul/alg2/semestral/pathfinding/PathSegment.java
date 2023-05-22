@@ -11,7 +11,13 @@ import java.util.Set;
  * The type Path segment.
  */
 public class PathSegment {
+    /**
+     * The Lines.
+     */
     private final Set<Line> lines;
+    /**
+     * The Stations.
+     */
     private final List<Pair<Station, Integer>> stations;
 
     /**

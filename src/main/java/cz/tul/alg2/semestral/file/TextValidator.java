@@ -2,6 +2,9 @@ package cz.tul.alg2.semestral.file;
 
 import java.io.File;
 
+/**
+ * The type Text validator.
+ */
 public class TextValidator implements IValidator {
     /**
      * Validates file structure

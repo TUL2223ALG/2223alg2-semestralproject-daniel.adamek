@@ -17,6 +17,7 @@ public interface PathFinder {
      * @return the list
      */
     List<PathSegment> findShortestPath(String start, String end);
+
     /**
      * Find the shortest path list.
      *

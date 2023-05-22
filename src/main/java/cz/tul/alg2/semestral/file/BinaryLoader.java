@@ -90,6 +90,7 @@ public class BinaryLoader implements ILoader {
 
     /**
      * Gets a map of all stations that have been loaded by this loader.
+     *
      * @return a map of all stations that have been loaded by this route loader
      */
     @Override
@@ -99,6 +100,7 @@ public class BinaryLoader implements ILoader {
 
     /**
      * Gets a map of all lines that have been loaded by this loader.
+     *
      * @return a map of all lines that have been loaded by this loader
      */
     @Override

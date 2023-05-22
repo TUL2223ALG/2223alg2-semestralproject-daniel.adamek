@@ -3,9 +3,9 @@ package cz.tul.alg2.semestral.utilities;
 import java.io.File;
 
 /**
-The PathBuilder class provides a static method to join an array of strings into a file system path
-using the system-specific path separator.
-*/
+ * The PathBuilder class provides a static method to join an array of strings into a file system path
+ * using the system-specific path separator.
+ */
 public class PathBuilder {
     /**
      * Joins an array of strings into a file system path using the system-specific path separator.

@@ -11,10 +11,25 @@ import java.util.stream.Collectors;
  */
 public class Station implements Comparable<Station> {
 
+    /**
+     * The Name.
+     */
     private final String name;
+    /**
+     * The Pretty name.
+     */
     private final String prettyName;
+    /**
+     * The Zone id.
+     */
     private String zoneID = null;
+    /**
+     * The Lines.
+     */
     private final Set<Line> lines = new TreeSet<>(Comparator.comparing(Line::getName));
+    /**
+     * The Neighbours.
+     */
     private final Set<Pair<Station, Integer>> neighbours = new TreeSet<>(Comparator.comparing((Pair<Station, Integer> obj) -> obj.first));
 
     /**
@@ -124,6 +139,12 @@ public class Station implements Comparable<Station> {
         return (zoneID == null) ? "-" : zoneID ;
     }
 
+    /**
+     * Equals boolean.
+     *
+     * @param obj the obj
+     * @return the boolean
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -133,11 +154,21 @@ public class Station implements Comparable<Station> {
         return this.name.equals(other.name);
     }
 
+    /**
+     * Hash code int.
+     *
+     * @return the int
+     */
     @Override
     public int hashCode() {
         return Objects.hash(name);
     }
 
+    /**
+     * To string string.
+     *
+     * @return the string
+     */
     @Override
     public String toString() {
         String linesToString = lines.stream().map(l -> l.getName() + ",").collect(Collectors.joining());
@@ -153,8 +184,9 @@ public class Station implements Comparable<Station> {
 
     /**
      * Comarator
-     * @param station 
-     * @return
+     *
+     * @param station the station
+     * @return int
      */
     @Override
     public int compareTo(Station station) {
