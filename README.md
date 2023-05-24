@@ -139,7 +139,7 @@ class Station {
   + Station(String, String) 
   + addLine(Line) void
   + removeLine(Line) void
-  + addNeighbour(Pair Station, Integer ) void
+  + addNeighbour(Pair~Station, Integer~) void
   + hashCode() int
   + equals(Object) boolean
   + toString() String
