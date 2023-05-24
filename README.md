@@ -33,9 +33,8 @@ Program po spuštění disponuje nabídkou funkcí:
  - Opuštění programu
 
 ### Class diagram
----
-title: Animal example
----
+#### Načítání dopravy - Loaders
+```mermaid
 classDiagram
 direction BT
 class BinaryLoader {
@@ -67,7 +66,7 @@ class TextLoader {
 BinaryLoader  ..>  ILoader 
 GTFSLoader  ..>  ILoader 
 TextLoader  ..>  ILoader 
-
+```
 
 ## Testování
 K testování poslouží knihovna JUnit verze 5.
