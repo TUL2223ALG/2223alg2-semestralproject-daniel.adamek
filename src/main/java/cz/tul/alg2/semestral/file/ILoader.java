@@ -19,21 +19,6 @@ public interface ILoader {
      */
     boolean loadFile(String path);
 
-
-    /**
-     * Gets a map of all stations that have been loaded by this loader.
-     *
-     * @return a map of all stations that have been loaded by this route loader
-     */
-    HashMap<String, Station> getAllStations();
-
-    /**
-     * Gets a map of all lines that have been loaded by this loader.
-     *
-     * @return a map of all lines that have been loaded by this loader
-     */
-    HashMap<String, Line> getAllLines();
-
     /**
      * The computeNeighbours function iterates over each line in the allLines HashMap, and for each station in that line,
      * it adds the current line to the station's set of lines. It also updates neighbors for the current station by adding
@@ -74,4 +59,17 @@ public interface ILoader {
         }
     }
 
+    /**
+     * Gets a map of all stations that have been loaded by this loader.
+     *
+     * @return a map of all stations that have been loaded by this route loader
+     */
+    HashMap<String, Station> getAllStations();
+
+    /**
+     * Gets a map of all lines that have been loaded by this loader.
+     *
+     * @return a map of all lines that have been loaded by this loader
+     */
+    HashMap<String, Line> getAllLines();
 }
