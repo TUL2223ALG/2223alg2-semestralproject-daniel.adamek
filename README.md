@@ -33,7 +33,7 @@ Program po spuštění disponuje nabídkou funkcí:
  - Opuštění programu
 
 ### Class diagram
-#### Načítání dopravy - Loaders
+#### Načítání, ukládání dopravy a validace souborů
 ```mermaid
 classDiagram
 direction BT
@@ -73,12 +73,6 @@ BinaryLoader  ..>  ILoader
 GTFSLoader  ..>  ILoader 
 TextLoader  ..>  ILoader 
 
-
-```
-#### Ukládání dopravy
-```mermaid
-classDiagram
-direction BT
 class BinarySaver {
   + BinarySaver(CityTransport) 
   - CityTransport transport
@@ -101,9 +95,6 @@ class TextSaver {
 BinarySaver  ..>  ISaver 
 TextSaver  ..>  ISaver 
 
-```
-#### Ověřování korekce souborů
-```mermaid
 classDiagram
 direction BT
 class BinaryValidator {
