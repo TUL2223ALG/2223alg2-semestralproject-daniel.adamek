@@ -95,8 +95,6 @@ class TextSaver {
 BinarySaver  ..>  ISaver 
 TextSaver  ..>  ISaver 
 
-classDiagram
-direction BT
 class BinaryValidator {
   + BinaryValidator() 
   + validateFile(File) boolean
@@ -199,11 +197,11 @@ class LangFormatter {
   + LangFormatter() 
   + formatCzechMinutes(int) String
 }
-class Pair K, T  {
+class Pair~K, T~  {
   + Pair(K, T) 
   + T second
   + K first
-  + compareTo(Pair K, T ) int
+  + compareTo(Pair K, T) int
 }
 class PathBuilder {
   + PathBuilder() 
