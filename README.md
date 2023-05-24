@@ -32,6 +32,43 @@ Program po spuštění disponuje nabídkou funkcí:
    - cesta k souboru (s podporou REGEX)
  - Opuštění programu
 
+### Class diagram
+---
+title: Animal example
+---
+classDiagram
+direction BT
+class BinaryLoader {
+  + BinaryLoader() 
+  + loadFile(String) boolean
+   HashMap String, Line  allLines
+   HashMap String, Station  allStations
+}
+class GTFSLoader {
+  + GTFSLoader() 
+  + loadFile(String) boolean
+   HashMap String, Line  allLines
+   HashMap String, Station  allStations
+}
+class ILoader {
+<<Interface>>
+  + computeNeighbours(HashMap String, Line ) void
+  + loadFile(String) boolean
+   HashMap String, Line  allLines
+   HashMap String, Station  allStations
+}
+class TextLoader {
+  + TextLoader() 
+  + loadFile(String) boolean
+   HashMap String, Line  allLines
+   HashMap String, Station  allStations
+}
+
+BinaryLoader  ..>  ILoader 
+GTFSLoader  ..>  ILoader 
+TextLoader  ..>  ILoader 
+
+
 ## Testování
 K testování poslouží knihovna JUnit verze 5.
 
