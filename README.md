@@ -139,7 +139,7 @@ class Station {
   + Station(String, String) 
   + addLine(Line) void
   + removeLine(Line) void
-  + addNeighbour(Pair~Station, Integer~) void
+  + addNeighbour(Pair Station, Integer ) void
   + hashCode() int
   + equals(Object) boolean
   + toString() String
@@ -264,11 +264,11 @@ class LoaderSelector {
 class Menu {
   + Menu(ILoader) 
   + Menu() 
-  ~ Scanner sc
-  ~ InteractiveGetter ig
-  ~ CityTransport transport
-  ~ StringBuilder sb
-  ~ ILoader loader
+    Scanner sc
+    InteractiveGetter ig
+    CityTransport transport
+    StringBuilder sb
+    ILoader loader
   - stationViewer() void
   - lineViewer() void
   - findPathMenu(boolean) void
@@ -276,9 +276,9 @@ class Menu {
   + getTransport() CityTransport
   + mainMenu() void
   - printStationInfo(Station) void
-  - generatePathFindReport(List~PathSegment~) String
+  - generatePathFindReport(List PathSegment ) String
   - transportViewerMenu() void
-  - sortLinesByTransportationType(Station) List~Entry~TransportationType, List~Line~~~
+  - sortLinesByTransportationType(Station) List Entry TransportationType, List Line   
   + checkValidityOfFileMenu() void
   - getLineCharCounter(int, Line) int
 }
