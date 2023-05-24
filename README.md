@@ -39,34 +39,274 @@ classDiagram
 direction BT
 class BinaryLoader {
   + BinaryLoader() 
+    HashMap String, Line  allLines
+    HashMap String, Station  allStations
+  + getAllStations() HashMap String, Station 
   + loadFile(String) boolean
-   HashMap String, Line  allLines
-   HashMap String, Station  allStations
+  + getAllLines() HashMap String, Line 
 }
 class GTFSLoader {
   + GTFSLoader() 
+  - HashMap String, Station  allStations
+  - HashMap String, Line  allLines
+  + getAllLines() HashMap String, Line 
+  + getAllStations() HashMap String, Station 
   + loadFile(String) boolean
-   HashMap String, Line  allLines
-   HashMap String, Station  allStations
 }
 class ILoader {
 <<Interface>>
   + computeNeighbours(HashMap String, Line ) void
+  + getAllLines() HashMap String, Line 
   + loadFile(String) boolean
-   HashMap String, Line  allLines
-   HashMap String, Station  allStations
+  + getAllStations() HashMap String, Station 
 }
 class TextLoader {
   + TextLoader() 
+    HashMap String, Station  allStations
+    HashMap String, Line  allLines
+  + getAllStations() HashMap String, Station 
   + loadFile(String) boolean
-   HashMap String, Line  allLines
-   HashMap String, Station  allStations
+  + getAllLines() HashMap String, Line 
 }
 
 BinaryLoader  ..>  ILoader 
 GTFSLoader  ..>  ILoader 
 TextLoader  ..>  ILoader 
+
+
 ```
+#### Ukládání dopravy
+```mermaid
+classDiagram
+direction BT
+class BinarySaver {
+  + BinarySaver(CityTransport) 
+  - CityTransport transport
+  + saveTransport(String) boolean
+}
+class DescriptionSaver {
+  + DescriptionSaver() 
+  + saveTextToFile(File, String) void
+}
+class ISaver {
+<<Interface>>
+  + saveTransport(String) boolean
+}
+class TextSaver {
+  + TextSaver(CityTransport) 
+  - CityTransport transport
+  + saveTransport(String) boolean
+}
+
+BinarySaver  ..>  ISaver 
+TextSaver  ..>  ISaver 
+
+```
+#### Ověřování korekce souborů
+```mermaid
+classDiagram
+direction BT
+class BinaryValidator {
+  + BinaryValidator() 
+  + validateFile(File) boolean
+}
+class IValidator {
+<<Interface>>
+  + validateFile(File) boolean
+}
+class TextValidator {
+  + TextValidator() 
+  + validateFile(File) boolean
+}
+
+BinaryValidator  ..>  IValidator 
+TextValidator  ..>  IValidator 
+```
+### Hromadná doprava
+```mermaid
+classDiagram
+direction BT
+class CityTransport {
+  + CityTransport(HashMap String, Station , HashMap String, Line ) 
+  + lines() HashMap String, Line 
+  + stations() HashMap String, Station 
+}
+class Line {
+  + Line(String, TransportationType, List Pair Station, Integer)
+  + addStation(Pair Station, Integer ) void 
+  + hashCode() int
+  + equals(Object) boolean
+  + toString() String
+  + compareTo(Line) int
+   TransportationType lineType
+   String name
+   String prettyName
+   List Pair Station, Integer   stations
+}
+class Station {
+  + Station(String) 
+  + Station(String, String) 
+  + addLine(Line) void
+  + removeLine(Line) void
+  + addNeighbour(Pair Station, Integer ) void
+  + hashCode() int
+  + equals(Object) boolean
+  + toString() String
+  + compareTo(Station) int
+   String name
+   String prettyName
+   String zoneID
+   Set Pair Station, Integer   neighbours
+   Set Line  lines
+}
+class TransportationType {
+<<enumeration>>
+  + TransportationType() 
+  + valueOf(String) TransportationType
+  + values() TransportationType[]
+}
+```
+### Hledání spojů - Pathfinding
+```mermaid
+classDiagram
+direction BT
+class BFS {
+  + BFS(CityTransport) 
+  + findShortestPath(Station, Station) List PathSegment 
+  - buildPath(Map String, Pair Station, Integer  , Station, Station) List PathSegment 
+  + findShortestPath(String, String) List PathSegment 
+  - findCommonLines(Station, Station) Set Line ?
+}
+class PathFinder {
+<<Interface>>
+  + findShortestPath(String, String) List PathSegment 
+  + findShortestPath(Station, Station) List PathSegment 
+}
+class PathSegment {
+  + PathSegment(Set Line , List Pair Station, Integer  ) 
+  + toString() String
+   Set Line  lines
+   List Pair Station, Integer   stations
+}
+
+BFS  ..>  PathFinder 
+```
+### PatternMatcher
+```mermaid
+classDiagram
+direction BT
+class HirschbergMatching {
+  + HirschbergMatching() 
+  + similarity(String, String) double
+}
+```
+### Nástroje
+```mermaid
+classDiagram
+direction BT
+class LangFormatter {
+  + LangFormatter() 
+  + formatCzechMinutes(int) String
+}
+class Pair K, T  {
+  + Pair(K, T) 
+  + T second
+  + K first
+  + compareTo(Pair K, T ) int
+}
+class PathBuilder {
+  + PathBuilder() 
+  + joinPath(String[]) String
+}
+class TextNormalization {
+  + TextNormalization() 
+  - StringBuilder sb
+  - HashMap Integer, Integer  map
+  + stringNormalize(String) String
+}
+```
+### Uživatelské rozhraní
+```mermaid
+classDiagram
+direction BT
+class ConsoleColors {
+  + ConsoleColors() 
+  + String CYAN
+  + String RESET
+  + String WHITE
+  + String PURPLE
+  + String GREEN_UNDERLINED
+  + String YELLOW
+  + String BLACK
+  + String BLACK_UNDERLINED
+  + String BLUE_UNDERLINED
+  + String PURPLE_UNDERLINED
+  + String RED_BOLD
+  + String CYAN_UNDERLINED
+  + String GREEN
+  + String BLUE
+  + String RED
+  + String PURPLE_BOLD
+  + String WHITE_UNDERLINED
+  + String GREEN_BOLD
+  + String YELLOW_BOLD
+  + String RED_UNDERLINED
+  + String YELLOW_UNDERLINED
+  + String CYAN_BOLD
+  + String WHITE_BOLD
+  + String BLUE_BOLD
+  + String BLACK_BOLD
+}
+class InteractiveGetter {
+  + InteractiveGetter(CityTransport, Scanner) 
+  - CityTransport transport
+  - Scanner sc
+  + getLine() Line
+  + getFile(boolean) File
+  + getStation() Station
+}
+class LoaderSelector {
+  + LoaderSelector() 
+  + getLoaderMethod(boolean) ILoader?
+  + suggestActualFiles() void
+}
+class Menu {
+  + Menu(ILoader) 
+  + Menu() 
+  ~ Scanner sc
+  ~ InteractiveGetter ig
+  ~ CityTransport transport
+  ~ StringBuilder sb
+  ~ ILoader loader
+  - stationViewer() void
+  - lineViewer() void
+  - findPathMenu(boolean) void
+  + loadTransportMenu(boolean) void
+  + getTransport() CityTransport
+  + mainMenu() void
+  - printStationInfo(Station) void
+  - generatePathFindReport(List~PathSegment~) String
+  - transportViewerMenu() void
+  - sortLinesByTransportationType(Station) List~Entry~TransportationType, List~Line~~~
+  + checkValidityOfFileMenu() void
+  - getLineCharCounter(int, Line) int
+}
+```
+### Zpracování chyb
+```mermaid
+classDiagram
+direction BT
+class ErrorLogger {
+  + ErrorLogger(String) 
+  - String logFileName
+  + String INFO_FILE
+  + String ERROR_FILE
+  + String WARNING_FILE
+  + logError(String, Throwable) void
+}
+```
+
+
 
 ## Testování
 K testování poslouží knihovna JUnit verze 5.
