@@ -301,9 +301,9 @@ public class Menu {
             System.out.println(
                     """
                     Vyberte jednu z možností:
-                    "S    Prohlížet stanice
-                    "L    Prohlížet linky
-                    "Z    Vrátit se zpátky""");
+                    S    Prohlížet stanice
+                    L    Prohlížet linky
+                    Z    Vrátit se zpátky""");
             System.out.print("> ");
             str = sc.nextLine().toLowerCase();
             switch (str) {

@@ -65,11 +65,13 @@ public class InteractiveGetter {
             // Detect stop
             if (TextNormalization.stringNormalize(str).equals("zpet")) return null;
 
+            // Found exactly
             if (transport.stations().containsKey(str)) {
                 System.out.println("Nalezeno!");
                 return transport.stations().get(str);
             }
 
+            // Find common parts and probability
             for (String name: transport.stations().keySet()) {
                 // Similarity weight
                 similarity = HirschbergMatching.similarity(str, name);
@@ -83,11 +85,13 @@ public class InteractiveGetter {
             }
             pq.sort(Comparator.comparing(a -> a.second));
 
+            // If there is only one with >0.95 similarity -> its typo
             if (subStringCounter == 1) {
                 System.out.println("Domysleli jsme si: " + transport.stations().get(pq.get(pq.size()-1).first).getPrettyName());
                 return transport.stations().get(pq.get(pq.size()-1).first);
             }
 
+            // Not found, print possible answers
             System.out.print("Jejda, nic takového jsme nenašli\nNeměli jste na mysli: ");
             for (int i = 0; i < SUGGEST_LEN; i++) {
                 System.out.printf("%s",
@@ -130,11 +134,13 @@ public class InteractiveGetter {
             // Detect stop
             if (TextNormalization.stringNormalize(str).equals("zpet")) return null;
 
+            // Found exactly
             if (transport.lines().containsKey(str)) {
                 System.out.println("Nalezeno!");
                 return transport.lines().get(str);
             }
 
+            // Find common parts and probability
             for (String name: transport.lines().keySet()) {
                 // Similarity weight
                 similarity = HirschbergMatching.similarity(str, name);
@@ -148,16 +154,17 @@ public class InteractiveGetter {
             }
             pq.sort(Comparator.comparing(a -> a.second));
 
+            // If there is only one with >0.95 similarity -> its typo
             if (subStringCounter == 1) {
                 System.out.println("Domysleli jsme si: " + transport.lines().get(pq.get(pq.size()-1).first).getName());
                 return transport.lines().get(pq.get(pq.size()-1).first);
             }
 
+            // Not found, print possible answers
             System.out.print("Jejda, nic takového jsme nenašli\nNeměli jste na mysli: ");
             for (int i = 0; i < SUGGEST_LEN; i++) {
-                System.out.printf("%s [%.2f]%%",
-                        transport.lines().get(pq.get(pq.size()-1 - i).first).getName(),
-                        pq.get(pq.size()-1 - i).second
+                System.out.printf("%s",
+                        transport.lines().get(pq.get(pq.size()-1 - i).first).getPrettyName()
                 );
                 if (i < SUGGEST_LEN-1) System.out.print(", ");
             }
