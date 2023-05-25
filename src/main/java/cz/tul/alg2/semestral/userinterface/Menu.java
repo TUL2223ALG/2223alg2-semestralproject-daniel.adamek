@@ -12,6 +12,7 @@ import cz.tul.alg2.semestral.utilities.LangFormatter;
 import cz.tul.alg2.semestral.utilities.Pair;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -30,7 +31,7 @@ public class Menu {
     /**
      * The Sc.
      */
-    Scanner sc = new Scanner(System.in);
+    Scanner sc = new Scanner(System.in, StandardCharsets.UTF_8);
     /**
      * The Sb.
      */

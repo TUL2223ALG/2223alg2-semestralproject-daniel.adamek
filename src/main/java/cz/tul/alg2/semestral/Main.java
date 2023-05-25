@@ -1,9 +1,6 @@
 package cz.tul.alg2.semestral;
 
-import cz.tul.alg2.semestral.file.BinarySaver;
-import cz.tul.alg2.semestral.file.TextSaver;
 import cz.tul.alg2.semestral.userinterface.Menu;
-import cz.tul.alg2.semestral.utilities.PathBuilder;
 
 /**
  * The type Main.
@@ -28,14 +25,6 @@ public class Main {
 
         Menu menu = new Menu();
         menu.mainMenu();
-
-
-        BinarySaver bs = new BinarySaver(menu.getTransport());
-        bs.saveTransport(PathBuilder.joinPath("data", "pid.ser"));
-
-        TextSaver ts = new TextSaver(menu.getTransport());
-        ts.saveTransport(PathBuilder.joinPath("data", "pid.txt"));
-
     }
 
 }
