@@ -1,0 +1,10 @@
+Domysleli jsme si: Nebozízek
+---------------------------[PROHLÍŽEČ STANIC]---------------------------
+Jméno: Nebozízek
+Normalizované jméno: nebozizek
+Zóna: P
+Linky: 
+ CABLE_CAR:
+  ld
+
+------------------------------------------------------------------------

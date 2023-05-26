@@ -1,0 +1,47 @@
+Nalezeno!
+---------------------------[PROHLÍŽEČ LINEK]----------------------------
+Jméno: c
+Druh dopravy: METRO
+Stanice:
+ Budějovická
+   -> 2 minuty
+ Chodov
+   -> 2 minuty
+ Florenc
+   -> 2 minuty
+ Háje
+   -> 2 minuty
+ Hlavní nádraží
+   -> 2 minuty
+ I. P. Pavlova
+   -> 2 minuty
+ Kačerov
+   -> 2 minuty
+ Kobylisy
+   -> 2 minuty
+ Ládví
+   -> 2 minuty
+ Letňany Muzeum
+   -> 1 minuta
+ Nádraží Holešovice
+   -> 3 minuty
+ Opatov
+   -> 2 minuty
+ Pankrác
+   -> 2 minuty
+ Pražského povstání
+   -> 2 minuty
+ Prosek
+   -> 3 minuty
+ Roztyly
+   -> 2 minuty
+ Střížkov
+   -> 2 minuty
+ Vltavská
+   -> 2 minuty
+ Vyšehrad
+   -> 2 minuty
+
+------------------------------------------------------------------------
+Zadejte linku (Pro opuštění napište ZPET)
+>

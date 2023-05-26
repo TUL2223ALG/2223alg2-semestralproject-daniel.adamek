@@ -363,8 +363,25 @@ Validace souborů:
 - data/pid.ser - binární soubor
 - data/pid-broken.ser - binární soubor - poškozený
 
+### Manuální testování
+Je uvedeno v složce manual-test. Soubory odpovídají:
+- koncovka "-in.txt" - vstup
+- koncovka "-out.txt" - reálný výstup
+- koncovka "-correct.txt" - chtěný výstup
+
+Všechny reálné výstupy odpovídají chtěným výstupům
+
 ### Automatické testování
 Automatické testování slouží knihovna JUnit verze 5.
+
+Vyjmenované testy:
+- BinaryLoaderTest
+- TextLoaderTest
+- HirsbergMatchingTest
+- PathBuilderTest
+- NextNormalizationTest
+- BinaryValitatorTest
+- TextValitatorTest
 
 __Status JUnit5 testů__ [![JUnit5 Tests](https://github.com/TUL2223ALG/2223alg2-semestralproject-daniel.adamek/actions/workflows/maven.yml/badge.svg)](https://github.com/TUL2223ALG/2223alg2-semestralproject-daniel.adamek/actions/workflows/maven.yml)
 

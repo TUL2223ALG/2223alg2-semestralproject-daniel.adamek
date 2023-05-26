@@ -186,12 +186,17 @@ public class Menu {
             // Get from
             System.out.println("Zadejte počáteční stanici");
             from = ig.getStation();
-            if (from == null) break;
+            if (from == null) continue;
 
             // Get to
             System.out.println("Zadejte koncovou stanici");
             to = ig.getStation();
-            if (to == null) break;
+            if (to == null) continue;
+
+            if (from.equals(to)) {
+                System.out.println("Počáteční i koncová stanice jsou stejné");
+                continue;
+            }
 
             // Find path
             PathFinder pf = new BFS(this.transport);
