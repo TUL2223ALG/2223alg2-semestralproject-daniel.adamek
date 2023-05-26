@@ -41,16 +41,21 @@ public class TextLoader implements ILoader {
             HashMap<Integer, Station> substitutionMap = new HashMap<>();
 
             // Read stations
+            // check file format
             if (!"STATIONS".equals(reader.readLine())) {
-                throw new IOException("Invalid file format");
+                throw new IOException("Neplatný formát souboru");
             }
 
+            // Loop over each line in the file until reaching "LINES"
             while ((line = reader.readLine()) != null && !line.equals("LINES")) {
                 String[] parts = line.split("\\|");
+
+                // Parse station info
                 int stationID = Integer.parseInt(parts[0]);
                 String prettyName = parts[1];
                 String zoneID = parts[2];
 
+                // Create new Station object and add it to memory
                 Station station = new Station(prettyName, zoneID);
                 substitutionMap.put(stationID, station);
                 allStations.put(station.getName(), station);
@@ -60,37 +65,47 @@ public class TextLoader implements ILoader {
             // Read lines
             int stationID;
             int travelTime;
+
+            // Loop over each remaining line in the file
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split("\\|");
+
+                // Parse line info
                 String lineName = parts[0];
                 TransportationType lineType = TransportationType.valueOf(parts[1]);
 
                 List<Pair<Station, Integer>> stationList = new ArrayList<>();
                 String[] stationPairs = parts[2].split(";");
+
+                // Parse each station pair in the line
                 for (String pair : stationPairs) {
                     String[] pairParts = pair.split(",");
+
+                    // If format is incorrect, return false
                     // Wrong format - should be: ...;STATION,TIME;...
                     if (pairParts.length != 2) return false;
 
+                    // Parse station pair info
                     stationID = Integer.parseInt(pairParts[0]);
                     travelTime = Integer.parseInt(pairParts[1]);
 
+                    // Add station pair to the list
                     Pair<Station, Integer> stationPair = new Pair<>(substitutionMap.get(stationID), travelTime);
                     stationList.add(stationPair);
                 }
+                // Create new Line object and add it to memory
                 Line currentLine = new Line(lineName, lineType, stationList);
-
                 allLines.put(currentLine.getName(), currentLine);
                 lineCounter++;
             }
+
+            // Compute neighbours of stations on lines
+            ILoader.computeNeighbours(allLines);
 
         } catch (IOException e) {
             new ErrorLogger("error.log").logError("Chyba při načítání dat na řádku " + lineCounter, e);
             return false;
         }
-
-        // Compute neighbours
-        ILoader.computeNeighbours(allLines);
 
         return true;
     }

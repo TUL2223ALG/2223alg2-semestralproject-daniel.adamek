@@ -41,21 +41,38 @@ public class TextSaver implements ISaver {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
             // Saving stations
             writer.write("STATIONS\n");
+
+            // Create substitution map for name -> ID
             HashMap<Station, Integer> substitutionMap = new HashMap<>();
+
+            // Save each station
             for (Station station : transport.stations().values()) {
+
+                // Save ID = size of substitution map, name and zoneID
                 writer.write(
                     substitutionMap.size() + "|" +
                     station.getPrettyName() + "|" +
                     station.getZoneID() + "|"
                 );
+
+                // save station to substitution map
                 substitutionMap.put(station, substitutionMap.size());
+
+                // new line to every station
                 writer.write("\n");
             }
 
             // Saving lines
             writer.write("LINES\n");
+
+            // Save every line
             for (Line line : transport.lines().values()) {
-                writer.write(line.getName() + "|" + line.getLineType() + "|");
+
+                // Save name, type and count of stations
+                writer.write(line.getPrettyName() + "|" + line.getLineType() + "|");
+
+                // Save the stations with the IDs due to substitution and time of shift
+                // to the next station
                 for (Pair<Station, Integer> station : line.getStations())
                     writer.write(substitutionMap.get(station.first) + "," + station.second + ";");
                 writer.write("\n");

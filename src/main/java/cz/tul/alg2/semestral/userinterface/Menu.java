@@ -12,6 +12,7 @@ import cz.tul.alg2.semestral.utilities.LangFormatter;
 import cz.tul.alg2.semestral.utilities.Pair;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -30,7 +31,7 @@ public class Menu {
     /**
      * The Sc.
      */
-    Scanner sc = new Scanner(System.in);
+    Scanner sc = new Scanner(System.in, StandardCharsets.UTF_8);
     /**
      * The Sb.
      */
@@ -196,14 +197,17 @@ public class Menu {
             PathFinder pf = new BFS(this.transport);
             List<PathSegment> path = pf.findShortestPath(from, to);
 
+            // Generate description in pretty format
             String description = generatePathFindReport(path);
 
             System.out.println("---------------------------[VÝSLEDEK HLEDÁNÍ]---------------------------");
             System.out.println( description );
             System.out.println("------------------------------------------------------------------------");
 
+            // Save the result do the file?
             if (save) {
                 File file = ig.getFile(false);
+                // Is it possible to write to the file?
                 if (file != null) DescriptionSaver.saveTextToFile(file, description);
             }
         }
@@ -222,7 +226,7 @@ public class Menu {
             Pair<Station, Integer>  prevStation = null;
             int lineCharCounter = 0;
             int totalTravelTime = 0;
-            int tmpCharCounter = 0;
+            int tmpCharCounter;
 
             for (PathSegment ps : path) {
                 sb.append("Úsek: \n  ");
@@ -280,13 +284,21 @@ public class Menu {
      */
     private int getLineCharCounter(int lineCharCounter, Line line) {
         int tmpCharCounter;
+        // If appending the line's name would cause the character limit to be exceeded
         if (lineCharCounter + line.getName().length()+1 > 70) {
+            // then append a line break to the StringBuilder
+            // and reset the character counter
             sb.append("\n  ");
             lineCharCounter = 0;
         }
+        // Store the current length of the StringBuilder in tmpCharCounter
         tmpCharCounter = sb.length();
+        // Append the line's pretty name and a comma to the StringBuilder
         sb.append(line.getPrettyName()).append(", ");
+        // Update the character counter to the difference between the StringBuilder length and tmpCharCounter
         lineCharCounter += sb.length() - tmpCharCounter;
+
+        // Return the updated character counter
         return lineCharCounter;
     }
 
@@ -323,6 +335,7 @@ public class Menu {
         Station station;
 
         while (true) {
+            // get station by InteractiveGetter
             station = ig.getStation();
             if (station == null) break;
             printStationInfo(station);
@@ -355,18 +368,21 @@ public class Menu {
     private void printStationInfo(Station station) {
         sb.setLength(0);
         int lineCharCounter;
+        // Group lines by TransportationType
         List<Map.Entry<TransportationType, List<Line>>> transportTypeGrouped = sortLinesByTransportationType(station);
 
         List<Line> lines;
         for (Map.Entry<TransportationType, List<Line>> entry : transportTypeGrouped) {
+            // Print space and type of transportation
             sb.append(" ").append(entry.getKey()).append(":\n  ");
                 lineCharCounter = 0;
                 lines = entry.getValue();
+
+                // Sort lines by Comparable interface of Lines class (line's names)
                 Collections.sort(lines);
-                for (Line l : entry.getValue()) {
-                    // length of line's name + 1 space
+                for (Line l : entry.getValue())
                     lineCharCounter = getLineCharCounter(lineCharCounter, l);
-                }
+                // delete last 2 chars, which are ", "
                 sb.delete(sb.length()-2, sb.length()).append("\n");
         }
 
@@ -391,14 +407,15 @@ public class Menu {
             line = ig.getLine();
             if (line == null) break;
 
-            // sort stations
             List<Pair<Station, Integer>> stations = line.getStations();
+            // Sort stations by Comparable interface of Station class (station's names)
             Collections.sort(stations);
 
             // Pretty list the stations
             for (Pair<Station, Integer> station : line.getStations()) {
                 sb.append(" ").append(station.first.getPrettyName());
                 if (station.second != 0)
+                    // Print minutes of the shift in Czech linguistically correct form
                     sb  .append("\n   -> ")
                         .append(LangFormatter.formatCzechMinutes(station.second))
                         .append("\n");
