@@ -14,6 +14,8 @@ public class TextValidator implements IValidator {
      */
     @Override
     public boolean validateFile(File file) {
+        // Loader as self implemented validator -> loading and not saving
+        // does validation
         TextLoader tl = new TextLoader();
         return tl.loadFile(file.getAbsolutePath());
     }

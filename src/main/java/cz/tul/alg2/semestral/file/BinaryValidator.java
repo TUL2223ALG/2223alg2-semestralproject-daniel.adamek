@@ -14,6 +14,8 @@ public class BinaryValidator implements IValidator {
      */
     @Override
     public boolean validateFile(File file) {
+        // Loader as self implemented validator -> loading and not saving
+        // does validation
         BinaryLoader bl = new BinaryLoader();
         return bl.loadFile(file.getAbsolutePath());
     }

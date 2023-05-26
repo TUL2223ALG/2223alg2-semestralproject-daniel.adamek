@@ -40,7 +40,8 @@ public class BFS implements PathFinder{
             if (start.equals(end))
                 return new LinkedList<>();
 
-            Station startStation, endStation;
+            Station startStation;
+            Station endStation;
             startStation = this.transport.stations().get(start);
             endStation = this.transport.stations().get(start);
 
@@ -60,26 +61,35 @@ public class BFS implements PathFinder{
      * @return A list of pathsegment objects that represent the shortest path between two stations
      */
     public List<PathSegment> findShortestPath(Station start, Station end) {
+        // Initialize a map of visited stations, and a queue for the BFS traversal
         Map<String, Pair<Station, Integer>> visited = new HashMap<>();
         Queue<Station> queue = new LinkedList<>();
 
-        if (start == end)
+        // If the start and end stations are the same, return an empty path
+        if (start.equals(end))
             return new LinkedList<>();
 
+        // Mark the start station as visited and enqueue it
         visited.put(start.getName(), new Pair<>(null, 0));
         queue.add(start);
 
+        // While there are still stations to visit
         while (!queue.isEmpty()) {
+            // Take the next station from the queue
             Station current = queue.poll();
 
-            if (current == end) {
+            // If the current station is the destination, we have found a path
+            if (current.equals(end)) {
+                // Build and return the path from start to end
                 return buildPath(visited, start, current);
             }
 
+            // If the current station is not the destination, visit its neighbours
             for (Pair<Station, Integer> neighbour : current.getNeighbours()) {
                 Station neighbourStation = neighbour.first;
                 String neighbourName = neighbourStation.getName();
 
+                // If the neighbour has not been visited, mark it as visited and enqueue it
                 if (!visited.containsKey(neighbourName)) {
                     visited.put(neighbourName, new Pair<>(current, neighbour.second));
                     queue.add(neighbourStation);
@@ -87,7 +97,8 @@ public class BFS implements PathFinder{
             }
         }
 
-        return null; // Path not found
+        // If no path was found, return null
+        return null;
     }
 
     /**
@@ -104,48 +115,64 @@ public class BFS implements PathFinder{
      * @return A list of pathsegments
      */
     private List<PathSegment> buildPath(Map<String, Pair<Station, Integer>> visited, Station startStation, Station endStation) {
+        // Create a LinkedList to store the path from the end station to the start station
         LinkedList<Pair<Station, Integer>> fullPath = new LinkedList<>();
         Station current = endStation;
 
+        // Traverse back from the end station to the start station, adding each station to the path
         while (current != null && !current.equals(startStation)) {
             Pair<Station, Integer> pathInfo = visited.get(current.getName());
             fullPath.addFirst(new Pair<>(current, pathInfo.second));
             current = pathInfo.first;
         }
 
+        // If the start station is reached, add it to the path
         if (current != null) {
             fullPath.addFirst(new Pair<>(startStation, 0));
         }
 
+        // Initialize a list to store the path segments and a set to store the current lines
         List<PathSegment> pathSegments = new ArrayList<>();
         Set<Line> currentLines = null;
         List<Pair<Station, Integer>> segmentStations = new ArrayList<>();
 
-        for (int i = 0; i < fullPath.size() - 1; i++) {
-            Pair<Station, Integer> currentPair = fullPath.get(i);
-            Station currentStation = currentPair.first;
-            Set<Line> nextLines = findCommonLines(currentStation, fullPath.get(i + 1).first);
+        try {
+            // Iterate through the full path
+            for (int i = 0; i < fullPath.size() - 1; i++) {
+                Pair<Station, Integer> currentPair = fullPath.get(i);
+                Station currentStation = currentPair.first;
+                // Find the common lines between the current station and the next station
+                Set<Line> nextLines = findCommonLines(currentStation, fullPath.get(i + 1).first);
 
-            if (currentLines == null && nextLines != null && !nextLines.isEmpty()) {
-                currentLines = nextLines;
-            }
-
-            if (nextLines != null && !nextLines.isEmpty()) {
-                segmentStations.add(currentPair);
-
-                if (!currentLines.equals(nextLines)) {
-                    pathSegments.add(new PathSegment(currentLines, segmentStations));
-                    segmentStations = new ArrayList<>();
+                // If this is the first iteration or the lines have changed, update the current lines
+                if (currentLines == null && nextLines != null && !nextLines.isEmpty()) {
                     currentLines = nextLines;
                 }
+
+                // If there are lines for the current station, add it to the current segment
+                if (nextLines != null && !nextLines.isEmpty()) {
+                    segmentStations.add(currentPair);
+
+                    // If the lines have changed, create a new path segment and start a new segment
+                    if (!currentLines.equals(nextLines)) {
+                        pathSegments.add(new PathSegment(currentLines, segmentStations));
+                        segmentStations = new ArrayList<>();
+                        currentLines = nextLines;
+                    }
+                }
             }
+        } catch (NullPointerException e) {
+            new ErrorLogger("error.log").logError("V nalezené cestě je chyba, nelze vytvořit cestu.", e);
+            return Collections.emptyList();
         }
 
+        // If the full path is not empty and there are lines for the last station, add the last segment
         if (!fullPath.isEmpty() && currentLines != null && !currentLines.isEmpty()) {
             segmentStations.add(fullPath.getLast());
             pathSegments.add(new PathSegment(currentLines, segmentStations));
         }
 
+        // Return the list of path segments
         return pathSegments;
     }
 
@@ -157,8 +184,14 @@ public class BFS implements PathFinder{
      * @return A set of all the lines that are common to both stations, or null if there are no common lines
      */
     private Set<Line> findCommonLines(Station station1, Station station2) {
+        // Initialize commonLines with lines from station1
         Set<Line> commonLines = new HashSet<>(station1.getLines());
+
+        // Retain lines common to both station1 and station2
         commonLines.retainAll(station2.getLines());
+
+        // Return commonLines if not empty, else null
         return (commonLines.isEmpty()) ? null : commonLines;
     }
+
 }
